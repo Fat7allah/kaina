@@ -108,7 +108,7 @@ section{padding:64px 0}
 .pin circle.halo{fill:var(--safran);opacity:.25}
 .pin.on circle.halo{fill:var(--terre);opacity:.3}
 .pin.on path{fill:var(--terre)}
-.info{position:absolute;right:12px;top:12px;background:var(--blanc);border-radius:14px;padding:14px 16px;box-shadow:0 14px 34px rgba(17,17,17,.12);width:210px}
+.info{position:absolute;right:12px;bottom:12px;background:var(--blanc);border-radius:14px;padding:14px 16px;box-shadow:0 14px 34px rgba(17,17,17,.12);width:210px}
 .info b{display:block;font-size:17px;font-weight:800}
 .info span{display:flex;gap:8px;font-size:12.5px;color:var(--gris);margin-top:8px;line-height:1.4}
 .info span:before{content:"";flex:none;width:8px;height:8px;border-radius:50%;background:var(--terre);margin-top:4px}
@@ -156,7 +156,9 @@ footer ul{list-style:none;display:grid;gap:9px;font-size:13.5px}
 footer .bottom{border-top:1px solid #2b2b2b;padding-top:18px;display:flex;flex-wrap:wrap;justify-content:space-between;gap:8px;font-size:12px;color:#8d8d8d}
 .cols{display:grid;grid-template-columns:1fr 1fr;gap:26px}
 
+@media (max-width:759px){.hero{padding-bottom:50px}.swoosh{height:60px}.info{width:190px}}
 @media (min-width:760px){
+  .info{top:12px;bottom:auto}
   .atouts .wrap{grid-template-columns:repeat(4,1fr)}
   .atout{border-left:1px solid var(--ligne);padding-left:20px}
   .steps{grid-template-columns:repeat(3,1fr);gap:40px}
