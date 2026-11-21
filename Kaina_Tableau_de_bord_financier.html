@@ -1,0 +1,310 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Kaïna Comité financier</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap">
+<style>
+/* Mise en page : bandeau de filtres collant, 3 cartes KPI, synthèse, courbe mensuelle, classement des agences. Une colonne sur téléphone. */
+:root{
+  --cedre:#0F5C4A; --safran:#F2A900; --terre:#C4532D; --sable:#F6EFE3;
+  --bg:#FBF8F2; --panel:#FFFFFF; --ink:#1B2621; --muted:#5E6B65; --line:#E4DED2; --grid:#EEE9DF;
+  --ok:#1E8A4C; --ok-bg:#E3F3E9; --bad:#C62828; --bad-bg:#FBE6E4;
+  --budget:#9AA39E;
+  --font:"Inter",system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;
+  color-scheme:light;
+}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){
+  --bg:#101614; --panel:#18201D; --ink:#EEF1EE; --muted:#A3AEA8; --line:#2B3531; --grid:#222B27;
+  --ok:#4CC27A; --ok-bg:#16301F; --bad:#FF6B5E; --bad-bg:#3A1A17; --budget:#7C8782; color-scheme:dark}}
+:root[data-theme="dark"]{
+  --bg:#101614; --panel:#18201D; --ink:#EEF1EE; --muted:#A3AEA8; --line:#2B3531; --grid:#222B27;
+  --ok:#4CC27A; --ok-bg:#16301F; --bad:#FF6B5E; --bad-bg:#3A1A17; --budget:#7C8782; color-scheme:dark}
+*{box-sizing:border-box}
+html,body{margin:0}
+body{background:var(--bg);color:var(--ink);font:15px/1.45 var(--font);font-variant-numeric:tabular-nums;-webkit-text-size-adjust:100%}
+.wrap{max-width:1080px;margin:0 auto;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
+header.top{background:var(--cedre);color:#fff;padding-top:env(safe-area-inset-top,0px)}
+header.top .wrap{display:flex;align-items:center;justify-content:space-between;gap:12px;padding-block:14px}
+.brand{font-weight:700;font-size:20px;letter-spacing:.2px}
+.brand{display:flex;flex-direction:column;align-items:flex-start;gap:4px}
+.brand .logo{display:block;height:34px;width:auto}
+.brand small{display:block;font-weight:500;font-size:12px;opacity:.8;letter-spacing:.4px;text-transform:uppercase}
+.unit{font-size:12px;opacity:.85;text-align:right}
+.filters{position:sticky;top:0;z-index:5;background:var(--bg);border-bottom:1px solid var(--line)}
+.filters .wrap{display:flex;flex-wrap:wrap;gap:10px;padding-block:10px;align-items:end}
+.f{display:flex;flex-direction:column;gap:3px;min-width:0;flex:1 1 140px}
+.f label{font-size:11px;font-weight:600;color:var(--muted);text-transform:uppercase;letter-spacing:.6px}
+select{font:inherit;font-size:15px;padding:9px 10px;border:1px solid var(--line);border-radius:8px;background:var(--panel);color:var(--ink);width:100%}
+.f.ag{flex-basis:180px}
+@media (max-width:560px){.f.ag{flex-basis:100%}}
+select:focus-visible,button:focus-visible{outline:2px solid var(--safran);outline-offset:2px}
+main .wrap{display:flex;flex-direction:column;gap:18px;padding-block:18px 40px}
+.kpis{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px}
+@media (max-width:700px){.kpis{grid-template-columns:1fr}}
+.kpi{background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:14px 16px;border-left:6px solid var(--line);display:grid;grid-template-columns:1fr auto;gap:2px 10px;align-items:baseline}
+.kpi.ok{border-left-color:var(--ok)} .kpi.bad{border-left-color:var(--bad)}
+.kpi h2{grid-column:1/-1;margin:0;font-size:13px;font-weight:600;color:var(--muted)}
+.kpi .v{font-size:38px;font-weight:700;line-height:1.1;letter-spacing:-.5px}
+.kpi.ok .v{color:var(--ok)} .kpi.bad .v{color:var(--bad)}
+.pill{font-size:12px;font-weight:700;padding:3px 9px;border-radius:99px;white-space:nowrap}
+.ok .pill{background:var(--ok-bg);color:var(--ok)} .bad .pill{background:var(--bad-bg);color:var(--bad)}
+.kpi .sub{grid-column:1/-1;font-size:13px;color:var(--muted)}
+.kpi .sub b{color:var(--ink);font-weight:600}
+.syn{background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:12px 16px;font-size:15px}
+.syn p{margin:0}
+.card{background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:16px;min-width:0}
+.card-h{display:flex;flex-wrap:wrap;justify-content:space-between;align-items:center;gap:8px;margin-bottom:6px}
+.card h2{margin:0;font-size:17px;text-wrap:balance}
+.card .note{font-size:13px;color:var(--muted);margin:0 0 8px}
+.seg{display:inline-flex;border:1px solid var(--line);border-radius:8px;overflow:hidden}
+.seg button{font:inherit;font-size:13px;font-weight:600;border:0;background:transparent;color:var(--muted);padding:7px 14px;cursor:pointer}
+.seg button[aria-pressed="true"]{background:var(--cedre);color:#fff}
+.legend{display:flex;flex-wrap:wrap;gap:14px;font-size:12px;color:var(--muted);margin-bottom:4px}
+.legend span{display:inline-flex;align-items:center;gap:6px}
+.sw{width:18px;height:0;border-top:2.5px solid var(--ink)} .sw.d{border-top:2px dashed var(--budget)}
+.dot{width:9px;height:9px;border-radius:50%} .dot.ok{background:var(--ok)} .dot.bad{background:var(--bad)}
+.chart{position:relative;min-height:240px}
+.chart svg{display:block;width:100%;height:auto;overflow:visible}
+.chart text{fill:var(--muted);font:12px var(--font)}
+.tip{position:absolute;pointer-events:none;background:var(--panel);border:1px solid var(--line);box-shadow:0 6px 18px rgba(0,0,0,.15);border-radius:8px;padding:8px 10px;font-size:13px;white-space:nowrap;z-index:3}
+.tip b{display:block;margin-bottom:2px}
+.rank{display:flex;flex-direction:column;gap:8px}
+.row{display:grid;grid-template-columns:minmax(84px,120px) minmax(0,1fr) 62px;gap:10px;align-items:center;font-size:14px}
+.row.sel .name{font-weight:700;text-decoration:underline;text-decoration-color:var(--safran);text-decoration-thickness:2px;text-underline-offset:3px}
+.row .val{text-align:right;font-weight:700}
+.row.ok .val{color:var(--ok)} .row.bad .val{color:var(--bad)}
+.track{position:relative;height:18px;background:var(--grid);border-radius:4px}
+.bar{position:absolute;top:0;bottom:0;border-radius:4px}
+.row.ok .bar{background:var(--ok)} .row.bad .bar{background:var(--bad)}
+.obj{position:absolute;top:-4px;bottom:-4px;border-left:2px dashed var(--ink)}
+.zero{position:absolute;top:-2px;bottom:-2px;border-left:1px solid var(--muted)}
+.rank-foot{font-size:12px;color:var(--muted);margin-top:10px}
+details{font-size:13px;color:var(--muted)}
+details summary{cursor:pointer;font-weight:600;color:var(--ink)}
+details ul{margin:6px 0 0;padding-left:18px}
+footer{font-size:12px;color:var(--muted)}
+@media (prefers-reduced-motion:no-preference){.bar{transition:width .4s ease,left .4s ease}}
+</style>
+</head>
+<body>
+<header class="top"><div class="wrap">
+  <div class="brand"><svg xmlns="http://www.w3.org/2000/svg" viewBox="36 26 470 160" class="logo" aria-label="Kaïna" role="img" aria-label="Kaïna Distribution — concept 3 Deux points">
+<title>Kaïna Distribution — concept 3 Deux points</title>
+<path d="M51.20,40.00 L51.20,171.20 M105.60,100.80 L57.60,142.40 M72.00,131.20 L108.80,171.20 M224.00,136.00 A35.20,35.20 0 1 1 153.60,136.00 A35.20,35.20 0 1 1 224.00,136.00 M224.00,100.80 L224.00,171.20 M265.60,100.80 L265.60,171.20 M307.20,171.20 L307.20,136.00 A35.20,35.20 0 0 1 377.60,136.00 L377.60,171.20 M489.60,136.00 A35.20,35.20 0 1 1 419.20,136.00 A35.20,35.20 0 1 1 489.60,136.00 M489.60,100.80 L489.60,171.20" fill="none" stroke="#F6EFE3" stroke-width="22.40" stroke-linecap="round" stroke-linejoin="round"/><circle cx="248.00" cy="62.40" r="13.12" fill="#F2A900"/><circle cx="283.20" cy="62.40" r="13.12" fill="#F2A900"/>
+</svg><small>Comité financier · agences</small></div>
+  <div class="unit">Nov. 2025 – oct. 2026<br>montants en MMAD</div>
+</div></header>
+
+<nav class="filters" aria-label="Filtres"><div class="wrap">
+  <div class="f ag"><label for="f-agence">Agence</label>
+    <select id="f-agence">
+      <option value="">Toutes (groupe)</option>
+      <option>Casablanca</option><option>Rabat-Salé</option><option>Tanger</option>
+      <option>Fès</option><option>Marrakech</option><option>Agadir</option>
+    </select></div>
+  <div class="f"><label for="f-du">Du</label><select id="f-du"></select></div>
+  <div class="f"><label for="f-au">Au</label><select id="f-au"></select></div>
+</div></nav>
+
+<main><div class="wrap">
+  <section class="kpis" aria-label="Indicateurs clés">
+    <article class="kpi" id="k-real">
+      <h2>Réalisation du budget de CA</h2>
+      <div class="v" data-k="v">—</div><span class="pill" data-k="pill">—</span>
+      <div class="sub" data-k="sub">—</div>
+    </article>
+    <article class="kpi" id="k-mb">
+      <h2>Taux de marge brute</h2>
+      <div class="v" data-k="v">—</div><span class="pill" data-k="pill">—</span>
+      <div class="sub" data-k="sub">—</div>
+    </article>
+    <article class="kpi" id="k-eb">
+      <h2>Taux d'EBITDA</h2>
+      <div class="v" data-k="v">—</div><span class="pill" data-k="pill">—</span>
+      <div class="sub" data-k="sub">—</div>
+    </article>
+  </section>
+
+  <section class="syn" aria-live="polite"><p id="syn">—</p></section>
+
+  <section class="card" id="courbe">
+    <div class="card-h">
+      <h2 id="c-title">Mois par mois : réel contre budget</h2>
+      <div class="seg" role="group" aria-label="Indicateur de la courbe">
+        <button type="button" data-m="ca" aria-pressed="true">CA</button>
+        <button type="button" data-m="eb" aria-pressed="false">EBITDA</button>
+      </div>
+    </div>
+    <div class="legend"><span><i class="sw"></i>Réel</span><span><i class="sw d"></i>Budget</span><span><i class="dot ok"></i>Mois au budget ou au-dessus</span><span><i class="dot bad"></i>Mois sous le budget</span></div>
+    <div class="chart" id="chart"></div>
+  </section>
+
+  <section class="card" id="classement">
+    <div class="card-h"><h2>Classement des agences par taux d'EBITDA</h2></div>
+    <p class="note" id="r-note">—</p>
+    <div class="rank" id="rank"></div>
+    <div class="rank-foot">Trait pointillé : objectif <span id="r-obj">—</span>. Vert = objectif atteint, rouge = objectif raté.</div>
+  </section>
+
+  <details>
+    <summary>Données et corrections appliquées</summary>
+    <ul>
+      <li>Source : M3_Reporting_Financier_Agences_Nov2025-Oct2026.xlsx, 6 agences × 12 mois, en kMAD (affiché en MMAD).</li>
+      <li>Correction 1 : doublon Tanger juin 2026 retiré (une seule ligne gardée).</li>
+      <li>Correction 2 : CA Fès mars 2026 ramené de 11 849 000 à 11 849 kMAD (erreur d'unité).</li>
+      <li>Correction 3 : achats Marrakech août 2026 = 8 069 kMAD (signe inversé) ; marge brute 1 344, EBITDA 343.</li>
+      <li>Agadir (EBITDA négatif mai–oct.) et Casablanca sept. (marge 12,8 %) ne sont pas corrigés : ce sont des signaux métier.</li>
+      <li>Taux de marge brute = marge brute / CA. Taux d'EBITDA = EBITDA / CA. Réalisation = CA réel / CA budgété.</li>
+      <li>Le fichier Excel d'origine n'est pas modifié.</li>
+    </ul>
+  </details>
+  <footer>Document fictif, atelier Challenge IA. Kaïna Distribution, contrôle de gestion.</footer>
+</div></main>
+
+<script>
+(function(){
+"use strict";
+// Objectifs groupe (feuille Objectifs)
+var OBJ = {real:100, mb:14, eb:3.5};
+var AG = ["Casablanca","Rabat-Salé","Tanger","Fès","Marrakech","Agadir"];
+// [Mois, Agence, CA, Budget CA, Marge brute, EBITDA, Budget EBITDA] en kMAD, données corrigées
+var RAW = [["2025-11",0,32696,32934,4697,1605,1317],["2025-12",0,33907,35188,4840,1631,1408],["2026-01",0,31283,32754,4445,1351,1310],["2026-02",0,32323,32814,4560,1360,1313],["2026-03",0,33872,35512,4711,1448,1420],["2026-04",0,33871,35701,4681,1317,1428],["2026-05",0,31958,32770,4387,1073,1311],["2026-06",0,32735,33140,4479,1165,1326],["2026-07",0,31470,33069,4192,920,1323],["2026-08",0,30791,31358,4003,716,1254],["2026-09",0,31234,32665,4003,661,1307],["2026-10",0,32563,32826,4252,858,1313],
+["2025-11",1,19693,20324,2967,1004,813],["2025-12",1,21046,21248,3113,1120,850],["2026-01",1,19756,20215,2923,968,809],["2026-02",1,20428,20020,2979,1006,801],["2026-03",1,21360,21689,3093,1021,868],["2026-04",1,22235,21708,3254,1177,868],["2026-05",1,20094,20056,2830,884,802],["2026-06",1,20299,20348,2859,879,814],["2026-07",1,20401,20218,2926,914,809],["2026-08",1,18557,19092,2633,703,764],["2026-09",1,19768,20157,2792,764,806],["2026-10",1,19703,20052,2747,737,802],
+["2025-11",2,13045,12537,1959,733,501],["2025-12",2,13549,13304,2057,811,532],["2026-01",2,13262,12555,2037,814,502],["2026-02",2,12748,12705,1928,723,508],["2026-03",2,13696,13529,2045,821,541],["2026-04",2,14422,13701,2179,913,548],["2026-05",2,13108,12720,1963,756,509],["2026-06",2,13299,12505,1981,751,500],["2026-07",2,13140,12605,1978,773,504],["2026-08",2,12328,12050,1850,662,482],["2026-09",2,12898,12608,1925,726,504],["2026-10",2,13306,12518,2005,767,501],
+["2025-11",3,11229,10787,1667,536,431],["2025-12",3,11500,11550,1702,574,462],["2026-01",3,11020,10922,1634,507,437],["2026-02",3,10739,10973,1580,477,439],["2026-03",3,11849,11843,1730,571,474],["2026-04",3,11598,11877,1693,554,475],["2026-05",3,10911,10992,1596,487,440],["2026-06",3,10887,10909,1573,452,436],["2026-07",3,10968,10993,1564,444,440],["2026-08",3,10155,10289,1487,376,412],["2026-09",3,10950,10833,1598,470,433],["2026-10",3,10869,10887,1585,453,435],
+["2025-11",4,9973,10255,1505,468,410],["2025-12",4,10870,10855,1631,569,434],["2026-01",4,10287,10300,1542,535,412],["2026-02",4,10170,10268,1514,479,411],["2026-03",4,10863,10932,1605,540,437],["2026-04",4,11100,10970,1628,546,439],["2026-05",4,10150,10192,1482,441,408],["2026-06",4,10101,10103,1468,430,404],["2026-07",4,9837,10265,1407,389,411],["2026-08",4,9413,9648,1344,343,386],["2026-09",4,10001,10114,1428,392,405],["2026-10",4,9860,10277,1367,347,411],
+["2025-11",5,5446,5734,752,45,229],["2025-12",5,5894,6132,783,56,245],["2026-01",5,5539,5740,745,37,230],["2026-02",5,5525,5738,742,23,230],["2026-03",5,5992,6292,803,46,252],["2026-04",5,5851,6210,761,1,248],["2026-05",5,5549,5774,718,-11,231],["2026-06",5,5339,5763,679,-40,231],["2026-07",5,5413,5816,678,-64,233],["2026-08",5,5175,5445,658,-55,218],["2026-09",5,5541,5831,698,-50,233],["2026-10",5,5379,5766,670,-48,231]];
+var D = RAW.map(function(r){return {m:r[0],a:AG[r[1]],ca:r[2],bca:r[3],mb:r[4],eb:r[5],beb:r[6]};});
+var MONTHS = Array.from(new Set(D.map(function(r){return r.m;}))).sort();
+var MN = ["janv.","févr.","mars","avr.","mai","juin","juil.","août","sept.","oct.","nov.","déc."];
+function mLab(m,long){var y=m.slice(0,4),i=+m.slice(5)-1;return MN[i]+" "+(long?y:y.slice(2));}
+function f1(x){return x.toLocaleString("fr-FR",{minimumFractionDigits:1,maximumFractionDigits:1});}
+function pct(x){return f1(x)+" %";}
+function mmad(k){return f1(k/1000)+" MMAD";}
+function sgn(x,fmt){return (x>0?"+":x<0?"−":"")+fmt(Math.abs(x));}
+
+var st = {agence:"", du:MONTHS[0], au:MONTHS[MONTHS.length-1], vue:"ca"};
+try{var s=JSON.parse(localStorage.getItem("kaina-dash")||"null"); if(s){Object.assign(st,s);}}catch(e){}
+
+var selA=document.getElementById("f-agence"), selDu=document.getElementById("f-du"), selAu=document.getElementById("f-au");
+MONTHS.forEach(function(m){selDu.add(new Option(mLab(m,true),m));selAu.add(new Option(mLab(m,true),m));});
+selA.value=st.agence; selDu.value=st.du; selAu.value=st.au;
+function onF(){st.agence=selA.value;st.du=selDu.value;st.au=selAu.value;
+  if(st.du>st.au){var t=st.du;st.du=st.au;st.au=t;selDu.value=st.du;selAu.value=st.au;}
+  save();render();}
+[selA,selDu,selAu].forEach(function(s){s.addEventListener("change",onF);});
+document.querySelectorAll(".seg button").forEach(function(b){b.addEventListener("click",function(){
+  st.vue=b.dataset.m; save(); render();});});
+function save(){try{localStorage.setItem("kaina-dash",JSON.stringify(st));}catch(e){}}
+
+function sum(rows){var o={ca:0,bca:0,mb:0,eb:0,beb:0};rows.forEach(function(r){o.ca+=r.ca;o.bca+=r.bca;o.mb+=r.mb;o.eb+=r.eb;o.beb+=r.beb;});return o;}
+function inP(r){return r.m>=st.du&&r.m<=st.au;}
+
+function setKpi(id,ok,v,sub){var c=document.getElementById(id);c.classList.toggle("ok",ok);c.classList.toggle("bad",!ok);
+  c.querySelector('[data-k="v"]').textContent=v;c.querySelector('[data-k="pill"]').textContent=ok?"✓ Atteint":"✗ Raté";
+  var s=c.querySelector('[data-k="sub"]');s.textContent="";sub.forEach(function(p){var e=document.createElement(p[1]?"b":"span");e.textContent=p[0];s.appendChild(e);});}
+
+function render(){
+  var rows=D.filter(function(r){return inP(r)&&(!st.agence||r.a===st.agence);});
+  var t=sum(rows);
+  var real=t.ca/t.bca*100, tmb=t.mb/t.ca*100, teb=t.eb/t.ca*100;
+  var okR=real>=OBJ.real, okM=tmb>=OBJ.mb, okE=teb>=OBJ.eb;
+  setKpi("k-real",okR,pct(real),[["Objectif ≥ "+OBJ.real+" % · ",0],[sgn(t.ca-t.bca,mmad),1],[" vs budget ("+mmad(t.ca)+" réalisés)",0]]);
+  setKpi("k-mb",okM,pct(tmb),[["Objectif ≥ "+f1(OBJ.mb)+" % · écart ",0],[sgn(tmb-OBJ.mb,f1)+" pt",1]]);
+  setKpi("k-eb",okE,pct(teb),[["Objectif ≥ "+f1(OBJ.eb)+" % · EBITDA ",0],[mmad(t.eb),1],[" (budget "+mmad(t.beb)+")",0]]);
+
+  // classement (sur la période, toutes agences)
+  var rk=AG.map(function(a){var s=sum(D.filter(function(r){return inP(r)&&r.a===a;}));return {a:a,teb:s.eb/s.ca*100,real:s.ca/s.bca*100};})
+    .sort(function(x,y){return y.teb-x.teb;});
+  var nOk=[okR,okM,okE].filter(Boolean).length;
+  var miss=rk.filter(function(r){return r.teb<OBJ.eb;});
+  var per=st.du===st.au?mLab(st.du,true):mLab(st.du,true)+" – "+mLab(st.au,true);
+  var who=st.agence||"Le groupe";
+  var syn=document.getElementById("syn"); syn.textContent="";
+  function add(txt,b,cls){var e=document.createElement(b?"b":"span");e.textContent=txt;if(cls)e.style.color="var(--"+cls+")";syn.appendChild(e);}
+  add(per+" · ",0); add(who+" atteint ",0); add(nOk+" objectif"+(nOk>1?"s":"")+" sur 3",1,nOk===3?"ok":"bad"); add(". ",0);
+  if(!okR){add("Le CA est "+(real<100?"sous":"au-dessus du")+" budget de ",0);add(mmad(Math.abs(t.ca-t.bca)),1,"bad");add(". ",0);}
+  if(miss.length){add("Agence"+(miss.length>1?"s":"")+" sous l'objectif d'EBITDA : ",0);add(miss.map(function(r){return r.a+" ("+pct(r.teb)+")";}).join(", "),1,"bad");add(".",0);}
+  else add("Toutes les agences tiennent l'objectif d'EBITDA.",0);
+
+  document.querySelectorAll(".seg button").forEach(function(b){b.setAttribute("aria-pressed",String(b.dataset.m===st.vue));});
+  document.getElementById("c-title").textContent=(st.vue==="ca"?"CA":"EBITDA")+" mois par mois : réel contre budget"+(st.agence?" · "+st.agence:" · groupe");
+  drawChart(rows);
+  drawRank(rk);
+  document.getElementById("r-note").textContent="Sur "+per+". Taux d'EBITDA = EBITDA / CA.";
+  document.getElementById("r-obj").textContent="≥ "+pct(OBJ.eb);
+}
+
+function drawChart(rows){
+  var el=document.getElementById("chart"); el.textContent="";
+  var ms=MONTHS.filter(function(m){return m>=st.du&&m<=st.au;});
+  var k=st.vue==="ca"?["ca","bca"]:["eb","beb"];
+  var pts=ms.map(function(m){var s=sum(rows.filter(function(r){return r.m===m;}));return {m:m,r:s[k[0]]/1000,b:s[k[1]]/1000};});
+  var W=Math.max(300,el.clientWidth), H=W<500?220:270, ml=0, mr=12, mt=12, mb=26;
+  var vals=pts.flatMap(function(p){return [p.r,p.b];});
+  var lo=Math.min.apply(null,vals), hi=Math.max.apply(null,vals), pad=(hi-lo)*0.15||Math.abs(hi)*0.1||1;
+  lo=lo-pad; hi=hi+pad; if(lo>0&&lo<(hi-lo)*0.3)lo=0;
+  var ticks=niceTicks(lo,hi,4); lo=Math.min(lo,ticks[0]); hi=Math.max(hi,ticks[ticks.length-1]);
+  var NS="http://www.w3.org/2000/svg";
+  var svg=document.createElementNS(NS,"svg"); svg.setAttribute("viewBox","0 0 "+W+" "+H); svg.setAttribute("role","img");
+  svg.setAttribute("aria-label",(st.vue==="ca"?"CA":"EBITDA")+" mensuel réel et budget, en MMAD"); el.appendChild(svg);
+  function mk(n,a,p){var e=document.createElementNS(NS,n);for(var x in a)e.setAttribute(x,a[x]);(p||svg).appendChild(e);return e;}
+  // marge gauche mesurée sur l'étiquette la plus large
+  var tl=ticks.map(function(v){return mk("text",{x:0,y:-50}).appendChild(document.createTextNode(f1(v))).parentNode;});
+  ml=Math.ceil(Math.max.apply(null,tl.map(function(t){return t.getComputedTextLength()||30;})))+8; tl.forEach(function(t){t.remove();});
+  var iw=W-ml-mr, ih=H-mt-mb;
+  var x=function(i){return ml+(pts.length===1?iw/2:i*iw/(pts.length-1));};
+  var y=function(v){return mt+ih-(v-lo)/(hi-lo)*ih;};
+  ticks.forEach(function(v){mk("line",{x1:ml,x2:W-mr,y1:y(v),y2:y(v),stroke:"var(--grid)"});
+    var t=mk("text",{x:ml-8,y:y(v)+4,"text-anchor":"end"});t.textContent=f1(v);});
+  if(lo<0&&hi>0)mk("line",{x1:ml,x2:W-mr,y1:y(0),y2:y(0),stroke:"var(--muted)"});
+  var step=Math.ceil(pts.length/(W<500?4:12));
+  pts.forEach(function(p,i){if((i%step===0&&pts.length-1-i>=step*0.7)||i===pts.length-1){var t=mk("text",{x:x(i),y:H-6,"text-anchor":pts.length===1?"middle":i===0?"start":i===pts.length-1?"end":"middle"});t.textContent=mLab(p.m);}});
+  function path(f){return pts.map(function(p,i){return (i?"L":"M")+x(i).toFixed(1)+","+y(f(p)).toFixed(1);}).join("");}
+  mk("path",{d:path(function(p){return p.b;}),fill:"none",stroke:"var(--budget)","stroke-width":2,"stroke-dasharray":"6 4"});
+  mk("path",{d:path(function(p){return p.r;}),fill:"none",stroke:"var(--ink)","stroke-width":2.5,"stroke-linejoin":"round"});
+  pts.forEach(function(p,i){mk("circle",{cx:x(i),cy:y(p.r),r:W<500?4:5,fill:p.r>=p.b?"var(--ok)":"var(--bad)",stroke:"var(--panel)","stroke-width":1.5});});
+  var u="MMAD";
+  // info-bulle
+  var tip=document.createElement("div");tip.className="tip";tip.hidden=true;el.appendChild(tip);
+  var hl=mk("line",{y1:mt,y2:mt+ih,stroke:"var(--muted)","stroke-dasharray":"2 3",visibility:"hidden"});
+  var hit=mk("rect",{x:ml,y:0,width:iw,height:H,fill:"transparent"});
+  function show(ev){var r=svg.getBoundingClientRect(),sx=(ev.clientX-r.left)*W/r.width;
+    var i=pts.length===1?0:Math.round((sx-ml)/iw*(pts.length-1));i=Math.max(0,Math.min(pts.length-1,i));var p=pts[i];
+    hl.setAttribute("x1",x(i));hl.setAttribute("x2",x(i));hl.setAttribute("visibility","visible");
+    var d=p.r-p.b, ok=d>=0;
+    tip.innerHTML="";var b=document.createElement("b");b.textContent=mLab(p.m,true);tip.appendChild(b);
+    [["Réel : "+f1(p.r)+" "+u],["Budget : "+f1(p.b)+" "+u],["Écart : "+sgn(d,f1)+" "+u+(p.b?" ("+sgn(d/Math.abs(p.b)*100,f1)+" %)":""),ok?"ok":"bad"]].forEach(function(l){var e=document.createElement("div");e.textContent=l[0];if(l[1]){e.style.color="var(--"+l[1]+")";e.style.fontWeight="600";}tip.appendChild(e);});
+    tip.hidden=false;var px=x(i)*r.width/W, tw=tip.offsetWidth;
+    tip.style.left=Math.max(0,Math.min(el.clientWidth-tw,px-tw/2))+"px";tip.style.top=Math.max(0,y(Math.max(p.r,p.b))*r.height/H-tip.offsetHeight-12)+"px";}
+  hit.addEventListener("pointermove",show);hit.addEventListener("pointerdown",show);
+  hit.addEventListener("pointerleave",function(){tip.hidden=true;hl.setAttribute("visibility","hidden");});
+}
+function niceTicks(a,b,n){var s=(b-a)/n,m=Math.pow(10,Math.floor(Math.log10(s))),e=s/m;s=(e>=5?10:e>=2?5:e>=1?2:1)*m;if(e<1.5)s=m;var o=[];for(var v=Math.ceil(a/s)*s;v<=b+1e-9;v+=s)o.push(+v.toFixed(10));return o.length?o:[a,b];}
+
+function drawRank(rk){
+  var el=document.getElementById("rank"); el.textContent="";
+  var lo=Math.min(0,Math.min.apply(null,rk.map(function(r){return r.teb;}))), hi=Math.max(OBJ.eb,Math.max.apply(null,rk.map(function(r){return r.teb;})))*1.08;
+  var X=function(v){return (v-lo)/(hi-lo)*100;};
+  rk.forEach(function(r){var ok=r.teb>=OBJ.eb;
+    var row=document.createElement("div");row.className="row "+(ok?"ok":"bad")+(st.agence===r.a?" sel":"");
+    var n=document.createElement("div");n.className="name";n.textContent=r.a;
+    var tr=document.createElement("div");tr.className="track";
+    var bar=document.createElement("div");bar.className="bar";var a=X(Math.min(0,r.teb)),b=X(Math.max(0,r.teb));bar.style.left=a+"%";bar.style.width=Math.max(.6,b-a)+"%";
+    var z=document.createElement("div");z.className="zero";z.style.left=X(0)+"%";
+    var o=document.createElement("div");o.className="obj";o.style.left=X(OBJ.eb)+"%";
+    tr.append(bar,z,o);
+    var v=document.createElement("div");v.className="val";v.textContent=pct(r.teb);
+    row.append(n,tr,v);row.title="Réalisation budget CA : "+pct(r.real);
+    row.style.cursor="pointer";row.addEventListener("click",function(){selA.value=st.agence===r.a?"":r.a;onF();});
+    el.appendChild(row);});
+}
+render();
+var rt;window.addEventListener("resize",function(){clearTimeout(rt);rt=setTimeout(render,120);});
+})();
+</script>
+</body>
+</html>

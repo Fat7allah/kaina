@@ -1,0 +1,33 @@
+﻿id_conducteur;nom;telephone;agence;categorie_permis;fin_validite_permis;date_embauche;vehicule_affecte;statut
+C01;Hamid Ouali;06 00 60 34 52;Casablanca;B;06/11/2028;17/12/2012;96654-A-6;Actif
+C02;Said Rami;06 00 53 97 69;Casablanca;B;05/04/2028;23/03/2021;53448-B-6;Actif
+C03;Khalid Naji;06 00 32 66 62;Casablanca;C;11/11/2031;05/05/2014;83413-D-6;Actif
+C04;Ayoub Fikri;06 00 25 69 53;Casablanca;B;02/03/2029;15/04/2015;70455-H-6;Actif
+C05;Mustapha Hilali;06 00 32 11 40;Casablanca;B;21/09/2031;26/09/2012;62962-A-6;Actif
+C06;Abdellah Sbai;06 00 73 58 75;Casablanca;B;13/08/2032;03/08/2014;74987-B-6;Actif
+C07;Yassine Boukhari;06 00 58 11 27;Casablanca;C;04/11/2026;23/11/2012;71802-D-6;Actif
+C08;Rachid Bouzid;06 00 27 23 80;Casablanca;B;17/02/2031;10/06/2023;29193-H-6;Actif
+C09;Hicham Alami;06 00 37 65 56;Casablanca;B;17/01/2034;15/12/2017;41375-A-6;Actif
+C10;Anas Belhaj;06 00 83 51 87;Casablanca;B;20/10/2031;06/06/2016;85570-B-6;Actif
+C11;Mohamed Ait Lahcen;06 00 97 64 76;Rabat-Salé;B;03/12/2026;11/07/2019;34787-D-1;Actif
+C12;Brahim Ait Ali;06 00 15 90 48;Rabat-Salé;B;14/04/2031;27/06/2012;36742-H-1;Actif
+C13;Jamal Bouhmadi;06 00 16 51 40;Rabat-Salé;B;17/08/2033;25/12/2016;35427-A-1;Actif
+C14;Noureddine Haddou;06 00 20 81 16;Rabat-Salé;B;24/05/2029;02/06/2020;72661-B-1;Actif
+C15;Younes Elkhadir;06 00 35 94 38;Rabat-Salé;B;24/01/2031;16/03/2022;;Actif
+C16;Soufiane Mrabet;06 00 59 15 75;Rabat-Salé;B;22/12/2029;24/08/2016;91679-H-1;Actif
+C17;Adil Chafik;06 00 96 88 89;Tanger;C;10/02/2033;10/09/2021;54962-A-40;Actif
+C18;Karim Ziani;06 00 66 34 44;Tanger;B;24/01/2028;28/06/2014;94825-B-40;Actif
+C19;Omar Fadili;06 00 35 98 59;Tanger;B;20/03/2031;17/12/2018;59266-D-40;Actif
+C20;Tarik Senhaji;06 00 83 98 99;Tanger;B;13/04/2033;28/11/2012;15906-H-40;Actif
+C21;Samir Ennaji;06 00 48 56 50;Fès;B;13/06/2030;15/07/2023;52553-A-13;Actif
+C22;Ilyas Akdim;06 00 91 61 79;Fès;B;11/10/2031;06/05/2015;62679-B-13;Actif
+C23;Hassan Ouchen;06 00 57 33 98;Fès;C;10/08/2030;14/09/2023;94233-D-13;Actif
+C24;Zakaria Lamrini;06 00 97 84 63;Fès;B;07/01/2034;11/03/2012;49643-H-13;Congé
+C25;Mehdi Saadi;06 00 33 22 97;Marrakech;B;15/07/2033;10/04/2017;64923-A-33;Actif
+C26;Reda Essaidi;06 00 67 26 71;Marrakech;B;21/04/2029;25/03/2022;56626-B-33;Actif
+C27;Driss Moussaoui;06 00 48 30 52;Marrakech;C;22/12/2032;02/02/2016;49993-D-33;Actif
+C28;Nabil Ghazi;06 00 31 19 38;Marrakech;B;11/10/2032;20/12/2018;44844-H-33;Actif
+C29;Fouad Kabbaj;06 00 42 48 36;Agadir;C;28/07/2031;26/07/2012;55022-A-37;Actif
+C30;Ali Benomar;06 00 49 77 41;Agadir;B;25/03/2028;13/01/2022;92975-B-37;Actif
+C31;Walid Raiss;06 00 18 28 50;Agadir;B;02/04/2032;26/06/2018;21902-D-37;Actif
+C32;Ismail Nouri;06 00 67 96 66;Casablanca;B;25/07/2028;08/02/2018;;Remplaçant

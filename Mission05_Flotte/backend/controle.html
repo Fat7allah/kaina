@@ -1,0 +1,142 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Kaïna Flotte · contrôle</title>
+<style>
+  :root { --vert:#0F5C4A; --or:#F2A900; --terre:#C4532D; --sable:#F6EFE3; --encre:#1E2A26; --gris:#6B7470; }
+  * { box-sizing:border-box; }
+  body { margin:0; font-family:system-ui,-apple-system,"Segoe UI",sans-serif; background:var(--sable); color:var(--encre); }
+  header { background:var(--vert); color:#fff; padding:14px 20px; display:flex; flex-wrap:wrap; gap:8px 24px; align-items:baseline; }
+  header h1 { margin:0; font-size:20px; }
+  header span { opacity:.85; font-size:14px; }
+  main { max-width:1100px; margin:0 auto; padding:20px 16px 40px; }
+  section { background:#fff; border-radius:10px; padding:16px 18px; margin-bottom:18px; }
+  h2 { margin:0 0 12px; font-size:16px; color:var(--vert); }
+  .compteurs { display:grid; grid-template-columns:repeat(auto-fit,minmax(180px,1fr)); gap:12px; }
+  .compteur { border:1px solid #e3dccd; border-radius:8px; padding:12px; }
+  .compteur b { display:block; font-size:30px; color:var(--vert); }
+  .compteur small { color:var(--gris); }
+  label { font-size:14px; margin-right:12px; }
+  input[type=file] { font-size:13px; }
+  button { background:var(--vert); color:#fff; border:0; border-radius:6px; padding:8px 14px; font-size:14px; cursor:pointer; margin:6px 6px 0 0; }
+  button.sec { background:#fff; color:var(--vert); border:1px solid var(--vert); }
+  button:disabled { opacity:.4; cursor:default; }
+  .rapport { font-size:14px; margin-top:10px; }
+  .rapport ul { margin:6px 0; padding-left:20px; }
+  .erreur { color:var(--terre); font-weight:600; }
+  table { width:100%; border-collapse:collapse; font-size:14px; }
+  th, td { text-align:left; padding:8px 6px; border-bottom:1px solid #eee5d6; vertical-align:top; }
+  th { color:var(--gris); font-weight:600; font-size:12px; text-transform:uppercase; }
+  .p { display:inline-block; min-width:30px; text-align:center; border-radius:4px; padding:2px 6px; font-weight:700; font-size:12px; color:#fff; }
+  .P1 { background:var(--terre); } .P2 { background:var(--or); color:var(--encre); } .P3 { background:var(--gris); }
+  .note { color:var(--gris); font-size:13px; }
+  .tableau { overflow-x:auto; }
+  td:nth-child(2), td:last-child { white-space:nowrap; }
+</style>
+</head>
+<body>
+<header>
+  <h1>Kaïna Flotte · écran de contrôle</h1>
+  <span id="infoDate"></span>
+  <span id="infoImport"></span>
+</header>
+<main>
+  <section>
+    <h2>Enregistrements par table</h2>
+    <div class="compteurs" id="compteurs"></div>
+  </section>
+
+  <section>
+    <h2>Import du lundi (2 fichiers CSV, séparateur « ; »)</h2>
+    <label>Parc véhicules <input type="file" id="fParc" accept=".csv"></label>
+    <label>Conducteurs <input type="file" id="fCond" accept=".csv"></label>
+    <div>
+      <button id="bAnalyser">Analyser</button>
+      <button id="bConfirmer" disabled>Confirmer l'import</button>
+      <button id="bAnnuler" class="sec" disabled>Annuler</button>
+    </div>
+    <div class="rapport" id="rapport"></div>
+  </section>
+
+  <section>
+    <h2 id="titreAlertes">Alertes ouvertes</h2>
+    <div class="tableau">
+      <table>
+        <thead><tr><th>Priorité</th><th>N°</th><th>Concerne</th><th>Agence</th><th>Constat</th><th>Proposition</th><th>À traiter avant</th></tr></thead>
+        <tbody id="alertes"></tbody>
+      </table>
+    </div>
+    <p class="note">Les alertes sont calculées par les règles, jamais saisies à la main. L'application propose, l'humain décide : aucune alerte ne change le statut d'un véhicule ou d'un conducteur.</p>
+  </section>
+
+  <section>
+    <h2>Réglages de test</h2>
+    <label>Date du jour <input id="dateJour" size="10" placeholder="JJ/MM/AAAA"></label>
+    <button class="sec" id="bDate">Appliquer</button>
+    <button class="sec" id="bEffacer">Effacer toutes les données</button>
+    <p class="note">Date réglée sur le 16/11/2026 pour retrouver les 13 alertes de la recette. Laisser vide pour utiliser la vraie date du jour.</p>
+  </section>
+</main>
+
+<script src="moteur.js"></script>
+<script>
+(function () {
+  var K = window.KainaFlotte, $ = function (id) { return document.getElementById(id); };
+  function esc(t) { return String(t == null ? "" : t).replace(/[&<>"]/g, function (c) { return { "&":"&amp;", "<":"&lt;", ">":"&gt;", '"':"&quot;" }[c]; }); }
+
+  function afficher() {
+    var c = K.compteurs(), r = K.reglages(), imp = K.dernierImport();
+    $("infoDate").textContent = "Date de calcul : " + (r.dateDuJour || "aujourd'hui");
+    $("infoImport").textContent = imp ? "Dernier import : " + imp.le : "Aucun import";
+    $("dateJour").value = r.dateDuJour || "";
+    $("compteurs").innerHTML =
+      bloc("Véhicules", c.vehicules, c.vehiculesArchives + " archivé(s)") +
+      bloc("Conducteurs", c.conducteurs, c.conducteursArchives + " archivé(s)") +
+      bloc("Alertes ouvertes", c.alertesOuvertes, c.P1 + " P1 · " + c.P2 + " P2 · " + c.P3 + " P3");
+    var liste = K.alertesOuvertes();
+    $("titreAlertes").textContent = "Alertes ouvertes (" + liste.length + ")";
+    $("alertes").innerHTML = liste.length ? liste.map(function (a) {
+      return "<tr><td><span class='p " + a.priorite + "'>" + a.priorite + "</span></td><td>" + esc(a.numero) +
+        "</td><td>" + esc(a.concerne) + "</td><td>" + esc(a.agence) + "</td><td>" + esc(a.constat) +
+        "</td><td>" + esc(a.proposition) + "</td><td>" + esc(a.aTraiterAvant) + "</td></tr>";
+    }).join("") : "<tr><td colspan='7' class='note'>Aucune alerte ouverte. Importez les deux fichiers pour commencer.</td></tr>";
+  }
+  function bloc(nom, n, detail) { return "<div class='compteur'><small>" + nom + "</small><b>" + n + "</b><small>" + detail + "</small></div>"; }
+  function lire(input) {
+    return new Promise(function (ok, ko) {
+      var f = input.files[0]; if (!f) return ko(new Error("Choisissez les deux fichiers."));
+      var r = new FileReader(); r.onload = function () { ok(r.result); }; r.onerror = ko; r.readAsText(f, "utf-8");
+    });
+  }
+  function boutons(attente) { $("bConfirmer").disabled = !attente; $("bAnnuler").disabled = !attente; }
+
+  $("bAnalyser").onclick = function () {
+    Promise.all([lire($("fParc")), lire($("fCond"))]).then(function (t) {
+      var a = K.analyserImport(t[0], t[1]);
+      if (!a.ok) { $("rapport").innerHTML = "<p class='erreur'>" + esc(a.erreur) + "</p>"; boutons(false); return; }
+      $("rapport").innerHTML = "<p><b>Ce que l'application a compris</b> (rien n'est encore enregistré)</p><ul>" +
+        "<li>Lignes lues : " + a.lignesParc + " véhicules, " + a.lignesConducteurs + " conducteurs</li>" +
+        "<li>Véhicules : " + a.vehicules + " (" + a.doublonsFusionnes + " doublon fusionné)</li>" +
+        "<li>Conducteurs : " + a.conducteurs + "</li>" +
+        "<li>Alertes après import : " + a.alertesApresImport + " (" + a.parPriorite.P1 + " P1 · " + a.parPriorite.P2 + " P2 · " + a.parPriorite.P3 + " P3)</li>" +
+        "</ul><p><b>Corrigé ou signalé</b></p><ul>" + a.signalements.map(function (s) { return "<li>" + esc(s) + "</li>"; }).join("") + "</ul>";
+      boutons(true);
+    }).catch(function (e) { $("rapport").innerHTML = "<p class='erreur'>" + esc(e.message) + "</p>"; });
+  };
+  $("bConfirmer").onclick = function () {
+    var r = K.confirmerImport();
+    $("rapport").innerHTML = r.ok ? "<p>Import enregistré.</p>" : "<p class='erreur'>" + esc(r.erreur) + "</p>";
+    boutons(false); afficher();
+  };
+  $("bAnnuler").onclick = function () { K.annulerImport(); $("rapport").innerHTML = "<p>Import annulé, rien n'a été enregistré.</p>"; boutons(false); };
+  $("bDate").onclick = function () { K.changerReglage("dateDuJour", $("dateJour").value.trim()); afficher(); };
+  $("bEffacer").onclick = function () {
+    if (window.confirm("Effacer toutes les données enregistrées dans ce navigateur ?")) { K.toutEffacer(); $("rapport").innerHTML = ""; afficher(); }
+  };
+  afficher();
+})();
+</script>
+</body>
+</html>

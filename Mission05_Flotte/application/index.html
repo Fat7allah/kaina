@@ -1,0 +1,737 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Kaïna Flotte</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --cedre:#0F5C4A; --safran:#F2A900; --terre:#C4532D; --sable:#F6EFE3; --noir:#111111; --blanc:#FFFFFF;
+    --cedre-clair:#E4EEEA; --terre-clair:#F8E6DF; --safran-clair:#FDF1D3; --trait:#E6DDCB; --doux:#4A5A54;
+  }
+  * { box-sizing:border-box; }
+  html, body { margin:0; }
+  body { font-family:Inter, Arial, sans-serif; background:var(--sable); color:var(--noir); font-size:15px; line-height:1.45; }
+  a { color:var(--cedre); }
+  button, input, select, textarea { font:inherit; }
+
+  /* ---------- Structure ---------- */
+  .app { display:flex; min-height:100vh; }
+  aside { width:236px; flex:none; background:var(--cedre); color:var(--sable); display:flex; flex-direction:column; position:sticky; top:0; height:100vh; }
+  .logo { padding:22px 20px 18px; }
+  .logo svg { width:128px; height:auto; display:block; }
+  .logo small { display:block; margin-top:6px; font-size:12px; letter-spacing:.04em; opacity:.85; }
+  aside nav a { display:flex; align-items:center; gap:10px; padding:11px 20px; color:var(--sable); text-decoration:none; font-weight:600; border-left:4px solid transparent; }
+  aside nav a:hover { background:rgba(255,255,255,.07); }
+  aside nav a.actif { background:rgba(255,255,255,.12); border-left-color:var(--safran); }
+  aside nav a .pastille { margin-left:auto; background:var(--terre); color:var(--blanc); border-radius:20px; padding:1px 8px; font-size:12px; }
+  aside nav svg { width:18px; height:18px; flex:none; }
+  .qui { margin-top:auto; padding:16px 20px 20px; font-size:13px; border-top:1px solid rgba(255,255,255,.15); }
+  .qui b { display:block; font-size:14px; }
+  .qui .frais { opacity:.85; margin-top:6px; }
+  main { flex:1; min-width:0; padding:24px 28px 60px; }
+  .contenu { max-width:1180px; margin:0 auto; }
+  .projet { text-align:center; font-size:12px; color:var(--doux); margin-top:36px; }
+
+  /* ---------- Éléments ---------- */
+  h1 { font-size:24px; margin:0; color:var(--cedre); }
+  h2 { font-size:16px; margin:0 0 12px; color:var(--cedre); }
+  .entete { display:flex; flex-wrap:wrap; align-items:center; gap:10px 16px; margin-bottom:18px; }
+  .entete .droite { margin-left:auto; display:flex; gap:8px; flex-wrap:wrap; }
+  .carte { background:var(--blanc); border-radius:12px; padding:18px; margin-bottom:16px; }
+  .grille { display:grid; gap:16px; }
+  .g4 { grid-template-columns:repeat(4,1fr); }
+  .g2 { grid-template-columns:1fr 1fr; }
+  .btn { display:inline-flex; align-items:center; gap:6px; border:0; border-radius:8px; padding:9px 14px; font-weight:600; cursor:pointer; background:var(--cedre); color:var(--blanc); text-decoration:none; font-size:14px; }
+  .btn.sec { background:var(--blanc); color:var(--cedre); box-shadow:inset 0 0 0 1.5px var(--cedre); }
+  .btn.danger { background:var(--terre); }
+  .btn.petit { padding:6px 10px; font-size:13px; }
+  .btn:disabled { opacity:.4; cursor:default; }
+  .badge { display:inline-block; border-radius:5px; padding:2px 7px; font-weight:700; font-size:12px; white-space:nowrap; }
+  .P1 { background:var(--terre); color:var(--blanc); }
+  .P2 { background:var(--safran); color:var(--noir); }
+  .P3 { background:var(--blanc); color:var(--cedre); box-shadow:inset 0 0 0 1.5px var(--cedre); }
+  .statut { display:inline-block; border-radius:20px; padding:2px 10px; font-size:12px; font-weight:600; background:var(--cedre-clair); color:var(--cedre); white-space:nowrap; }
+  .statut.immo { background:var(--terre-clair); color:var(--terre); }
+  .statut.conge { background:var(--safran-clair); color:var(--noir); }
+  .statut.archive { background:#eee; color:var(--doux); }
+  .muet { color:var(--doux); font-size:13px; }
+  .vide { color:var(--doux); padding:18px 0; text-align:center; }
+
+  /* Compteurs */
+  .compteur { background:var(--blanc); border-radius:12px; padding:16px 18px; text-decoration:none; color:inherit; display:block; border-top:5px solid var(--cedre); }
+  .compteur b { display:block; font-size:34px; line-height:1.1; color:var(--cedre); }
+  .compteur.c1 { border-top-color:var(--terre); } .compteur.c1 b { color:var(--terre); }
+  .compteur.c2 { border-top-color:var(--safran); }
+  .compteur span { font-size:13px; color:var(--doux); }
+
+  /* Bandeau « ne roulent pas » */
+  .stop { background:var(--terre); color:var(--blanc); border-radius:12px; padding:16px 18px; margin-bottom:16px; }
+  .stop h2 { color:var(--blanc); font-size:18px; display:flex; align-items:center; gap:8px; }
+  .stop h2 svg { width:22px; height:22px; flex:none; }
+  .stop ul { list-style:none; margin:0; padding:0; display:grid; gap:8px; }
+  .stop li a { display:flex; flex-wrap:wrap; gap:4px 14px; align-items:baseline; background:rgba(255,255,255,.12); border-radius:8px; padding:10px 12px; color:var(--blanc); text-decoration:none; }
+  .stop li a:hover { background:rgba(255,255,255,.2); }
+  .stop .immat { font-weight:700; font-size:16px; min-width:120px; }
+  .stop .raison { flex:1; min-width:200px; }
+  .stop .ag { opacity:.9; font-size:13px; }
+  .stop .note { font-size:13px; opacity:.9; margin:10px 0 0; }
+
+  /* Listes simples */
+  .liste { list-style:none; margin:0; padding:0; }
+  .liste li { display:flex; gap:10px; align-items:baseline; padding:9px 0; border-bottom:1px solid var(--trait); }
+  .liste li:last-child { border-bottom:0; }
+  .liste .d { margin-left:auto; font-weight:600; white-space:nowrap; }
+
+  /* Barres carburant */
+  .barre { display:grid; grid-template-columns:96px 1fr 92px; gap:10px; align-items:center; padding:5px 0; font-size:14px; }
+  .barre .fond { background:var(--cedre-clair); border-radius:4px; height:14px; }
+  .barre .val { background:var(--cedre); height:14px; border-radius:4px; }
+  .barre .m { text-align:right; font-weight:600; }
+
+  /* Filtres */
+  .filtres { display:flex; flex-wrap:wrap; gap:8px; margin-bottom:14px; }
+  .filtres input[type=search] { flex:1 1 260px; }
+  input[type=search], input[type=text], input[type=date], input[type=number], select, textarea {
+    border:1.5px solid var(--trait); border-radius:8px; padding:8px 10px; background:var(--blanc); color:var(--noir); min-height:40px; }
+  input:focus, select:focus, textarea:focus { outline:2px solid var(--safran); outline-offset:1px; border-color:var(--cedre); }
+
+  /* Tableaux (deviennent des cartes sur téléphone) */
+  table.t { width:100%; border-collapse:collapse; font-size:14px; }
+  table.t th { text-align:left; font-size:12px; color:var(--doux); font-weight:600; padding:8px; border-bottom:2px solid var(--trait); white-space:nowrap; }
+  table.t td { padding:9px 8px; border-bottom:1px solid var(--trait); vertical-align:middle; }
+  table.t tbody tr { cursor:pointer; }
+  table.t tbody tr:hover { background:var(--sable); }
+  table.t td.num { text-align:right; white-space:nowrap; }
+  .rouge { color:var(--terre); font-weight:700; }
+
+  /* Fiches */
+  .fiche-tete { display:flex; flex-wrap:wrap; gap:8px 14px; align-items:center; }
+  .fiche-tete h1 { font-size:26px; }
+  .fil { font-size:13px; margin-bottom:6px; }
+  .fil a { text-decoration:none; }
+  dl.champs { display:grid; grid-template-columns:minmax(150px, 45%) 1fr; gap:0; margin:0; }
+  dl.champs dt, dl.champs dd { padding:8px 0; border-bottom:1px solid var(--trait); margin:0; }
+  dl.champs dt { color:var(--doux); font-size:14px; }
+  dl.champs dd { font-weight:600; }
+  .lie { display:flex; gap:12px; align-items:center; background:var(--sable); border-radius:10px; padding:12px 14px; text-decoration:none; color:inherit; }
+  .lie b { font-size:16px; color:var(--cedre); }
+
+  /* Alertes */
+  .onglets { display:flex; gap:6px; margin-bottom:14px; flex-wrap:wrap; }
+  .onglets a { padding:7px 14px; border-radius:20px; text-decoration:none; font-weight:600; font-size:14px; background:var(--blanc); color:var(--cedre); }
+  .onglets a.actif { background:var(--cedre); color:var(--blanc); }
+  .groupe-titre { display:flex; align-items:center; gap:10px; margin:20px 0 10px; font-weight:700; color:var(--cedre); }
+  .groupe-titre.g1 { color:var(--terre); }
+  .alerte { background:var(--blanc); border-radius:10px; padding:14px 16px; margin-bottom:10px; border-left:6px solid var(--cedre); }
+  .alerte.a1 { border-left-color:var(--terre); background:var(--terre-clair); }
+  .alerte.a2 { border-left-color:var(--safran); }
+  .alerte .haut { display:flex; flex-wrap:wrap; gap:6px 12px; align-items:center; }
+  .alerte .haut a { font-weight:700; text-decoration:none; font-size:15px; }
+  .alerte .haut .ag { color:var(--doux); font-size:13px; }
+  .alerte .haut .delai { margin-left:auto; font-size:13px; font-weight:600; }
+  .alerte p { margin:6px 0; }
+  .alerte .prop { color:var(--doux); font-size:14px; }
+  .alerte .actions { display:flex; flex-wrap:wrap; gap:8px; margin-top:10px; }
+  .decisions { margin:8px 0 0; padding:8px 10px; background:var(--blanc); border-radius:8px; font-size:13px; list-style:none; }
+  .alerte.a1 .decisions { background:rgba(255,255,255,.7); }
+  .decisions li { padding:2px 0; }
+
+  /* Fenêtre de saisie */
+  dialog { border:0; border-radius:14px; padding:0; width:min(560px, calc(100vw - 24px)); max-height:calc(100vh - 32px); }
+  dialog::backdrop { background:rgba(17,17,17,.45); }
+  dialog form { padding:20px; }
+  dialog h2 { font-size:18px; }
+  .formulaire { display:grid; grid-template-columns:1fr 1fr; gap:12px; }
+  .formulaire label { display:flex; flex-direction:column; gap:4px; font-size:13px; font-weight:600; color:var(--doux); }
+  .formulaire label.large { grid-column:1 / -1; }
+  .formulaire input, .formulaire select, .formulaire textarea { width:100%; color:var(--noir); font-weight:400; }
+  .pied { display:flex; gap:8px; justify-content:flex-end; margin-top:18px; flex-wrap:wrap; }
+  .erreur { color:var(--terre); font-weight:600; font-size:14px; margin:10px 0 0; }
+  .toast { position:fixed; left:50%; bottom:24px; transform:translateX(-50%); background:var(--noir); color:var(--blanc); padding:11px 18px; border-radius:10px; font-size:14px; z-index:50; max-width:calc(100vw - 32px); box-shadow:0 6px 20px rgba(0,0,0,.2); }
+
+  /* Barre du haut et menu du bas : téléphone seulement */
+  .haut-mobile, .bas-mobile { display:none; }
+
+  @media (max-width: 1000px) {
+    .g4 { grid-template-columns:1fr 1fr; }
+    .g2 { grid-template-columns:1fr; }
+  }
+  @media (max-width: 760px) {
+    aside { display:none; }
+    main { padding:14px 12px 92px; }
+    .haut-mobile { display:flex; align-items:center; gap:10px; background:var(--cedre); color:var(--sable); padding:10px 14px; position:sticky; top:0; z-index:20; }
+    .haut-mobile svg { width:96px; height:auto; }
+    .haut-mobile small { margin-left:auto; font-size:12px; opacity:.9; text-align:right; }
+    .app { flex-direction:column; }
+    .bas-mobile { display:flex; position:fixed; left:0; right:0; bottom:0; background:var(--cedre); z-index:20; padding-bottom:env(safe-area-inset-bottom); }
+    .bas-mobile a { flex:1; display:flex; flex-direction:column; align-items:center; gap:2px; padding:8px 2px 9px; color:var(--sable); text-decoration:none; font-size:11px; font-weight:600; position:relative; }
+    .bas-mobile a.actif { color:var(--safran); }
+    .bas-mobile svg { width:22px; height:22px; }
+    .bas-mobile .pastille { position:absolute; top:3px; left:calc(50% + 6px); background:var(--terre); color:var(--blanc); border-radius:10px; padding:0 6px; font-size:11px; }
+    h1 { font-size:21px; }
+    .fiche-tete h1 { font-size:22px; }
+    .formulaire { grid-template-columns:1fr; }
+    /* Les tableaux deviennent des cartes */
+    table.t thead { display:none; }
+    table.t, table.t tbody, table.t tr, table.t td { display:block; width:100%; }
+    table.t tr { background:var(--blanc); border-radius:10px; margin-bottom:10px; padding:10px 12px; border:1px solid var(--trait); }
+    table.t td { border:0; padding:2px 0; text-align:left !important; }
+    table.t td[data-l]::before { content:attr(data-l) " : "; color:var(--doux); font-size:12px; }
+    table.t td.cle { font-weight:700; font-size:16px; color:var(--cedre); }
+    .carte.tableau { background:transparent; padding:0; }
+    .barre { grid-template-columns:84px 1fr 80px; }
+    .alerte .haut .delai { margin-left:0; width:100%; }
+    .toast { bottom:84px; }
+    .stop li a { padding:8px 10px; gap:2px 10px; }
+  }
+</style>
+</head>
+<body>
+<div class="app">
+  <div class="haut-mobile" id="hautMobile"></div>
+  <aside>
+    <div class="logo" id="logo"></div>
+    <nav id="nav"></nav>
+    <div class="qui" id="qui"></div>
+  </aside>
+  <main><div class="contenu" id="page"></div><p class="projet">Kaïna Distribution · Kaïna Flotte v1 · Projet — identité en cours de validation.</p></main>
+  <nav class="bas-mobile" id="navMobile"></nav>
+</div>
+<dialog id="fenetre"><form method="dialog" id="fenetreForm" novalidate></form></dialog>
+
+<script src="moteur.js"></script>
+<script>
+(function () {
+  "use strict";
+  var K = window.KainaFlotte;
+  var $ = function (id) { return document.getElementById(id); };
+  var AGENCES = ["Casablanca", "Rabat-Salé", "Tanger", "Fès", "Marrakech", "Agadir"];
+  var MOIS = ["janvier","février","mars","avril","mai","juin","juillet","août","septembre","octobre","novembre","décembre"];
+  var JOURS = ["dimanche","lundi","mardi","mercredi","jeudi","vendredi","samedi"];
+
+  /* ---------- Outils ---------- */
+  function esc(t) { return String(t == null ? "" : t).replace(/[&<>"']/g, function (c) { return { "&":"&amp;", "<":"&lt;", ">":"&gt;", '"':"&quot;", "'":"&#39;" }[c]; }); }
+  function nb(n) { return n == null ? "—" : Math.round(n).toLocaleString("fr-FR").replace(/ | /g, " "); }
+  function vers(d) { var p = String(d || "").split("/"); return p.length === 3 ? new Date(Date.UTC(+p[2], +p[1] - 1, +p[0])) : null; }
+  function versIso(d) { var p = String(d || "").split("/"); return p.length === 3 ? p[2] + "-" + p[1] + "-" + p[0] : ""; }
+  function depuisIso(i) { var p = String(i || "").split("-"); return p.length === 3 ? p[2] + "/" + p[1] + "/" + p[0] : ""; }
+  function jourTexte() {
+    var d = vers(K.reglages().dateDuJour) || new Date();
+    return JOURS[d.getUTCDay()] + " " + K.reglages().dateDuJour;
+  }
+  function expire(date) { var d = vers(date), j = vers(K.reglages().dateDuJour); return d && j && d < j; }
+  function prioMax(alertes) { return alertes.reduce(function (m, a) { return !m || a.priorite < m ? a.priorite : m; }, null); }
+  function toast(msg) {
+    document.querySelectorAll(".toast").forEach(function (x) { x.remove(); });
+    var t = document.createElement("div"); t.className = "toast"; t.textContent = msg; document.body.appendChild(t);
+    setTimeout(function () { t.remove(); }, 3200);
+  }
+  function telecharger(nom, texte) {
+    var a = document.createElement("a");
+    a.href = URL.createObjectURL(new Blob([texte], { type: "text/csv;charset=utf-8" }));
+    a.download = nom; document.body.appendChild(a); a.click(); a.remove();
+  }
+  function classeStatut(s) { return s === "Immobilisé" ? "immo" : s === "Congé" ? "conge" : ""; }
+
+  /* ---------- Logo et icônes ---------- */
+  var LOGO = '<svg viewBox="0 0 541 218" role="img" aria-label="Kaïna"><path d="M51.20,40.00 L51.20,171.20 M105.60,100.80 L57.60,142.40 M72.00,131.20 L108.80,171.20 M224.00,136.00 A35.20,35.20 0 1 1 153.60,136.00 A35.20,35.20 0 1 1 224.00,136.00 M224.00,100.80 L224.00,171.20 M265.60,100.80 L265.60,171.20 M307.20,171.20 L307.20,136.00 A35.20,35.20 0 0 1 377.60,136.00 L377.60,171.20 M489.60,136.00 A35.20,35.20 0 1 1 419.20,136.00 A35.20,35.20 0 1 1 489.60,136.00 M489.60,100.80 L489.60,171.20" fill="none" stroke="#F6EFE3" stroke-width="22.40" stroke-linecap="round" stroke-linejoin="round"/><circle cx="248.00" cy="62.40" r="13.12" fill="#F2A900"/><circle cx="283.20" cy="62.40" r="13.12" fill="#F2A900"/></svg>';
+  function ico(d) { return '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">' + d + '</svg>'; }
+  var ICONES = {
+    tableau: ico('<rect x="3" y="3" width="7" height="9" rx="1"/><rect x="14" y="3" width="7" height="5" rx="1"/><rect x="14" y="12" width="7" height="9" rx="1"/><rect x="3" y="16" width="7" height="5" rx="1"/>'),
+    vehicules: ico('<path d="M3 17V7a1 1 0 0 1 1-1h10v11"/><path d="M14 10h4l3 3v4h-7"/><circle cx="7" cy="17.5" r="2"/><circle cx="17" cy="17.5" r="2"/>'),
+    conducteurs: ico('<circle cx="12" cy="8" r="4"/><path d="M4 21c0-4 4-6 8-6s8 2 8 6"/>'),
+    alertes: ico('<path d="M10.3 3.9 1.8 18a2 2 0 0 0 1.7 3h17a2 2 0 0 0 1.7-3L13.7 3.9a2 2 0 0 0-3.4 0z"/><path d="M12 9v4M12 17h.01"/>'),
+    import: ico('<path d="M12 3v12M7 10l5 5 5-5"/><path d="M4 21h16"/>'),
+    stop: ico('<circle cx="12" cy="12" r="9"/><path d="M5.6 5.6l12.8 12.8"/>')
+  };
+  var MENU = [
+    ["tableau", "Tableau de bord", "Accueil"], ["vehicules", "Véhicules", "Véhicules"],
+    ["conducteurs", "Conducteurs", "Conducteurs"], ["alertes", "Alertes", "Alertes"], ["import", "Import / export", "Import"]
+  ];
+
+  function cadre(section) {
+    var c = K.compteurs(), r = K.reglages(), imp = K.dernierImport();
+    var compte = { vehicules: c.vehicules, conducteurs: c.conducteurs };
+    $("logo").innerHTML = LOGO + "<small>FLOTTE</small>";
+    $("nav").innerHTML = MENU.map(function (m) {
+      var p = m[0] === "alertes" && c.alertesOuvertes ? '<span class="pastille">' + c.alertesOuvertes + "</span>"
+        : (compte[m[0]] != null ? '<span class="pastille" style="background:rgba(255,255,255,.18)">' + compte[m[0]] + "</span>" : "");
+      return '<a href="#/' + m[0] + '" class="' + (section === m[0] ? "actif" : "") + '">' + ICONES[m[0]] + m[1] + p + "</a>";
+    }).join("");
+    $("navMobile").innerHTML = MENU.map(function (m) {
+      var p = m[0] === "alertes" && c.alertesOuvertes ? '<span class="pastille">' + c.alertesOuvertes + "</span>" : "";
+      return '<a href="#/' + m[0] + '" class="' + (section === m[0] ? "actif" : "") + '">' + ICONES[m[0]] + m[2] + p + "</a>";
+    }).join("");
+    $("qui").innerHTML = "<b>" + esc(r.utilisateur) + "</b>Chef de parc · 6 agences" +
+      '<div class="frais">' + (imp ? "Données du " + esc(imp.le) : "Aucun import") + "</div>";
+    $("hautMobile").innerHTML = LOGO + "<small>" + esc(r.utilisateur) + "<br>" + (imp ? "Données du " + esc(imp.le) : "Aucun import") + "</small>";
+  }
+
+  /* =================================================================
+     1. Tableau de bord
+     ================================================================= */
+  function pageTableau() {
+    var c = K.compteurs(), stop = K.nePasRouler(), ech = K.echeances(30), cout = K.coutCarburantParAgence();
+    if (!c.vehicules && !c.conducteurs) return accueilVide();
+    var max = Math.max.apply(null, cout.map(function (x) { return x.coutMAD; }).concat([1]));
+    var total = cout.reduce(function (s, x) { return s + x.coutMAD; }, 0);
+    var litres = cout.reduce(function (s, x) { return s + x.litres; }, 0);
+    var h = '<div class="entete"><h1>Tableau de bord · ' + esc(jourTexte()) + "</h1></div>";
+
+    h += '<section class="stop"><h2>' + ICONES.stop + " Ne roulent pas aujourd'hui (" + stop.length + ")</h2>";
+    if (!stop.length) h += "<p>Aucun véhicule bloqué par une alerte P1.</p>";
+    else h += "<ul>" + stop.map(function (s) {
+      var v = s.vehicule, deja = v.statut === "Immobilisé";
+      return '<li><a href="#/vehicules/' + esc(v.numero) + '"><span class="immat">' + esc(v.immatriculation) + "</span>" +
+        '<span class="raison">' + esc(s.raisons.join(" · ")) + (deja ? " · déjà immobilisé" : "") + "</span>" +
+        '<span class="ag">' + esc(v.type) + " · " + esc(v.agence) + "</span></a></li>";
+    }).join("") + "</ul>";
+    h += '<p class="note">Proposition de l\'outil : le chef de parc décide de chaque immobilisation.</p></section>';
+
+    h += '<div class="grille g4" style="margin-bottom:16px">' +
+      '<a class="compteur" href="#/vehicules"><span>Véhicules</span><b>' + c.vehicules + "</b><span>" + c.vehiculesEnService + " en service · " + c.vehiculesImmobilises + " immobilisé" + (c.vehiculesImmobilises > 1 ? "s" : "") + "</span></a>" +
+      '<a class="compteur c1" href="#/alertes"><span>Alertes P1</span><b>' + c.P1 + "</b><span>à régler aujourd'hui</span></a>" +
+      '<a class="compteur c2" href="#/alertes"><span>Alertes P2</span><b>' + c.P2 + "</b><span>sous 7 jours</span></a>" +
+      '<a class="compteur c3" href="#/alertes"><span>Alertes P3</span><b>' + c.P3 + "</b><span>sous 15 jours</span></a></div>";
+
+    h += '<div class="grille g2"><section class="carte"><h2>Échéances des 30 prochains jours (' + ech.length + ")</h2>";
+    h += ech.length ? '<ul class="liste">' + ech.map(function (e) {
+      return '<li><span class="badge P3">' + esc(e.quoi) + '</span><a href="#/' + e.lien.table + "/" + esc(e.lien.numero) + '">' + esc(e.qui) + "</a>" +
+        '<span class="muet">' + esc(e.agence) + '</span><span class="d">' + esc(e.date) + (e.dansJours != null ? ' <span class="muet">(J+' + e.dansJours + ")</span>" : "") + "</span></li>";
+    }).join("") + "</ul>" : '<p class="vide">Aucune échéance dans les 30 jours.</p>';
+    h += "</section>";
+
+    h += '<section class="carte"><h2>Coût carburant d\'octobre par agence</h2>' + cout.map(function (x) {
+      return '<div class="barre"><span>' + esc(x.agence) + '</span><span class="fond"><span class="val" style="display:block;width:' + Math.round(x.coutMAD / max * 100) + '%"></span></span><span class="m">' + nb(x.coutMAD) + " MAD</span></div>";
+    }).join("") + '<p class="muet" style="margin:10px 0 0">Total : ' + nb(litres) + " L · <b>" + nb(total) + " MAD</b> à " + String(K.reglages().prixGasoil).replace(".", ",") + " MAD/L</p></section></div>";
+    return h;
+  }
+  function accueilVide() {
+    return '<div class="entete"><h1>Bienvenue dans Kaïna Flotte</h1></div><section class="carte"><p>Aucune donnée pour l\'instant. Commencez par importer les deux fichiers du lundi.</p><a class="btn" href="#/import">Importer les fichiers</a></section>';
+  }
+
+  /* =================================================================
+     2. Listes Véhicules et Conducteurs
+     ================================================================= */
+  var filtres = { vehicules: { q: "", agence: "", type: "", statut: "", archives: false },
+                  conducteurs: { q: "", agence: "", categoriePermis: "", statut: "", archives: false } };
+
+  function options(liste, val, tous) {
+    return '<option value="">' + tous + "</option>" + liste.map(function (o) {
+      return '<option value="' + esc(o) + '"' + (o === val ? " selected" : "") + ">" + esc(o) + "</option>";
+    }).join("");
+  }
+  function alertesParCible() {
+    var m = {};
+    K.alertesOuvertes().forEach(function (a) {
+      [a.immatriculation, a.numeroConducteur].forEach(function (k) { if (k) (m[k] = m[k] || []).push(a); });
+    });
+    return m;
+  }
+
+  function pageListe(table) {
+    var f = filtres[table], V = table === "vehicules";
+    var h = '<div class="entete"><h1>' + (V ? "Véhicules" : "Conducteurs") + ' <span class="muet" id="nbListe"></span></h1>' +
+      '<div class="droite"><button class="btn sec" data-export="' + table + '">Exporter pour Excel</button><button class="btn" data-ajouter="' + table + '">+ Ajouter</button></div></div>';
+    h += '<div class="filtres"><input type="search" id="fq" placeholder="' + (V ? "Rechercher une immatriculation, un conducteur, un n°…" : "Rechercher un nom, un n°, un véhicule…") + '" value="' + esc(f.q) + '">' +
+      '<select id="fagence">' + options(AGENCES, f.agence, "Toutes les agences") + "</select>" +
+      (V ? '<select id="ftype">' + options(K.choix.type, f.type, "Tous les types") + "</select>"
+         : '<select id="fpermis">' + options(K.choix.categoriePermis, f.categoriePermis, "Tous les permis") + "</select>") +
+      '<select id="fstatut">' + options(V ? K.choix.statutVehicule : K.choix.statutConducteur, f.statut, "Tous les statuts") + "</select>" +
+      '<select id="farchives"><option value="">Archivés masqués</option><option value="1"' + (f.archives ? " selected" : "") + ">Archivés seulement</option></select></div>";
+    h += '<section class="carte tableau"><div id="liste"></div></section>';
+    return h;
+  }
+  function remplirListe(table) {
+    var f = filtres[table], V = table === "vehicules", parCible = alertesParCible();
+    var crit = {}; if (f.agence) crit.agence = f.agence;
+    if (V && f.type) crit.type = f.type;
+    if (!V && f.categoriePermis) crit.categoriePermis = f.categoriePermis;
+    if (f.statut) crit.statut = f.statut;
+    if (f.archives) { crit.archives = true; crit.archive = true; }
+    var lignes = K.rechercher(table, f.q, crit).sort(function (a, b) { return a.numero.localeCompare(b.numero, "fr", { numeric: true }); });
+    $("nbListe").textContent = "(" + lignes.length + ")";
+    if (!lignes.length) { $("liste").innerHTML = '<p class="vide">Aucune fiche ne correspond.</p>'; return; }
+    var h = '<table class="t"><thead><tr>';
+    if (V) {
+      h += "<th>N°</th><th>Immatriculation</th><th>Type</th><th>Agence</th><th>Conducteur</th><th>Compteur</th><th>Vidange dans</th><th>Fin VT</th><th>Fin assurance</th><th>Conso (L/100)</th><th>Statut</th><th>Alerte</th></tr></thead><tbody>";
+      h += lignes.map(function (v) {
+        var al = parCible[v.immatriculation] || [], p = prioMax(al);
+        return '<tr data-ouvrir="#/vehicules/' + esc(v.numero) + '"><td>' + esc(v.numero) + '</td><td class="cle">' + esc(v.immatriculation) + "</td>" +
+          '<td data-l="Type">' + esc(v.type) + '</td><td data-l="Agence">' + esc(v.agence) + (v.siteOrigine !== v.agence ? ' <span class="muet">(' + esc(v.siteOrigine) + ")</span>" : "") + "</td>" +
+          '<td data-l="Conducteur">' + (v.conducteur ? esc(v.conducteur) : '<span class="muet">aucun</span>') + "</td>" +
+          '<td class="num" data-l="Compteur">' + nb(v.compteur) + " km</td>" +
+          '<td class="num" data-l="Vidange dans">' + (v.aVerifier ? '<span class="rouge">à vérifier</span>' : v.vidangeDansKm == null ? "—" : '<span class="' + (v.vidangeDansKm < 1000 ? "rouge" : "") + '">' + nb(v.vidangeDansKm) + " km</span>") + "</td>" +
+          '<td data-l="Fin VT"><span class="' + (expire(v.finVisiteTechnique) ? "rouge" : "") + '">' + esc(v.finVisiteTechnique) + "</span></td>" +
+          '<td data-l="Fin assurance"><span class="' + (expire(v.finAssurance) ? "rouge" : "") + '">' + esc(v.finAssurance) + "</span></td>" +
+          '<td class="num" data-l="Conso">' + (v.consoL100 == null ? "—" : '<span class="' + (v.ecartReferencePct > K.reglages().surconsommationPct ? "rouge" : "") + '">' + String(v.consoL100).replace(".", ",") + "</span>") + "</td>" +
+          '<td><span class="statut ' + (v.archive ? "archive" : classeStatut(v.statut)) + '">' + (v.archive ? "Archivé" : esc(v.statut)) + "</span></td>" +
+          "<td>" + (p ? '<span class="badge ' + p + '">' + p + (al.length > 1 ? " +" + (al.length - 1) : "") + "</span>" : "") + "</td></tr>";
+      }).join("");
+    } else {
+      h += "<th>N°</th><th>Nom</th><th>Agence</th><th>Permis</th><th>Fin du permis</th><th>Véhicule</th><th>Téléphone</th><th>Statut</th><th>Alerte</th></tr></thead><tbody>";
+      h += lignes.map(function (c) {
+        var al = parCible[c.numero] || [], p = prioMax(al.filter(function (a) { return a.numeroConducteur === c.numero && /permis|congé/i.test(a.regle); }));
+        return '<tr data-ouvrir="#/conducteurs/' + esc(c.numero) + '"><td>' + esc(c.numero) + '</td><td class="cle">' + esc(c.nom) + "</td>" +
+          '<td data-l="Agence">' + esc(c.agence) + '</td><td data-l="Permis">' + esc(c.categoriePermis) + "</td>" +
+          '<td data-l="Fin du permis"><span class="' + (expire(c.finValiditePermis) ? "rouge" : "") + '">' + esc(c.finValiditePermis) + "</span></td>" +
+          '<td data-l="Véhicule">' + (c.vehiculeAffecte ? esc(c.vehiculeAffecte) : '<span class="muet">aucun</span>') + "</td>" +
+          '<td data-l="Téléphone">' + esc(c.telephone) + "</td>" +
+          '<td><span class="statut ' + (c.archive ? "archive" : classeStatut(c.statut)) + '">' + (c.archive ? "Archivé" : esc(c.statut)) + "</span></td>" +
+          "<td>" + (p ? '<span class="badge ' + p + '">' + p + "</span>" : "") + "</td></tr>";
+      }).join("");
+    }
+    $("liste").innerHTML = h + "</tbody></table>";
+  }
+  function brancherListe(table) {
+    var f = filtres[table];
+    $("fq").oninput = function () { f.q = this.value; remplirListe(table); };
+    $("fagence").onchange = function () { f.agence = this.value; remplirListe(table); };
+    if ($("ftype")) $("ftype").onchange = function () { f.type = this.value; remplirListe(table); };
+    if ($("fpermis")) $("fpermis").onchange = function () { f.categoriePermis = this.value; remplirListe(table); };
+    $("fstatut").onchange = function () { f.statut = this.value; remplirListe(table); };
+    $("farchives").onchange = function () { f.archives = !!this.value; remplirListe(table); };
+    remplirListe(table);
+  }
+
+  /* =================================================================
+     3. Fiches
+     ================================================================= */
+  function blocAlertes(alertes, retour) {
+    if (!alertes.length) return '<p class="muet">Aucune alerte en cours.</p>';
+    return alertes.map(function (a) { return carteAlerte(a, false); }).join("");
+  }
+  function champs(paires) {
+    return '<dl class="champs">' + paires.map(function (p) { return "<dt>" + p[0] + "</dt><dd>" + p[1] + "</dd>"; }).join("") + "</dl>";
+  }
+  function boutonsFiche(table, f) {
+    return '<div class="droite">' + (f.archive
+      ? '<button class="btn sec" data-restaurer="' + table + '|' + esc(f.numero) + '">Restaurer</button>'
+      : '<button class="btn" data-modifier="' + table + '|' + esc(f.numero) + '">Modifier</button><button class="btn sec" data-supprimer="' + table + '|' + esc(f.numero) + '">Supprimer</button>') + "</div>";
+  }
+
+  function pageVehicule(numero) {
+    var v = K.fiche("vehicules", numero);
+    if (!v) return '<p class="vide">Véhicule introuvable.</p>';
+    var c = K.rechercher("conducteurs", "", { vehiculeAffecte: v.immatriculation })[0] ||
+            (v.conducteur ? K.rechercher("conducteurs", "", { nom: v.conducteur })[0] : null);
+    var al = K.alertesDe(v.immatriculation), ref = (K.reglages().types[v.type] || {});
+    var h = '<div class="fil"><a href="#/vehicules">‹ Véhicules</a></div><div class="entete fiche-tete"><h1>' + esc(v.immatriculation) + "</h1>" +
+      '<span class="muet">' + esc(v.numero) + " · " + esc(v.type) + " · " + esc(v.agence) + "</span>" +
+      '<span class="statut ' + (v.archive ? "archive" : classeStatut(v.statut)) + '">' + (v.archive ? "Archivé le " + esc(v.archiveLe) : esc(v.statut)) + "</span>" + boutonsFiche("vehicules", v) + "</div>";
+    if (al.length) h += '<section class="carte"><h2>Alertes de ce véhicule (' + al.length + ")</h2>" + blocAlertes(al) + "</section>";
+    h += '<div class="grille g2"><section class="carte"><h2>Identité et échéances</h2>' + champs([
+      ["Immatriculation", esc(v.immatriculation)], ["Type", esc(v.type)],
+      ["Agence", esc(v.agence) + (v.siteOrigine !== v.agence ? ' <span class="muet">· site ' + esc(v.siteOrigine) + "</span>" : "")],
+      ["Fin visite technique", '<span class="' + (expire(v.finVisiteTechnique) ? "rouge" : "") + '">' + esc(v.finVisiteTechnique) + (expire(v.finVisiteTechnique) ? " · expirée" : "") + "</span>"],
+      ["Fin assurance", '<span class="' + (expire(v.finAssurance) ? "rouge" : "") + '">' + esc(v.finAssurance) + (expire(v.finAssurance) ? " · expirée" : "") + "</span>"],
+      ["Statut", esc(v.statut)]
+    ]) + "</section>";
+    h += '<section class="carte"><h2>Conducteur</h2>' + (c
+      ? '<a class="lie" href="#/conducteurs/' + esc(c.numero) + '">' + ICONES.conducteurs.replace("<svg", '<svg width="28" height="28"') + "<span><b>" + esc(c.nom) + "</b><br>" +
+        '<span class="muet">' + esc(c.numero) + " · permis " + esc(c.categoriePermis) + " jusqu'au " + esc(c.finValiditePermis) + " · " + esc(c.statut) + "</span></span></a>" +
+        (ref.permis && c.categoriePermis !== ref.permis && !(ref.permis === "B" && c.categoriePermis === "C") ? '<p class="rouge">Permis ' + esc(ref.permis) + " requis pour ce véhicule.</p>" : "")
+      : '<p class="muet">Aucun conducteur affecté.</p>') +
+      '<h2 style="margin-top:20px">Kilométrage et carburant</h2>' + champs([
+      ["Compteur", nb(v.compteur) + " km"], ["Dernière vidange", nb(v.kmDerniereVidange) + " km"],
+      ["Vidange dans", v.aVerifier ? '<span class="rouge">à vérifier</span><br><span class="muet">' + esc(v.raisonAVerifier) + "</span>" : v.vidangeDansKm == null ? "—" : '<span class="' + (v.vidangeDansKm < 0 ? "rouge" : "") + '">' + nb(v.vidangeDansKm) + " km</span>"],
+      ["Octobre", nb(v.kmMois) + " km · " + nb(v.litresMois) + " L"],
+      ["Consommation", v.consoL100 == null ? "—" : String(v.consoL100).replace(".", ",") + " L/100 · référence " + ref.referenceL100 + (v.ecartReferencePct != null ? " · " + (v.ecartReferencePct > 0 ? "+" : "") + v.ecartReferencePct + " %" : "")],
+      ["Coût d'octobre", nb(v.coutMoisMAD) + " MAD"]
+    ]) + "</section></div>";
+    return h;
+  }
+
+  function pageConducteur(numero) {
+    var c = K.fiche("conducteurs", numero);
+    if (!c) return '<p class="vide">Conducteur introuvable.</p>';
+    var v = c.vehiculeAffecte ? K.rechercher("vehicules", "", { immatriculation: c.vehiculeAffecte })[0] : null;
+    var al = K.alertesDe(c.numero);
+    var anc = vers(c.dateEmbauche), j = vers(K.reglages().dateDuJour);
+    var ans = anc && j ? Math.floor((j - anc) / (365.25 * 86400000)) : null;
+    var h = '<div class="fil"><a href="#/conducteurs">‹ Conducteurs</a></div><div class="entete fiche-tete"><h1>' + esc(c.nom) + "</h1>" +
+      '<span class="muet">' + esc(c.numero) + " · " + esc(c.agence) + "</span>" +
+      '<span class="statut ' + (c.archive ? "archive" : classeStatut(c.statut)) + '">' + (c.archive ? "Archivé le " + esc(c.archiveLe) : esc(c.statut)) + "</span>" + boutonsFiche("conducteurs", c) + "</div>";
+    if (al.length) h += '<section class="carte"><h2>Alertes de ce conducteur (' + al.length + ")</h2>" + blocAlertes(al) + "</section>";
+    h += '<div class="grille g2"><section class="carte"><h2>Identité et permis</h2>' + champs([
+      ["N° conducteur", esc(c.numero)], ["Téléphone", esc(c.telephone) || "—"], ["Agence", esc(c.agence)],
+      ["Embauché le", esc(c.dateEmbauche) + (ans != null ? ' <span class="muet">· ' + ans + " ans</span>" : "")],
+      ["Catégorie de permis", esc(c.categoriePermis)],
+      ["Fin de validité du permis", '<span class="' + (expire(c.finValiditePermis) ? "rouge" : "") + '">' + esc(c.finValiditePermis) + (expire(c.finValiditePermis) ? " · expiré" : "") + "</span>"],
+      ["Statut", esc(c.statut)]
+    ]) + "</section>";
+    h += '<section class="carte"><h2>Véhicule affecté</h2>' + (v
+      ? '<a class="lie" href="#/vehicules/' + esc(v.numero) + '">' + ICONES.vehicules.replace("<svg", '<svg width="28" height="28"') + "<span><b>" + esc(v.immatriculation) + "</b><br>" +
+        '<span class="muet">' + esc(v.numero) + " · " + esc(v.type) + " · " + esc(v.statut) + " · permis " + esc((K.reglages().types[v.type] || {}).permis) + " requis</span></span></a>"
+      : '<p class="muet">Aucun véhicule affecté.</p>') + "</section></div>";
+    return h;
+  }
+
+  /* =================================================================
+     4. Alertes
+     ================================================================= */
+  var ongletAlertes = "ouvertes", filtreAgenceAlertes = "";
+  var CHAMP_RAPIDE = {
+    "Assurance expirée": ["vehicules", "finAssurance", "Mettre à jour l'assurance", "Nouvelle fin d'assurance"],
+    "Assurance à renouveler": ["vehicules", "finAssurance", "Mettre à jour l'assurance", "Nouvelle fin d'assurance"],
+    "Visite technique expirée": ["vehicules", "finVisiteTechnique", "Mettre à jour la visite technique", "Nouvelle fin de visite technique"],
+    "Visite technique à renouveler": ["vehicules", "finVisiteTechnique", "Mettre à jour la visite technique", "Nouvelle fin de visite technique"],
+    "Permis expiré": ["conducteurs", "finValiditePermis", "Mettre à jour le permis", "Nouvelle fin de validité du permis"],
+    "Permis à renouveler": ["conducteurs", "finValiditePermis", "Mettre à jour le permis", "Nouvelle fin de validité du permis"]
+  };
+  function lienCible(a) {
+    if (/^C\d/.test(a.concerne)) return "#/conducteurs/" + a.concerne.split(" · ")[0];
+    return "#/vehicules/" + a.concerne.split(" · ")[0];
+  }
+  function carteAlerte(a, avecAgence) {
+    var retard = K.enRetard(a) && (a.statut === "Ouverte" || a.statut === "Escaladée");
+    var h = '<article class="alerte a' + a.priorite.slice(1) + '"><div class="haut"><span class="badge ' + a.priorite + '">' + a.priorite + "</span>" +
+      '<a href="' + lienCible(a) + '">' + esc(a.concerne) + "</a>" + (avecAgence !== false ? '<span class="ag">' + esc(a.agence) + "</span>" : "") +
+      (a.statut !== "Ouverte" ? '<span class="statut">' + esc(a.statut) + (a.reporteeJusquau ? " jusqu'au " + esc(a.reporteeJusquau) : "") + "</span>" : "") +
+      '<span class="delai ' + (retard ? "rouge" : "") + '">' + (retard ? "En retard · " : "") + "À traiter avant le " + esc(a.aTraiterAvant) + "</span></div>" +
+      "<p><b>" + esc(a.regle) + ".</b> " + esc(a.constat) + "</p>" +
+      '<p class="prop">Proposition : ' + esc(a.proposition) + "</p>";
+    if (a.decisions && a.decisions.length) h += '<ul class="decisions">' + a.decisions.map(function (d) {
+      return "<li><b>" + esc(d.action === "Valider" ? "Validée" : d.action === "Reporter" ? "Reportée au " + d.nouvelleDate : "Escaladée") + "</b> par " + esc(d.par) + " le " + esc(d.le) + " · « " + esc(d.motif) + " »</li>";
+    }).join("") + "</ul>";
+    if (a.statut === "Ouverte" || a.statut === "Escaladée") {
+      var rap = CHAMP_RAPIDE[a.regle];
+      h += '<div class="actions">' +
+        (rap ? '<button class="btn danger petit" data-rapide="' + esc(a.numero) + '">' + rap[2] + "</button>" : "") +
+        '<button class="btn petit" data-decider="Valider|' + esc(a.numero) + '">Valider</button>' +
+        '<button class="btn sec petit" data-decider="Reporter|' + esc(a.numero) + '">Reporter</button>' +
+        (a.statut !== "Escaladée" ? '<button class="btn sec petit" data-decider="Escalader|' + esc(a.numero) + '">Escalader</button>' : "") + "</div>";
+    }
+    return h + "</article>";
+  }
+  function pageAlertes() {
+    var ouv = K.alertesOuvertes(), rep = K.alertesParStatut("Reportée"), tr = K.alertesParStatut("Traitée");
+    var listes = { ouvertes: ouv, reportees: rep, traitees: tr };
+    var liste = listes[ongletAlertes].filter(function (a) { return !filtreAgenceAlertes || a.agence === filtreAgenceAlertes; });
+    var h = '<div class="entete"><h1>Alertes</h1><div class="droite"><select id="falerte">' + options(AGENCES, filtreAgenceAlertes, "Toutes les agences") + '</select><button class="btn sec" data-export="alertes">Exporter pour Excel</button></div></div>';
+    h += '<div class="onglets">' + [["ouvertes", "Ouvertes", ouv.length], ["reportees", "Reportées", rep.length], ["traitees", "Traitées", tr.length]].map(function (o) {
+      return '<a href="#" data-onglet="' + o[0] + '" class="' + (ongletAlertes === o[0] ? "actif" : "") + '">' + o[1] + " (" + o[2] + ")</a>";
+    }).join("") + "</div>";
+    if (!liste.length) return h + '<p class="vide">Aucune alerte ici.</p>';
+    var titres = { P1: "P1 · à régler aujourd'hui", P2: "P2 · sous 7 jours", P3: "P3 · sous 15 jours" };
+    ["P1", "P2", "P3"].forEach(function (p) {
+      var g = liste.filter(function (a) { return a.priorite === p; });
+      if (!g.length) return;
+      h += '<div class="groupe-titre ' + (p === "P1" ? "g1" : "") + '"><span class="badge ' + p + '">' + p + "</span>" + titres[p].slice(5) + " (" + g.length + ")</div>";
+      h += g.map(function (a) { return carteAlerte(a); }).join("");
+    });
+    return h + '<p class="muet">L\'application propose, l\'humain décide : valider, reporter ou escalader ne change jamais le statut d\'un véhicule ou d\'un conducteur.</p>';
+  }
+
+  /* =================================================================
+     5. Import / export
+     ================================================================= */
+  function pageImport() {
+    var imp = K.dernierImport(), r = K.reglages();
+    return '<div class="entete"><h1>Import / export</h1></div>' +
+      '<section class="carte"><h2>Import du lundi</h2><p class="muet">Déposez les deux fichiers CSV (séparateur « ; »). L\'application montre ce qu\'elle a compris avant d\'enregistrer quoi que ce soit.</p>' +
+      '<div class="formulaire"><label>Parc véhicules<input type="file" id="iParc" accept=".csv"></label><label>Conducteurs<input type="file" id="iCond" accept=".csv"></label></div>' +
+      '<div class="pied" style="justify-content:flex-start"><button class="btn" id="iAnalyser">Vérifier les fichiers</button><button class="btn" id="iConfirmer" disabled>Confirmer l\'import</button><button class="btn sec" id="iAnnuler" disabled>Annuler</button></div>' +
+      '<div id="iRapport"></div><p class="muet">' + (imp ? "Dernier import : " + esc(imp.le) + " · " + imp.lignesParc + " + " + imp.lignesConducteurs + " lignes." : "Aucun import pour l'instant.") + "</p></section>" +
+      '<section class="carte"><h2>Export pour Excel</h2><div class="pied" style="justify-content:flex-start"><button class="btn sec" data-export="vehicules">Véhicules</button><button class="btn sec" data-export="conducteurs">Conducteurs</button><button class="btn sec" data-export="alertes">Alertes</button></div></section>' +
+      '<section class="carte"><h2>Réglages</h2><div class="formulaire"><label>Vous êtes<input type="text" id="rUtil" value="' + esc(r.utilisateur) + '"></label>' +
+      '<label>Date de calcul (vide = aujourd\'hui)<input type="date" id="rDate" value="' + versIso(r.dateDuJour) + '"></label></div>' +
+      '<div class="pied" style="justify-content:flex-start"><button class="btn" id="rEnregistrer">Enregistrer les réglages</button><button class="btn sec" id="rEffacer">Effacer toutes les données</button></div>' +
+      '<p class="muet">La date de calcul est réglée sur le lundi 16/11/2026 pour retrouver les alertes de la recette.</p></section>';
+  }
+  function brancherImport() {
+    function lire(input) {
+      return new Promise(function (ok, ko) {
+        var f = input.files[0]; if (!f) return ko(new Error("Choisissez les deux fichiers."));
+        var r = new FileReader(); r.onload = function () { ok(r.result); }; r.onerror = ko; r.readAsText(f, "utf-8");
+      });
+    }
+    function etat(a) { $("iConfirmer").disabled = !a; $("iAnnuler").disabled = !a; }
+    $("iAnalyser").onclick = function () {
+      Promise.all([lire($("iParc")), lire($("iCond"))]).then(function (t) {
+        var a = K.analyserImport(t[0], t[1]);
+        if (!a.ok) { $("iRapport").innerHTML = '<p class="erreur">' + esc(a.erreur) + "</p>"; etat(false); return; }
+        $("iRapport").innerHTML = '<div class="carte" style="background:var(--sable);margin-top:14px"><h2>Vérification avant enregistrement</h2>' + champs([
+          ["Fichiers lus", a.lignesParc + " lignes véhicules · " + a.lignesConducteurs + " lignes conducteurs"],
+          ["Véhicules", a.vehicules + (a.doublonsFusionnes ? " (" + a.doublonsFusionnes + " doublon fusionné)" : "")],
+          ["Conducteurs", String(a.conducteurs)],
+          ["Alertes après import", a.alertesApresImport + " : " + a.parPriorite.P1 + " P1 · " + a.parPriorite.P2 + " P2 · " + a.parPriorite.P3 + " P3"]
+        ]) + "<h2 style='margin-top:14px'>Corrigé ou signalé</h2><ul>" + a.signalements.map(function (s) { return "<li>" + esc(s) + "</li>"; }).join("") + "</ul><p class='muet'>Rien n'est enregistré avant « Confirmer l'import ».</p></div>";
+        etat(true);
+      }).catch(function (e) { $("iRapport").innerHTML = '<p class="erreur">' + esc(e.message) + "</p>"; });
+    };
+    $("iConfirmer").onclick = function () {
+      var r = K.confirmerImport();
+      if (!r.ok) { $("iRapport").innerHTML = '<p class="erreur">' + esc(r.erreur) + "</p>"; return; }
+      toast("Import enregistré : " + r.compteurs.vehicules + " véhicules, " + r.compteurs.conducteurs + " conducteurs, " + r.compteurs.alertesOuvertes + " alertes ouvertes.");
+      location.hash = "#/tableau";
+    };
+    $("iAnnuler").onclick = function () { K.annulerImport(); $("iRapport").innerHTML = "<p>Import annulé, rien n'a été enregistré.</p>"; etat(false); };
+    $("rEnregistrer").onclick = function () {
+      K.changerReglage("utilisateur", $("rUtil").value.trim() || "Driss Amghar");
+      K.changerReglage("dateDuJour", depuisIso($("rDate").value));
+      toast("Réglages enregistrés."); afficher();
+    };
+    $("rEffacer").onclick = function () {
+      ouvrirFenetre("<h2>Effacer toutes les données ?</h2><p>Véhicules, conducteurs et alertes enregistrés dans ce navigateur seront effacés. Il faudra réimporter les fichiers.</p>",
+        "Effacer", function () { K.toutEffacer(); toast("Données effacées."); location.hash = "#/import"; afficher(); }, true);
+    };
+  }
+
+  /* =================================================================
+     6. Fenêtres de saisie (formulaires)
+     ================================================================= */
+  var surValider = null;
+  function ouvrirFenetre(html, libelle, action, danger) {
+    $("fenetreForm").innerHTML = html + '<p class="erreur" id="fErreur" hidden></p><div class="pied"><button type="button" class="btn sec" id="fAnnuler">Annuler</button><button type="submit" class="btn ' + (danger ? "danger" : "") + '" id="fOk">' + libelle + "</button></div>";
+    surValider = action;
+    $("fAnnuler").onclick = function () { $("fenetre").close(); };
+    $("fenetre").showModal();
+    var premier = $("fenetreForm").querySelector("[autofocus]") || $("fenetreForm").querySelector("input, select, textarea");
+    if (premier) premier.focus();
+  }
+  $("fenetreForm").addEventListener("submit", function (e) {
+    e.preventDefault();
+    try { surValider(); $("fenetre").close(); }
+    catch (err) { $("fErreur").hidden = false; $("fErreur").textContent = err.message; }
+  });
+
+  var FORM = {
+    vehicules: [
+      ["numero", "N° véhicule", "text"], ["immatriculation", "Immatriculation", "text"],
+      ["type", "Type", "select", function () { return K.choix.type; }], ["siteOrigine", "Agence ou site", "select", function () { return AGENCES.concat(["Mohammedia", "Rabat", "Salé", "Témara"]); }],
+      ["conducteur", "Conducteur affecté", "select", function () { return K.rechercher("conducteurs", "").map(function (c) { return c.nom; }).sort(); }, true],
+      ["statut", "Statut", "select", function () { return K.choix.statutVehicule; }],
+      ["finVisiteTechnique", "Fin visite technique", "date"], ["finAssurance", "Fin assurance", "date"],
+      ["compteur", "Compteur (km)", "number"], ["kmDerniereVidange", "Km dernière vidange", "number"],
+      ["kmMois", "Km du mois", "number"], ["litresMois", "Litres du mois", "number"]
+    ],
+    conducteurs: [
+      ["numero", "N° conducteur", "text"], ["nom", "Prénom et nom", "text"],
+      ["telephone", "Téléphone", "text"], ["agence", "Agence", "select", function () { return AGENCES; }],
+      ["categoriePermis", "Catégorie de permis", "select", function () { return K.choix.categoriePermis; }],
+      ["finValiditePermis", "Fin de validité du permis", "date"], ["dateEmbauche", "Date d'embauche", "date"],
+      ["vehiculeAffecte", "Véhicule affecté", "select", function () { return K.rechercher("vehicules", "").map(function (v) { return v.immatriculation; }).sort(); }, true],
+      ["statut", "Statut", "select", function () { return K.choix.statutConducteur; }]
+    ]
+  };
+  function champForm(def, val, verrou) {
+    var id = "c_" + def[0], h = '<label' + (def[0] === "nom" ? ' class="large"' : "") + ">" + def[1];
+    if (def[2] === "select") {
+      var opts = def[3]();
+      if (val && opts.indexOf(val) === -1) opts = [val].concat(opts);
+      h += '<select id="' + id + '">' + (def[4] ? '<option value="">— aucun —</option>' : "") + opts.map(function (o) {
+        return '<option' + (o === val ? " selected" : "") + ' value="' + esc(o) + '">' + esc(o) + "</option>";
+      }).join("") + "</select>";
+    } else if (def[2] === "date") h += '<input type="date" id="' + id + '" value="' + versIso(val) + '">';
+    else h += '<input type="' + (def[2] === "number" ? "number" : "text") + '" id="' + id + '" value="' + esc(val == null ? "" : val) + '"' + (def[2] === "number" ? ' min="0" inputmode="numeric"' : "") + (verrou ? " readonly" : "") + ">";
+    return h + "</label>";
+  }
+  function lireForm(table) {
+    var d = {};
+    FORM[table].forEach(function (def) {
+      var el = $("c_" + def[0]); if (!el) return;
+      d[def[0]] = def[2] === "date" ? depuisIso(el.value) : el.value;
+    });
+    return d;
+  }
+  function formulaire(table, numero) {
+    var f = numero ? K.fiche(table, numero) : {};
+    var V = table === "vehicules";
+    var titre = numero ? "Modifier " + (V ? f.immatriculation : f.nom) : (V ? "Ajouter un véhicule" : "Ajouter un conducteur");
+    var html = "<h2>" + esc(titre) + '</h2><div class="formulaire">' + FORM[table].map(function (def) {
+      return champForm(def, f[def[0]], numero && (def[0] === "numero" || (V && def[0] === "immatriculation")));
+    }).join("") + "</div>";
+    ouvrirFenetre(html, "Enregistrer", function () {
+      var d = lireForm(table), avant = K.compteurs().alertesOuvertes, res;
+      if (numero) { delete d.numero; if (V) delete d.immatriculation; res = K.modifier(table, numero, d); }
+      else res = K.ajouter(table, d);
+      var apres = K.compteurs().alertesOuvertes;
+      toast((numero ? "Fiche enregistrée." : "Fiche ajoutée.") + (apres !== avant ? " Alertes ouvertes : " + avant + " → " + apres + "." : ""));
+      if (!numero) location.hash = "#/" + table + "/" + res.numero; else afficher();
+    });
+  }
+  function majRapide(numAlerte) {
+    var a = K.rechercher("alertes", numAlerte)[0] || K.alertesOuvertes().find(function (x) { return x.numero === numAlerte; });
+    var r = CHAMP_RAPIDE[a.regle], cle = r[0] === "vehicules" ? a.concerne.split(" · ")[0] : a.numeroConducteur;
+    var f = K.fiche(r[0], cle);
+    ouvrirFenetre("<h2>" + esc(r[2]) + "</h2><p class='muet'>" + esc(a.concerne) + " · actuellement " + esc(f[r[1]]) + '</p><div class="formulaire"><label class="large">' + esc(r[3]) + '<input type="date" id="rapide" autofocus></label></div>',
+      "Enregistrer", function () {
+        var v = depuisIso($("rapide").value);
+        if (!v) throw new Error("Choisissez la nouvelle date.");
+        var ch = {}; ch[r[1]] = v;
+        K.modifier(r[0], cle, ch);
+        var encore = K.alertesOuvertes().some(function (x) { return x.numero === a.numero; });
+        toast(encore ? "Date enregistrée. L'alerte reste ouverte : la nouvelle date ne règle pas la situation." : "Date enregistrée. L'alerte " + a.priorite + " est réglée.");
+        afficher();
+      });
+  }
+  function decider(action, numAlerte) {
+    var a = K.alertesOuvertes().find(function (x) { return x.numero === numAlerte; });
+    var textes = { Valider: ["Valider l'alerte", "L'action est faite. Commentaire court (obligatoire)", "Valider"],
+                   Reporter: ["Reporter l'alerte", "Motif du report (obligatoire)", "Reporter"],
+                   Escalader: ["Escalader à la direction régionale", "Motif (obligatoire)", "Escalader"] }[action];
+    var demain = vers(K.reglages().dateDuJour) || new Date(); demain = new Date(demain.getTime() + 86400000);
+    ouvrirFenetre("<h2>" + textes[0] + "</h2><p class='muet'><span class='badge " + a.priorite + "'>" + a.priorite + "</span> " + esc(a.concerne) + " · " + esc(a.regle) + "</p>" +
+      '<div class="formulaire">' + (action === "Reporter" ? '<label class="large">Nouvelle date (obligatoire)<input type="date" id="dDate" min="' + demain.toISOString().slice(0, 10) + '"></label>' : "") +
+      '<label class="large">' + textes[1] + '<textarea id="dMotif" rows="3" autofocus></textarea></label></div>' +
+      "<p class='muet'>Décision enregistrée au nom de " + esc(K.reglages().utilisateur) + ", avec la date et l'heure.</p>",
+      textes[2], function () {
+        K.deciderAlerte(numAlerte, action, { motif: $("dMotif").value, nouvelleDate: $("dDate") ? depuisIso($("dDate").value) : "" });
+        toast({ Valider: "Alerte validée.", Reporter: "Alerte reportée.", Escalader: "Alerte escaladée : elle reste ouverte." }[action]);
+        afficher();
+      });
+  }
+
+  /* =================================================================
+     7. Navigation et clics
+     ================================================================= */
+  function afficher() {
+    var morceaux = (location.hash.replace(/^#\/?/, "") || "tableau").split("/");
+    var section = morceaux[0], id = morceaux[1] ? decodeURIComponent(morceaux[1]) : null;
+    if (["tableau", "vehicules", "conducteurs", "alertes", "import"].indexOf(section) === -1) section = "tableau";
+    cadre(section);
+    var page = $("page");
+    if (section === "tableau") page.innerHTML = pageTableau();
+    else if (section === "vehicules" && id) page.innerHTML = pageVehicule(id);
+    else if (section === "conducteurs" && id) page.innerHTML = pageConducteur(id);
+    else if (section === "vehicules" || section === "conducteurs") { page.innerHTML = pageListe(section); brancherListe(section); }
+    else if (section === "alertes") {
+      page.innerHTML = pageAlertes();
+      $("falerte").onchange = function () { filtreAgenceAlertes = this.value; afficher(); };
+    }
+    else if (section === "import") { page.innerHTML = pageImport(); brancherImport(); }
+    document.title = "Kaïna Flotte · " + (MENU.find(function (m) { return m[0] === section; }) || MENU[0])[1];
+  }
+  document.addEventListener("click", function (e) {
+    var t = e.target.closest("[data-ouvrir],[data-ajouter],[data-modifier],[data-supprimer],[data-restaurer],[data-export],[data-decider],[data-rapide],[data-onglet]");
+    if (!t) return;
+    var d = t.dataset;
+    if (d.ouvrir) { location.hash = d.ouvrir; return; }
+    if (d.onglet) { e.preventDefault(); ongletAlertes = d.onglet; afficher(); return; }
+    if (d.ajouter) return formulaire(d.ajouter);
+    if (d.modifier) { var m = d.modifier.split("|"); return formulaire(m[0], m[1]); }
+    if (d.supprimer) {
+      var s = d.supprimer.split("|");
+      return ouvrirFenetre("<h2>Supprimer la fiche " + esc(s[1]) + " ?</h2><p>La fiche est archivée : elle sort des listes et des alertes, mais reste consultable avec le filtre « Archivés » et peut être restaurée.</p>" +
+        '<div class="formulaire"><label class="large">Motif<input type="text" id="sMotif" autofocus></label></div>', "Supprimer (archiver)", function () {
+          K.supprimer(s[0], s[1], $("sMotif").value); toast("Fiche " + s[1] + " archivée."); afficher();
+        }, true);
+    }
+    if (d.restaurer) { var rr = d.restaurer.split("|"); K.restaurer(rr[0], rr[1]); toast("Fiche " + rr[1] + " restaurée."); return afficher(); }
+    if (d.export) {
+      var nom = { vehicules: "Vehicules", conducteurs: "Conducteurs", alertes: "Alertes" }[d.export];
+      telecharger("Kaina_Flotte_" + nom + "_" + K.reglages().dateDuJour.replace(/\//g, "-") + ".csv", K.exporterCSV(d.export)); return;
+    }
+    if (d.decider) { var dd = d.decider.split("|"); return decider(dd[0], dd[1]); }
+    if (d.rapide) return majRapide(d.rapide);
+  });
+  window.addEventListener("hashchange", function () { afficher(); window.scrollTo(0, 0); });
+  afficher();
+})();
+</script>
+</body>
+</html>

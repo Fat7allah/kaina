@@ -1,0 +1,33 @@
+﻿id;immatriculation;type;agence;conducteur;km_compteur;km_derniere_vidange;fin_visite_technique;fin_assurance;km_octobre;carburant_octobre_L;statut
+V01;96654-A-6;VP pré-vendeur;Casablanca;Hamid Ouali;104251;97412;18/10/2027;18/12/2027;2604;180;En service
+V02;53448-B-6;VUL 3,5 t;Casablanca;Said Rami;169234;167715;07/09/2027;13/04/2027;3418;406;En service
+V03;83413-D-6;Camion 7,5 t;Casablanca;Khalid Naji;122274;119814;02/11/2026;28/05/2027;3693;678;En service
+V04;70455-H-6;VP pré-vendeur;Casablanca;Ayoub Fikri;152724;141471;24/06/2027;04/11/2027;3303;248;En service
+V05;62962-A-6;VUL 3,5 t;Casablanca;Mustapha Hilali;58796;52889;18/02/2027;17/02/2027;2410;465;En service
+V06;74987-B-6;VP pré-vendeur;Casablanca;Abdellah Sbai;177190;171630;25/07/2027;02/02/2027;2648;198;En service
+V07;71802-D-6;Camion 7,5 t;Casablanca;Yassine Boukhari;48343;40734;17/10/2027;02/12/2027;2841;500;En service
+V08;29193-H-6;VP pré-vendeur;Mohammedia;Rachid Bouzid;62953;59038;12/07/2027;02/09/2027;2810;214;En service
+V09;41375-A-6;VUL 3,5 t;Casablanca;Hicham Alami;84200;91500;04/07/2027;04/04/2027;2580;289;En service
+V10;85570-B-6;VP direction;Casablanca;Anas Belhaj;106557;101618;28/04/2027;25/08/2027;1365;102;En service
+V11;34787-D-1;VP pré-vendeur;Rabat-Salé;Mohamed Ait Lahcen;147397;137877;14/05/2027;10/09/2027;3237;231;En service
+V12;36742-H-1;VP pré-vendeur;Rabat-Salé;Brahim Ait Ali;42797;36449;01/02/2027;31/10/2026;2473;177;En service
+V13;35427-A-1;Camion 7,5 t;Rabat-Salé;Jamal Bouhmadi;59780;54798;16/09/2027;25/08/2027;3387;600;En service
+V14;72661-B-1;VP pré-vendeur;Rabat-Salé;Noureddine Haddou;150226;144614;07/05/2027;25/12/2027;2780;193;En service
+V15;20340-D-1;VUL 3,5 t;Rabat-Salé;;175472;170746;24/09/2027;22/06/2027;3220;355;En service
+V16;91679-H-1;VP pré-vendeur;Rabat-Salé;Soufiane Mrabet;109899;97338;23/01/2027;27/11/2027;2411;187;En service
+V17;54962-A-40;Camion 7,5 t;Tanger;Adil Chafik;52932;47110;27/03/2027;06/12/2027;2845;538;En service
+V17;54962-A-40;Camion 7,5 t;Tanger;Adil Chafik;52932;47110;27/03/2027;06/12/2027;2845;538;En service
+V18;94825-B-40;VP pré-vendeur;Tanger;Karim Ziani;53854;41247;28/11/2026;12/09/2027;3256;253;En service
+V19;59266-D-40;VUL 3,5 t;Tanger;Omar Fadili;39332;37446;18/02/2027;04/02/2027;2704;299;En service
+V20;15906-H-40;VP direction;Tanger;Tarik Senhaji;71193;69065;06/09/2027;03/03/2027;1813;160;En service
+V21;52553-A-13;VP pré-vendeur;Fès;Samir Ennaji;182348;174489;07/09/2027;24/07/2027;3247;243;En service
+V22;62679-B-13;VUL 3,5 t;Fès;Ilyas Akdim;148900;136500;13/12/2027;18/05/2027;3582;402;En service
+V23;94233-D-13;Camion 7,5 t;Fès;Hassan Ouchen;63276;60042;21/07/2027;17/07/2027;3277;587;En service
+V24;49643-H-13;VP pré-vendeur;Fès;Zakaria Lamrini;93886;88221;27/05/2027;15/06/2027;2926;217;En service
+V25;64923-A-33;VUL 3,5 t;Marrakech;Mehdi Saadi;167135;163675;10/03/2027;10/11/2027;3603;374;En service
+V26;56626-B-33;VP pré-vendeur;Marrakech;Reda Essaidi;155604;141204;27/02/2027;26/10/2027;3275;231;En service
+V27;49993-D-33;Camion 7,5 t;Marrakech;Driss Moussaoui;161925;156410;14/10/2027;01/11/2027;3395;669;En service
+V28;44844-H-33;VP pré-vendeur;Marrakech;Nabil Ghazi;112497;103811;03/07/2027;12/12/2027;3246;212;En service
+V29;55022-A-37;Camion 7,5 t;Agadir;Fouad Kabbaj;66845;62477;15/03/2027;19/06/2027;0;120;Immobilisé
+V30;92975-B-37;VP direction;Agadir;Ali Benomar;131656;128642;23/01/2027;04/10/2027;1991;158;En service
+V31;21902-D-37;VP pré-vendeur;Agadir;Walid Raiss;151156;145861;16/02/2027;14/02/2027;2610;171;En service

@@ -1,0 +1,21 @@
+=== tests/test1_conforme.txt
+CONFORME : aucune alerte (R1-R10). Vérifier manuellement R7 (une seule action) et R9.
+code=0
+=== tests/test2_non_conforme.txt
+NON CONFORME : 15 alerte(s)
+- R1 | « 24 » | Nombre absent des faits autorisés : le sourcer ou le remplacer par [À CONFIRMER].
+- R1 | « 15 % » | Nombre absent des faits autorisés : le sourcer ou le remplacer par [À CONFIRMER].
+- R1 | « 20 000 » | Nombre absent des faits autorisés : le sourcer ou le remplacer par [À CONFIRMER].
+- R2 | « garantie » | Promesse non validée : retirer ou faire valider par la Direction commerciale.
+- R2 | « toujours » | Promesse non validée : retirer ou faire valider par la Direction commerciale.
+- R2 | « en 24h » | Promesse non validée : retirer ou faire valider par la Direction commerciale.
+- R2 | « -15 % » | Promesse non validée : retirer ou faire valider par la Direction commerciale.
+- R3 | « leader » | Superlatif invérifiable : retirer.
+- R4 | « « Kaïna m'a sauvé mon mois de Ramadan, me…» » | Citation ou témoignage sans source fournie.
+- R5 | « ta » | Tutoiement interdit dans un message externe.
+- R5 | « taux de service » | Jargon interne dans un message externe : dire « livraison complète et à l'heure ».
+- R6 | « Déjà 20 000 épiciers nous font confiance : « Kaïna… » | Phrase de 23 mots (maximum 20).
+- R6 | « Découvre notre logo officiel et commande vite avan… » | Phrase de 32 mots (maximum 20).
+- R8 | « KAINA » | Graphie de marque incorrecte : écrire « Kaïna » ou « Kaïna Distribution ».
+- R10 | « logo officiel » | La charte n'est pas validée : ne pas la présenter comme officielle.
+code=1

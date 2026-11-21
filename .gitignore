@@ -1,0 +1,8 @@
+.DS_Store
+.env
+.env.*
+*.key
+~$*
+# Copies en double de la fiche entreprise
+Kaina_Fiche_Entreprise (1).docx
+Kaina_Fiche_Entreprise (2).docx

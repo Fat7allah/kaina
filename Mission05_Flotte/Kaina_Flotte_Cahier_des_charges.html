@@ -1,0 +1,794 @@
+<title>Cahier des charges Kaïna Flotte</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap">
+<style>
+/* Mise en page : document long sur fond sable, une colonne lisible, maquettes d'écran en pleine largeur dans des cadres "écran". */
+:root{
+  --cedre:#0F5C4A; --safran:#F2A900; --terre:#C4532D; --sable:#F6EFE3; --noir:#111111; --blanc:#FFFFFF;
+  --bg:#F6EFE3; --surface:#FFFFFF; --fg:#111111; --muted:#4a4f4c; --title:#0F5C4A;
+  --line:color-mix(in srgb,#0F5C4A 18%,transparent); --soft:color-mix(in srgb,#0F5C4A 7%,#FFFFFF);
+  --logo:#0F5C4A;
+  --f:'Inter',Arial,system-ui,sans-serif;
+}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){
+  --bg:#111111; --surface:#1a1d1b; --fg:#F6EFE3; --muted:#c9c2b6; --title:#F6EFE3;
+  --line:color-mix(in srgb,#F6EFE3 18%,transparent); --soft:color-mix(in srgb,#0F5C4A 35%,#111111); --logo:#F6EFE3; color-scheme:dark}}
+:root[data-theme="dark"]{
+  --bg:#111111; --surface:#1a1d1b; --fg:#F6EFE3; --muted:#c9c2b6; --title:#F6EFE3;
+  --line:color-mix(in srgb,#F6EFE3 18%,transparent); --soft:color-mix(in srgb,#0F5C4A 35%,#111111); --logo:#F6EFE3; color-scheme:dark}
+*{box-sizing:border-box}
+body{background:var(--bg);color:var(--fg);font-family:var(--f);font-size:16px;line-height:1.55;margin:0}
+.wrap{max-width:1080px;margin:0 auto;padding-block:32px 80px;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
+.prose{max-width:760px}
+h1,h2,h3{color:var(--title);text-wrap:balance;line-height:1.2;margin:0}
+h1{font-size:clamp(28px,4.4vw,42px);font-weight:800;letter-spacing:-.01em}
+h2{font-size:26px;font-weight:700;margin-top:56px;padding-top:20px;border-top:2px solid var(--title);display:flex;gap:12px;align-items:baseline}
+h2 .n{color:var(--terre);font-size:26px}
+h3{font-size:18px;font-weight:700;margin-top:32px}
+p{margin:12px 0}
+.lead{font-size:18px;color:var(--fg)}
+.muted{color:var(--muted)}
+.small{font-size:13.5px}
+a{color:inherit}
+.eyebrow{text-transform:uppercase;letter-spacing:.08em;font-size:12px;font-weight:700;color:var(--muted)}
+header.top{display:flex;flex-wrap:wrap;gap:24px;align-items:center;justify-content:space-between;padding-bottom:24px;border-bottom:1px solid var(--line)}
+.logo{color:var(--logo);width:140px;height:57px;display:block}
+.meta{display:grid;grid-template-columns:auto 1fr;gap:4px 14px;font-size:14px}
+.meta dt{color:var(--muted)} .meta dd{margin:0;font-weight:600}
+.status{display:inline-block;border:1.5px solid var(--terre);color:var(--terre);border-radius:4px;padding:2px 8px;font-size:12.5px;font-weight:700}
+:root[data-theme="dark"] .status{color:#F6EFE3}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]) .status{color:#F6EFE3}}
+nav.toc{display:flex;flex-wrap:wrap;gap:6px 18px;margin:20px 0 0;font-size:14px}
+nav.toc a{text-decoration:none;font-weight:600;color:var(--title)} nav.toc a:hover,nav.toc a:focus-visible{text-decoration:underline}
+.box{background:var(--surface);border:1px solid var(--line);border-radius:8px;padding:18px 20px;margin:18px 0}
+.grid2{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:16px}
+.grid2>*{min-width:0}
+.tag{display:inline-block;font-size:11.5px;font-weight:700;border-radius:3px;padding:1px 6px;vertical-align:1px;white-space:nowrap}
+.tag.add{background:var(--cedre);color:#fff}
+.tag.val{border:1px dashed var(--terre);color:var(--terre)}
+:root[data-theme="dark"] .tag.val{color:#F6EFE3}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]) .tag.val{color:#F6EFE3}}
+.def{border-left:3px solid var(--safran);padding:4px 0 4px 12px;margin:10px 0;font-size:14.5px;color:var(--muted)}
+.def b{color:var(--fg)}
+.tbl{overflow-x:auto;margin:14px 0;border:1px solid var(--line);border-radius:8px;background:var(--surface)}
+table{border-collapse:collapse;width:100%;font-size:14px}
+th,td{text-align:left;padding:8px 10px;border-bottom:1px solid var(--line);vertical-align:top}
+th{font-size:12px;text-transform:uppercase;letter-spacing:.05em;color:var(--muted);font-weight:700;background:var(--soft)}
+tr:last-child td{border-bottom:0}
+td code,.mono{font-family:ui-monospace,Menlo,Consolas,monospace;font-size:12.5px}
+.num{font-variant-numeric:tabular-nums;white-space:nowrap}
+.yes{font-weight:700;color:var(--title)} .no{color:var(--muted)}
+.p{display:inline-block;min-width:28px;text-align:center;font-weight:800;font-size:12px;border-radius:3px;padding:2px 6px}
+.p1{background:#C4532D;color:#fff}.p2{background:#F2A900;color:#111}.p3{background:#F6EFE3;color:#0F5C4A;border:1px solid #0F5C4A}
+.kpis{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:12px;margin:16px 0}
+.kpi{background:var(--surface);border:1px solid var(--line);border-radius:8px;padding:12px 14px}
+.kpi b{display:block;font-size:26px;color:var(--title);font-variant-numeric:tabular-nums}
+.kpi span{font-size:13px;color:var(--muted)}
+ul.clean{padding-left:20px} ul.clean li{margin:4px 0}
+.answers{counter-reset:q;list-style:none;padding:0;margin:0;display:grid;gap:8px}
+.answers li{counter-increment:q;display:grid;grid-template-columns:28px 1fr;gap:8px;font-size:14.5px}
+.answers li::before{content:counter(q);font-weight:800;color:var(--terre)}
+
+/* ======= Maquettes : toujours en clair, comme une capture d'écran ======= */
+.shot{margin:18px 0 8px}
+.shot figcaption{font-size:13px;color:var(--muted);margin-top:8px}
+.screen-scroll{overflow-x:auto;border-radius:10px;box-shadow:0 1px 0 rgba(0,0,0,.04),0 8px 28px rgba(15,92,74,.12)}
+.app{min-width:940px;display:grid;grid-template-columns:200px 1fr;background:#FFFFFF;color:#111111;font-size:12.5px;border:1px solid #d9d2c4;border-radius:10px;overflow:hidden;line-height:1.4}
+.app.solo{grid-template-columns:200px;min-width:0;width:200px}
+.side{background:#0F5C4A;color:#F6EFE3;padding:14px 10px;display:flex;flex-direction:column;gap:3px;min-height:100%}
+.side .lg{color:#F6EFE3;width:92px;height:37px;margin:2px 6px 14px}
+.side a{display:flex;justify-content:space-between;align-items:center;padding:7px 9px;border-radius:5px;color:#F6EFE3;text-decoration:none;font-weight:500}
+.side a.on{background:#F6EFE3;color:#0F5C4A;font-weight:700}
+.side a .bd{background:#C4532D;color:#fff;border-radius:9px;font-size:10.5px;padding:0 6px;font-weight:700}
+.side .who{margin-top:auto;padding:10px 9px 2px;border-top:1px solid rgba(246,239,227,.25);font-size:11px;opacity:.9}
+.side .stamp{font-size:10px;opacity:.75;padding:0 9px}
+.main{padding:14px 16px;background:#F6EFE3;min-width:0}
+.bar{display:flex;justify-content:space-between;align-items:center;gap:10px;margin-bottom:10px}
+.bar h4{margin:0;font-size:16px;color:#0F5C4A}
+.btn{display:inline-block;border:1px solid #0F5C4A;color:#0F5C4A;background:#fff;border-radius:5px;padding:4px 9px;font-weight:600;font-size:11.5px;white-space:nowrap}
+.btn.pri{background:#0F5C4A;color:#fff}
+.btn.acc{background:#F2A900;border-color:#F2A900;color:#111}
+.btn.ghost{border-color:#bdb5a6;color:#4a4f4c}
+.filters{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:8px}
+.fl{background:#fff;border:1px solid #d9d2c4;border-radius:5px;padding:4px 8px;font-size:11.5px}
+.fl b{color:#0F5C4A}
+.card{background:#fff;border:1px solid #e3dccf;border-radius:7px;padding:10px 12px}
+.mk{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin-bottom:10px}
+.mk .card b{display:block;font-size:22px;color:#0F5C4A;font-variant-numeric:tabular-nums}
+.mk .card span{color:#4a4f4c;font-size:11px}
+.mt{width:100%;border-collapse:collapse;font-size:11.5px;background:#fff}
+.mt th{background:#fff;color:#4a4f4c;font-size:10px;text-transform:uppercase;letter-spacing:.04em;padding:6px 7px;border-bottom:1.5px solid #0F5C4A}
+.mt td{padding:6px 7px;border-bottom:1px solid #eee7da;font-variant-numeric:tabular-nums}
+.mt tr.hl td{background:#fbeee8}
+.mt tr.hl2 td{background:#fdf5df}
+.red{color:#C4532D;font-weight:700}
+.tiny{font-size:10.5px;color:#4a4f4c}
+.cols2{display:grid;grid-template-columns:1.1fr 1fr;gap:10px}
+.cols3{display:grid;grid-template-columns:1.2fr 1fr 1fr;gap:10px}
+.kv{display:grid;grid-template-columns:120px 1fr;gap:4px 8px;font-size:12px}
+.kv dt{color:#4a4f4c} .kv dd{margin:0;font-weight:600}
+.alert-l{display:grid;grid-template-columns:34px 1fr auto;gap:10px;align-items:center;padding:8px 10px;border-bottom:1px solid #eee7da;background:#fff}
+.alert-l:first-child{border-radius:7px 7px 0 0}
+.grp{font-size:10.5px;text-transform:uppercase;letter-spacing:.06em;color:#4a4f4c;font-weight:700;margin:10px 0 4px}
+.bars{display:grid;grid-template-columns:90px 1fr 22px;gap:4px 8px;align-items:center;font-size:11px}
+.stk{display:flex;height:12px;border-radius:2px;overflow:hidden;background:#f1ebdf}
+.stk i{display:block;height:100%}
+.note-ann{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:12px}
+.phone{width:250px;border:8px solid #111;border-radius:26px;overflow:hidden;background:#F6EFE3;color:#111;font-size:11.5px;flex:none}
+.phone .ph-top{background:#0F5C4A;color:#F6EFE3;padding:10px 12px;display:flex;justify-content:space-between;align-items:center}
+.phone .ph-body{padding:10px;display:grid;gap:7px}
+.row{display:flex;gap:20px;flex-wrap:wrap;align-items:flex-start}
+.row>*{min-width:0}
+.check td:first-child{width:56px}
+footer{margin-top:64px;padding-top:16px;border-top:1px solid var(--line);font-size:13px;color:var(--muted)}
+@media print{.screen-scroll{box-shadow:none}}
+</style>
+
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <symbol id="kaina" viewBox="0 0 541 218">
+    <path d="M51.20,40.00 L51.20,171.20 M105.60,100.80 L57.60,142.40 M72.00,131.20 L108.80,171.20 M224.00,136.00 A35.20,35.20 0 1 1 153.60,136.00 A35.20,35.20 0 1 1 224.00,136.00 M224.00,100.80 L224.00,171.20 M265.60,100.80 L265.60,171.20 M307.20,171.20 L307.20,136.00 A35.20,35.20 0 0 1 377.60,136.00 L377.60,171.20 M489.60,136.00 A35.20,35.20 0 1 1 419.20,136.00 A35.20,35.20 0 1 1 489.60,136.00 M489.60,100.80 L489.60,171.20" fill="none" stroke="currentColor" stroke-width="22.40" stroke-linecap="round" stroke-linejoin="round"/>
+    <circle cx="248.00" cy="62.40" r="13.12" fill="#F2A900"/><circle cx="283.20" cy="62.40" r="13.12" fill="#F2A900"/>
+  </symbol>
+</svg>
+
+<div class="wrap">
+
+<header class="top">
+  <div>
+    <svg class="logo" role="img" aria-label="Kaïna"><use href="#kaina"/></svg>
+    <p class="eyebrow" style="margin-top:14px">Cahier des charges · version 1</p>
+    <h1>Kaïna Flotte</h1>
+    <p class="lead" style="margin-top:6px">L'application de gestion de la flotte automobile de Kaïna Distribution.</p>
+  </div>
+  <dl class="meta">
+    <dt>Demandeur</dt><dd>Yassine, directeur régional Centre</dd>
+    <dt>Pour</dt><dd>Driss Amghar, directeur logistique et flotte</dd>
+    <dt>Rédigé le</dt><dd>samedi 21/11/2026</dd>
+    <dt>Données</dt><dd>export du lundi 16/11/2026, 8 h</dd>
+    <dt>Statut</dt><dd><span class="status">À valider avant toute construction</span></dd>
+  </dl>
+</header>
+
+<nav class="toc" aria-label="Sommaire">
+  <a href="#s1">1. Objectif</a><a href="#s2">2. Utilisateurs et droits</a><a href="#s3">3. Les écrans</a><a href="#s4">4. Les données</a><a href="#s5">5. Les alertes</a><a href="#s6">6. L'humain décide</a><a href="#s7">7. Hors périmètre</a><a href="#s8">8. Réception</a><a href="#lexique">Lexique</a>
+</nav>
+
+<div class="grid2" style="margin-top:24px">
+  <div class="box">
+    <p class="eyebrow">Comment lire ce document</p>
+    <p class="small" style="margin-bottom:0">Il part du brouillon de Yassine, des règles de gestion de la flotte (version 2) et des deux fichiers exportés. Les éléments marqués <span class="tag add">Ajouté</span> ne figuraient pas dans le brouillon et viennent des fichiers ou des règles. Les éléments marqués <span class="tag val">À valider</span> sont des propositions de rédaction qui demandent l'accord de Driss. Toutes les maquettes sont remplies avec de vraies lignes de l'export du 16/11/2026.</p>
+  </div>
+  <div class="box">
+    <p class="eyebrow">Les 5 décisions déjà prises</p>
+    <ol class="answers">
+      <li>Le brouillon de Yassine sert de base.</li>
+      <li>Driss est le seul chef de parc, pour les 6 agences.</li>
+      <li>On ne supprime jamais : on archive.</li>
+      <li>Driss importe lui-même les deux fichiers chaque lundi.</li>
+      <li>Ordinateur pour Driss et la direction ; téléphone en plus pour les chefs d'agence. Rien à installer.</li>
+    </ol>
+  </div>
+</div>
+
+<!-- ============ 1 ============ -->
+<h2 id="s1"><span class="n">1</span>Objectif et contexte</h2>
+<div class="prose">
+<p class="lead"><b>Suivre le parc et les conducteurs sans Excel, et ne laisser rouler aucun véhicule non conforme.</b></p>
+<p>Aujourd'hui, le parc est extrait chaque lundi à 8 h du logiciel de gestion actuel, puis suivi dans des fichiers Excel. Les échéances (visite technique, assurance, vidange, permis) se vérifient à la main, agence par agence. Une échéance ratée peut immobiliser un camion de livraison ou faire rouler un véhicule sans assurance, ce qui pèse directement sur le taux de service suivi par « Cap Service 2027 ».</p>
+<p>Kaïna Flotte lit ces deux fichiers, calcule les échéances selon les règles de Driss, affiche les alertes par priorité et garde la trace de chaque décision. <b>L'outil propose, l'humain décide.</b></p>
+</div>
+<div class="kpis">
+  <div class="kpi"><b>31</b><span>véhicules (32 lignes, dont 1 doublon)</span></div>
+  <div class="kpi"><b>32</b><span>conducteurs, dont 1 remplaçant</span></div>
+  <div class="kpi"><b>6</b><span>agences</span></div>
+  <div class="kpi"><b>13</b><span>alertes au 16/11/2026 : 5 P1, 4 P2, 4 P3</span></div>
+  <div class="kpi"><b>9 657 L</b><span>de gasoil en octobre, soit 130 370 MAD à 13,50 MAD/L</span></div>
+</div>
+<div class="prose">
+<h3>Ce que l'application doit changer</h3>
+<ul class="clean">
+  <li>Le lundi matin, Driss sait en moins de 5 minutes quels véhicules et quels conducteurs ne doivent pas rouler. <span class="tag val">À valider</span></li>
+  <li>Chaque chef d'agence voit les alertes de son agence, sur ordinateur ou sur téléphone.</li>
+  <li>Chaque décision (immobiliser, reporter, réaffecter) est datée et signée.</li>
+  <li>Plus aucun fichier Excel de suivi : l'export Excel reste possible pour partager.</li>
+</ul>
+</div>
+
+<!-- ============ 2 ============ -->
+<h2 id="s2"><span class="n">2</span>Utilisateurs et droits</h2>
+<div class="prose">
+<p>Trois profils. Un « droit », c'est ce qu'une personne a le droit de voir ou de faire dans l'application.</p>
+</div>
+<div class="tbl"><table>
+<thead><tr><th>Profil</th><th>Qui</th><th>Périmètre</th><th>Appareil</th><th>Rôle en une phrase</th></tr></thead>
+<tbody>
+<tr><td><b>Chef de parc</b> (service flotte)</td><td>Driss Amghar</td><td>Les 6 agences</td><td>Ordinateur</td><td>Il importe les données, décide des immobilisations, valide les messages et règle les situations bloquantes.</td></tr>
+<tr><td><b>Chef d'agence</b></td><td>Un par agence (6)</td><td>Son agence seulement</td><td>Ordinateur ou téléphone</td><td>Il suit son agence, traite ses alertes et propose les réaffectations de véhicules.</td></tr>
+<tr><td><b>Direction régionale</b></td><td>Yassine</td><td>Les 6 agences, en lecture</td><td>Ordinateur</td><td>Elle suit l'ensemble et reçoit les alertes escaladées.</td></tr>
+</tbody></table></div>
+
+<div class="tbl"><table>
+<thead><tr><th>Action</th><th>Chef de parc</th><th>Chef d'agence</th><th>Direction régionale</th></tr></thead>
+<tbody>
+<tr><td>Voir le tableau de bord, les véhicules, les conducteurs</td><td class="yes">Toutes agences</td><td class="yes">Son agence</td><td class="yes">Toutes agences</td></tr>
+<tr><td>Voir les numéros de téléphone (donnée personnelle)</td><td class="yes">Oui</td><td class="yes">Son agence</td><td class="no">Non</td></tr>
+<tr><td>Voir le nom du conducteur dans une alerte de surconsommation</td><td class="yes">Oui</td><td class="no">Non, véhicule seulement</td><td class="no">Non, véhicule seulement</td></tr>
+<tr><td>Ajouter ou modifier une fiche véhicule ou conducteur</td><td class="yes">Oui</td><td class="no">Non, il signale une erreur</td><td class="no">Non</td></tr>
+<tr><td>Archiver une fiche</td><td class="yes">Oui, seul</td><td class="no">Non</td><td class="no">Non</td></tr>
+<tr><td>Importer les fichiers CSV du lundi</td><td class="yes">Oui, seul</td><td class="no">Non</td><td class="no">Non</td></tr>
+<tr><td>Exporter en Excel</td><td class="yes">Oui</td><td class="yes">Son agence</td><td class="yes">Oui, sans téléphones</td></tr>
+<tr><td>Valider, reporter ou escalader une alerte</td><td class="yes">Toutes</td><td class="yes">Celles de son agence <span class="tag val">À valider</span></td><td class="yes">Commenter une alerte escaladée</td></tr>
+<tr><td>Proposer une réaffectation de véhicule</td><td class="yes">Oui</td><td class="yes">Oui</td><td class="no">Non</td></tr>
+<tr><td>Décider une immobilisation, autoriser un conducteur à reprendre le volant</td><td class="yes">Oui, seul</td><td class="no">Non</td><td class="no">Non</td></tr>
+<tr><td>Valider un brouillon de message à un conducteur</td><td class="yes">Oui, seul</td><td class="no">Non</td><td class="no">Non</td></tr>
+<tr><td>Modifier les règles (seuils, références, prix du gasoil)</td><td class="yes">Oui, seul</td><td class="no">Non</td><td class="no">Non</td></tr>
+</tbody></table></div>
+<div class="def"><b>Connexion.</b> Chaque personne a son propre identifiant. C'est ce qui permet de savoir qui a décidé quoi. Pas de compte partagé.</div>
+
+<!-- ============ 3 ============ -->
+<h2 id="s3"><span class="n">3</span>Les écrans</h2>
+<div class="prose">
+<p>L'application s'ouvre dans un navigateur web (Chrome, Edge, Safari…), comme un site internet : rien à installer. Le « front-end », c'est cette partie visible, les écrans ; le « back-end », c'est la partie invisible qui range les données et calcule les alertes.</p>
+<p class="muted small">Les maquettes montrent l'organisation et le contenu, pas le dessin final. Elles sont arrêtées au lundi 16/11/2026, 8 h 30, juste après l'import.</p>
+</div>
+
+<h3>3.1 La barre latérale</h3>
+<div class="row" style="margin-top:14px">
+  <div class="screen-scroll" style="flex:none">
+    <div class="app solo">
+      <div class="side">
+        <svg class="lg" role="img" aria-label="Kaïna"><use href="#kaina"/></svg>
+        <a class="on">Tableau de bord</a>
+        <a>Véhicules <span class="tiny" style="color:#F6EFE3">31</span></a>
+        <a>Conducteurs <span class="tiny" style="color:#F6EFE3">32</span></a>
+        <a>Alertes <span class="bd">13</span></a>
+        <a>Import / export</a>
+        <div class="who"><b>Driss Amghar</b><br>Chef de parc · 6 agences</div>
+        <div class="stamp">Données du 16/11/2026, 8 h</div>
+      </div>
+    </div>
+  </div>
+  <div style="flex:1 1 320px" class="note-ann">
+    <div class="box" style="margin:0"><b>Toujours visible</b><p class="small">Cinq entrées, dans l'ordre du brouillon. Le chiffre rouge sur « Alertes » compte les alertes ouvertes du périmètre de la personne connectée.</p></div>
+    <div class="box" style="margin:0"><b>Selon le profil</b><p class="small">« Import / export » ne montre que l'export pour les chefs d'agence et la direction. Un chef d'agence voit en bas « Chef d'agence · Fès », par exemple.</p></div>
+    <div class="box" style="margin:0"><b>Fraîcheur des données</b><p class="small">La date du dernier import est affichée en permanence. Si elle a plus de 7 jours, elle passe en rouge. <span class="tag val">À valider</span></p></div>
+    <div class="box" style="margin:0"><b>Sur téléphone</b><p class="small">La barre devient un menu en bas de l'écran avec Tableau de bord et Alertes (voir 3.5).</p></div>
+  </div>
+</div>
+
+<h3>3.2 Tableau de bord</h3>
+<p class="prose">L'écran d'accueil. Il répond à une question : qu'est-ce qui doit être réglé aujourd'hui ?</p>
+<figure class="shot">
+<div class="screen-scroll"><div class="app">
+  <div class="side">
+    <svg class="lg" role="img" aria-label="Kaïna"><use href="#kaina"/></svg>
+    <a class="on">Tableau de bord</a><a>Véhicules</a><a>Conducteurs</a><a>Alertes <span class="bd">13</span></a><a>Import / export</a>
+    <div class="who"><b>Driss Amghar</b><br>Chef de parc · 6 agences</div><div class="stamp">Données du 16/11/2026, 8 h</div>
+  </div>
+  <div class="main">
+    <div class="bar"><h4>Tableau de bord · lundi 16/11/2026</h4><div class="filters" style="margin:0"><span class="fl">Agence : <b>Toutes</b></span><span class="btn">Exporter en Excel</span></div></div>
+    <div class="mk">
+      <div class="card"><b>31</b><span>véhicules · 30 en service · 1 immobilisé</span></div>
+      <div class="card"><b>32</b><span>conducteurs · 30 actifs · 1 congé · 1 remplaçant</span></div>
+      <div class="card" style="border-color:#C4532D"><b style="color:#C4532D">5</b><span>alertes P1 à régler aujourd'hui</span></div>
+      <div class="card"><b>9 657 L</b><span>gasoil d'octobre · 130 370 MAD</span></div>
+    </div>
+    <div class="cols2">
+      <div class="card">
+        <div class="grp" style="margin-top:0">À régler aujourd'hui (P1)</div>
+        <table class="mt">
+          <tr><td><span class="p p1">P1</span></td><td>83413-D-6 · Camion 7,5 t</td><td>Visite technique expirée le 02/11/2026</td><td>Casablanca</td></tr>
+          <tr><td><span class="p p1">P1</span></td><td>C07 · Yassine Boukhari</td><td>Permis expiré le 04/11/2026, camion 71802-D-6</td><td>Casablanca</td></tr>
+          <tr><td><span class="p p1">P1</span></td><td>36742-H-1 · VP pré-vendeur</td><td>Assurance expirée le 31/10/2026</td><td>Rabat-Salé</td></tr>
+          <tr><td><span class="p p1">P1</span></td><td>C13 · Jamal Bouhmadi</td><td>Permis B sur le camion 35427-A-1 (permis C requis)</td><td>Rabat-Salé</td></tr>
+          <tr><td><span class="p p1">P1</span></td><td>55022-A-37 · Camion 7,5 t</td><td>Immobilisé, mais 120 L de gasoil en octobre</td><td>Agadir</td></tr>
+        </table>
+        <div style="margin-top:8px"><span class="btn pri">Voir les 13 alertes</span></div>
+      </div>
+      <div class="card">
+        <div class="grp" style="margin-top:0">Alertes ouvertes par agence</div>
+        <div class="bars">
+          <span>Casablanca</span><span class="stk"><i style="width:30%;background:#C4532D"></i><i style="width:15%;background:#F2A900"></i><i style="width:15%;background:#0F5C4A"></i></span><b>4</b>
+          <span>Rabat-Salé</span><span class="stk"><i style="width:30%;background:#C4532D"></i><i style="width:15%;background:#F2A900"></i><i style="width:15%;background:#0F5C4A"></i></span><b>4</b>
+          <span>Fès</span><span class="stk"><i style="width:15%;background:#F2A900"></i><i style="width:15%;background:#0F5C4A"></i></span><b>2</b>
+          <span>Agadir</span><span class="stk"><i style="width:15%;background:#C4532D"></i></span><b>1</b>
+          <span>Tanger</span><span class="stk"><i style="width:15%;background:#F2A900"></i></span><b>1</b>
+          <span>Marrakech</span><span class="stk"><i style="width:15%;background:#0F5C4A"></i></span><b>1</b>
+        </div>
+        <p class="tiny" style="margin:8px 0 0"><span class="p p1">P1</span> le jour même · <span class="p p2">P2</span> sous 7 jours · <span class="p p3">P3</span> sous 15 jours</p>
+        <div class="grp">Prochaines échéances (30 jours)</div>
+        <table class="mt">
+          <tr><td>94825-B-40</td><td>Visite technique</td><td>28/11/2026</td></tr>
+          <tr><td>C11 · Mohamed Ait Lahcen</td><td>Permis</td><td>03/12/2026</td></tr>
+          <tr><td>56626-B-33</td><td>Vidange</td><td>dans 600 km</td></tr>
+        </table>
+      </div>
+    </div>
+  </div>
+</div></div>
+<figcaption>Les 4 compteurs, les 5 alertes P1 et la répartition par agence sont calculés à partir de l'export du 16/11/2026. Un chef d'agence voit le même écran, limité à son agence.</figcaption>
+</figure>
+
+<h3>3.3 Liste des véhicules</h3>
+<p class="prose">Une ligne par véhicule, avec recherche (immatriculation ou nom) et filtres par agence, type et statut. Un clic ouvre la fiche du véhicule. Les cases en couleur signalent une alerte.</p>
+<figure class="shot">
+<div class="screen-scroll"><div class="app">
+  <div class="side">
+    <svg class="lg" role="img" aria-label="Kaïna"><use href="#kaina"/></svg>
+    <a>Tableau de bord</a><a class="on">Véhicules</a><a>Conducteurs</a><a>Alertes <span class="bd">13</span></a><a>Import / export</a>
+    <div class="who"><b>Driss Amghar</b><br>Chef de parc · 6 agences</div><div class="stamp">Données du 16/11/2026, 8 h</div>
+  </div>
+  <div class="main">
+    <div class="bar"><h4>Véhicules · Casablanca (10)</h4><div><span class="btn">Exporter en Excel</span> <span class="btn pri">+ Ajouter un véhicule</span></div></div>
+    <div class="filters"><span class="fl">🔍 Rechercher une immatriculation, un conducteur…</span><span class="fl">Agence : <b>Casablanca</b></span><span class="fl">Type : <b>Tous</b></span><span class="fl">Statut : <b>Tous</b></span><span class="fl">Archivés : <b>masqués</b></span></div>
+    <table class="mt">
+      <thead><tr><th>N°</th><th>Immatriculation</th><th>Type</th><th>Conducteur</th><th>Compteur</th><th>Vidange dans</th><th>Fin visite tech.</th><th>Fin assurance</th><th>Conso oct. (L/100)</th><th>Statut</th><th>Alerte</th></tr></thead>
+      <tbody>
+      <tr><td>V01</td><td>96654-A-6</td><td>VP pré-vendeur</td><td>Hamid Ouali</td><td>104 251</td><td>8 161 km</td><td>18/10/2027</td><td>18/12/2027</td><td>6,9 <span class="tiny">/ 7</span></td><td>En service</td><td></td></tr>
+      <tr><td>V02</td><td>53448-B-6</td><td>VUL 3,5 t</td><td>Said Rami</td><td>169 234</td><td>8 481 km</td><td>07/09/2027</td><td>13/04/2027</td><td>11,9 <span class="tiny">/ 11</span></td><td>En service</td><td></td></tr>
+      <tr class="hl"><td>V03</td><td>83413-D-6</td><td>Camion 7,5 t</td><td>Khalid Naji</td><td>122 274</td><td>7 540 km</td><td class="red">02/11/2026</td><td>28/05/2027</td><td>18,4 <span class="tiny">/ 18</span></td><td>En service</td><td><span class="p p1">P1</span></td></tr>
+      <tr><td>V04</td><td>70455-H-6</td><td>VP pré-vendeur</td><td>Ayoub Fikri</td><td>152 724</td><td>3 747 km</td><td>24/06/2027</td><td>04/11/2027</td><td>7,5 <span class="tiny">/ 7</span></td><td>En service</td><td></td></tr>
+      <tr class="hl2"><td>V05</td><td>62962-A-6</td><td>VUL 3,5 t</td><td>Mustapha Hilali</td><td>58 796</td><td>4 093 km</td><td>18/02/2027</td><td>17/02/2027</td><td class="red">19,3 <span class="tiny">/ 11 · +75 %</span></td><td>En service</td><td><span class="p p2">P2</span></td></tr>
+      <tr><td>V06</td><td>74987-B-6</td><td>VP pré-vendeur</td><td>Abdellah Sbai</td><td>177 190</td><td>9 440 km</td><td>25/07/2027</td><td>02/02/2027</td><td>7,5 <span class="tiny">/ 7</span></td><td>En service</td><td></td></tr>
+      <tr class="hl"><td>V07</td><td>71802-D-6</td><td>Camion 7,5 t</td><td>Yassine Boukhari</td><td>48 343</td><td>2 391 km</td><td>17/10/2027</td><td>02/12/2027</td><td>17,6 <span class="tiny">/ 18</span></td><td>En service</td><td><span class="p p1">P1</span> <span class="tiny">permis</span></td></tr>
+      <tr><td>V08</td><td>29193-H-6</td><td>VP pré-vendeur</td><td>Rachid Bouzid</td><td>62 953</td><td>11 085 km</td><td>12/07/2027</td><td>02/09/2027</td><td>7,6 <span class="tiny">/ 7</span></td><td>En service <span class="tiny">· site Mohammedia</span></td><td></td></tr>
+      <tr><td>V09</td><td>41375-A-6</td><td>VUL 3,5 t</td><td>Hicham Alami</td><td class="red">84 200</td><td><b>à vérifier</b></td><td>04/07/2027</td><td>04/04/2027</td><td>11,2 <span class="tiny">/ 11</span></td><td>En service</td><td><span class="p p3">P3</span></td></tr>
+      <tr><td>V10</td><td>85570-B-6</td><td>VP direction</td><td>Anas Belhaj</td><td>106 557</td><td>10 061 km</td><td>28/04/2027</td><td>25/08/2027</td><td>7,5 <span class="tiny">/ 8</span></td><td>En service</td><td></td></tr>
+      </tbody>
+    </table>
+    <p class="tiny" style="margin:6px 0 0">« Vidange dans » et « Conso » sont calculés par l'application (voir 4.1). Le chiffre en petit après la consommation est la référence du type de véhicule.</p>
+  </div>
+</div></div>
+<figcaption>Les 10 véhicules rattachés à Casablanca, dont V08 qui vient du site de Mohammedia. V09 a un compteur (84 200 km) plus bas que sa dernière vidange (91 500 km) : aucune vidange n'est calculée tant que la donnée n'est pas vérifiée.</figcaption>
+</figure>
+
+<h3>3.4 Fiche conducteur</h3>
+<p class="prose">Tout ce qu'il faut savoir sur un conducteur, sur une seule page. L'exemple choisi est le cas le plus urgent de l'export : un conducteur de camion dont le permis a expiré.</p>
+<figure class="shot">
+<div class="screen-scroll"><div class="app">
+  <div class="side">
+    <svg class="lg" role="img" aria-label="Kaïna"><use href="#kaina"/></svg>
+    <a>Tableau de bord</a><a>Véhicules</a><a class="on">Conducteurs</a><a>Alertes <span class="bd">13</span></a><a>Import / export</a>
+    <div class="who"><b>Driss Amghar</b><br>Chef de parc · 6 agences</div><div class="stamp">Données du 16/11/2026, 8 h</div>
+  </div>
+  <div class="main">
+    <div class="bar"><h4>Conducteurs › C07 · Yassine Boukhari</h4><div><span class="btn">Modifier</span> <span class="btn ghost">Archiver</span></div></div>
+    <div class="card" style="border-color:#C4532D;background:#fbeee8;margin-bottom:10px"><span class="p p1">P1</span> <b>Permis expiré depuis le 04/11/2026.</b> Ce conducteur ne prend pas le volant du camion 71802-D-6 tant que le chef de parc n'a pas réglé la situation.</div>
+    <div class="cols3">
+      <div class="card">
+        <div class="grp" style="margin-top:0">Identité</div>
+        <dl class="kv">
+          <dt>N° conducteur</dt><dd>C07</dd>
+          <dt>Nom</dt><dd>Yassine Boukhari</dd>
+          <dt>Téléphone</dt><dd>06 00 58 11 27 <span class="tiny">· visible flotte et chef d'agence</span></dd>
+          <dt>Agence</dt><dd>Casablanca</dd>
+          <dt>Embauché le</dt><dd>23/11/2012 <span class="tiny">· 13 ans</span></dd>
+          <dt>Statut</dt><dd>Actif</dd>
+        </dl>
+      </div>
+      <div class="card">
+        <div class="grp" style="margin-top:0">Permis</div>
+        <dl class="kv">
+          <dt>Catégorie</dt><dd>C <span class="tiny">· adaptée au camion</span></dd>
+          <dt>Fin de validité</dt><dd class="red">04/11/2026</dd>
+        </dl>
+        <div class="grp">Véhicule affecté</div>
+        <dl class="kv">
+          <dt>Immatriculation</dt><dd>71802-D-6 (V07)</dd>
+          <dt>Type</dt><dd>Camion 7,5 t</dd>
+          <dt>Statut</dt><dd>En service</dd>
+        </dl>
+      </div>
+      <div class="card">
+        <div class="grp" style="margin-top:0">Ce que propose l'outil</div>
+        <p style="margin:0 0 6px">Conducteurs de Casablanca avec permis C :</p>
+        <p style="margin:0 0 6px">• <b>Khalid Naji (C03)</b>, son camion 83413-D-6 a une visite technique expirée.</p>
+        <p class="tiny" style="margin:0 0 8px">Le remplaçant de l'agence, Ismail Nouri (C32), a un permis B : il ne peut pas conduire ce camion.</p>
+        <span class="btn pri">Décider (chef de parc)</span> <span class="btn">Préparer un brouillon de message</span>
+      </div>
+    </div>
+    <div class="card" style="margin-top:10px">
+      <div class="grp" style="margin-top:0">Historique des décisions</div>
+      <table class="mt">
+        <tr><td>16/11/2026 8 h 12</td><td>Import du lundi</td><td>Alerte P1 « permis expiré » créée</td></tr>
+        <tr><td class="tiny" colspan="3">Exemple de ligne à venir : « 16/11/2026 9 h 05 · Driss Amghar · Interdiction de conduire confirmée · Motif : renouvellement en cours ».</td></tr>
+      </table>
+    </div>
+  </div>
+</div></div>
+<figcaption>C07 vient du fichier des conducteurs ; le camion V07 vient de l'export du parc. La suggestion de Khalid Naji est calculée (même agence, permis C), la décision reste à Driss.</figcaption>
+</figure>
+
+<h3>3.5 Alertes</h3>
+<p class="prose">La liste de toutes les alertes ouvertes, triées par priorité puis par date limite. Chaque alerte a trois boutons : <b>Valider</b> (l'action est faite), <b>Reporter</b> (nouvelle date et motif obligatoires) et <b>Escalader</b> (envoyer à la direction régionale).</p>
+<figure class="shot">
+<div class="screen-scroll"><div class="app">
+  <div class="side">
+    <svg class="lg" role="img" aria-label="Kaïna"><use href="#kaina"/></svg>
+    <a>Tableau de bord</a><a>Véhicules</a><a>Conducteurs</a><a class="on">Alertes <span class="bd">13</span></a><a>Import / export</a>
+    <div class="who"><b>Driss Amghar</b><br>Chef de parc · 6 agences</div><div class="stamp">Données du 16/11/2026, 8 h</div>
+  </div>
+  <div class="main">
+    <div class="bar"><h4>Alertes ouvertes (13)</h4><div class="filters" style="margin:0"><span class="fl">Priorité : <b>Toutes</b></span><span class="fl">Agence : <b>Toutes</b></span><span class="fl">Statut : <b>Ouvertes</b></span></div></div>
+    <div class="grp" style="margin-top:0">P1 · le jour même · avant le 16/11/2026 au soir</div>
+    <div>
+      <div class="alert-l"><span class="p p1">P1</span><div><b>83413-D-6 · Camion 7,5 t · Casablanca</b><br><span class="tiny">Visite technique expirée le 02/11/2026, véhicule en service. Proposition : immobiliser et prendre rendez-vous.</span></div><div><span class="btn">Valider</span> <span class="btn ghost">Reporter</span> <span class="btn ghost">Escalader</span></div></div>
+      <div class="alert-l"><span class="p p1">P1</span><div><b>C07 Yassine Boukhari · camion 71802-D-6 · Casablanca</b><br><span class="tiny">Permis expiré le 04/11/2026. Proposition : interdire la conduite, désigner un conducteur permis C.</span></div><div><span class="btn">Valider</span> <span class="btn ghost">Reporter</span> <span class="btn ghost">Escalader</span></div></div>
+      <div class="alert-l"><span class="p p1">P1</span><div><b>36742-H-1 · VP pré-vendeur · Rabat-Salé</b><br><span class="tiny">Assurance expirée le 31/10/2026, véhicule en service. Proposition : immobiliser jusqu'au renouvellement.</span></div><div><span class="btn">Valider</span> <span class="btn ghost">Reporter</span> <span class="btn ghost">Escalader</span></div></div>
+      <div class="alert-l"><span class="p p1">P1</span><div><b>C13 Jamal Bouhmadi · camion 35427-A-1 · Rabat-Salé</b><br><span class="tiny">Permis B pour un camion 7,5 t (permis C requis). Proposition : retirer le camion à ce conducteur.</span></div><div><span class="btn">Valider</span> <span class="btn ghost">Reporter</span> <span class="btn ghost">Escalader</span></div></div>
+      <div class="alert-l"><span class="p p1">P1</span><div><b>55022-A-37 · Camion 7,5 t · Agadir</b><br><span class="tiny">Immobilisé, 0 km et 120 L de gasoil en octobre. Proposition : vérifier la carte carburant.</span></div><div><span class="btn">Valider</span> <span class="btn ghost">Reporter</span> <span class="btn ghost">Escalader</span></div></div>
+    </div>
+    <div class="grp">P2 · sous 7 jours · avant le 23/11/2026</div>
+    <div>
+      <div class="alert-l"><span class="p p2">P2</span><div><b>62962-A-6 · VUL 3,5 t · Casablanca</b><br><span class="tiny">19,3 L/100 km en octobre pour une référence de 11, soit +75 %. Proposition : vérifier fuite, carte carburant, itinéraire. <i>Conducteur visible seulement du service flotte.</i></span></div><div><span class="btn">Valider</span> <span class="btn ghost">Reporter</span> <span class="btn ghost">Escalader</span></div></div>
+      <div class="alert-l"><span class="p p2">P2</span><div><b>94825-B-40 · VP pré-vendeur · Tanger</b><br><span class="tiny">Visite technique le 28/11/2026, dans 12 jours. Proposition : prendre rendez-vous.</span></div><div><span class="btn">Valider</span> <span class="btn ghost">Reporter</span> <span class="btn ghost">Escalader</span></div></div>
+      <div class="alert-l"><span class="p p2">P2</span><div><b>62679-B-13 · VUL 3,5 t · Fès</b><br><span class="tiny">Vidange dépassée de 2 400 km (148 900 km au compteur, dernière à 136 500). Proposition : planifier la vidange.</span></div><div><span class="btn">Valider</span> <span class="btn ghost">Reporter</span> <span class="btn ghost">Escalader</span></div></div>
+      <div class="alert-l"><span class="p p2">P2</span><div><b>C11 Mohamed Ait Lahcen · Rabat-Salé</b><br><span class="tiny">Permis valable jusqu'au 03/12/2026, dans 17 jours. Proposition : préparer un brouillon de rappel.</span></div><div><span class="btn">Valider</span> <span class="btn ghost">Reporter</span> <span class="btn ghost">Escalader</span></div></div>
+    </div>
+    <div class="grp">P3 · sous 15 jours · avant le 01/12/2026</div>
+    <div>
+      <div class="alert-l"><span class="p p3">P3</span><div><b>56626-B-33 · VP pré-vendeur · Marrakech</b><br><span class="tiny">Vidange dans 600 km. Proposition : planifier la vidange.</span></div><div><span class="btn">Valider</span> <span class="btn ghost">Reporter</span> <span class="btn ghost">Escalader</span></div></div>
+      <div class="alert-l"><span class="p p3">P3</span><div><b>41375-A-6 · VUL 3,5 t · Casablanca</b><br><span class="tiny">Donnée à vérifier : compteur 84 200 km, plus bas que la dernière vidange à 91 500 km.</span></div><div><span class="btn">Valider</span> <span class="btn ghost">Reporter</span> <span class="btn ghost">Escalader</span></div></div>
+      <div class="alert-l"><span class="p p3">P3</span><div><b>20340-D-1 · VUL 3,5 t · Rabat-Salé</b><br><span class="tiny">Véhicule sans conducteur. Proposition au chef d'agence : Younes Elkhadir (C15), sans véhicule, même agence.</span></div><div><span class="btn">Valider</span> <span class="btn ghost">Reporter</span> <span class="btn ghost">Escalader</span></div></div>
+      <div class="alert-l"><span class="p p3">P3</span><div><b>C24 Zakaria Lamrini · VP 49643-H-13 · Fès</b><br><span class="tiny">Conducteur en congé avec un véhicule affecté. Proposition : réaffectation à proposer au chef d'agence.</span></div><div><span class="btn">Valider</span> <span class="btn ghost">Reporter</span> <span class="btn ghost">Escalader</span></div></div>
+    </div>
+  </div>
+</div></div>
+<figcaption>Les 13 alertes que l'application doit trouver dans l'export du 16/11/2026. C'est aussi le premier test de réception (section 8).</figcaption>
+</figure>
+
+<div class="row" style="margin-top:22px">
+  <div class="phone" aria-label="Maquette téléphone">
+    <div class="ph-top"><svg style="width:58px;height:24px;color:#F6EFE3"><use href="#kaina"/></svg><span style="font-size:10.5px">Rabat-Salé</span></div>
+    <div class="ph-body">
+      <b style="color:#0F5C4A">Alertes de mon agence (4)</b>
+      <div class="card"><span class="p p1">P1</span> <b>36742-H-1</b><br><span class="tiny">Assurance expirée le 31/10/2026</span></div>
+      <div class="card"><span class="p p1">P1</span> <b>Camion 35427-A-1</b><br><span class="tiny">Permis du conducteur non adapté. Décision : chef de parc.</span></div>
+      <div class="card"><span class="p p2">P2</span> <b>Permis C11</b><br><span class="tiny">Expire le 03/12/2026</span></div>
+      <div class="card"><span class="p p3">P3</span> <b>20340-D-1 sans conducteur</b><br><span class="tiny">Proposer Younes Elkhadir ?</span><div style="margin-top:6px"><span class="btn pri">Proposer</span> <span class="btn ghost">Reporter</span></div></div>
+    </div>
+  </div>
+  <div class="prose" style="flex:1 1 300px">
+    <h3 style="margin-top:0">Sur le téléphone d'un chef d'agence</h3>
+    <p>Même adresse web, écran adapté. Le chef d'agence voit le tableau de bord et les alertes de son agence, et peut les traiter. Les décisions réservées au chef de parc (immobiliser, autoriser à reprendre le volant) sont affichées mais pas cliquables.</p>
+  </div>
+</div>
+
+<h3>3.6 Import / export</h3>
+<p class="prose">Le lundi, Driss dépose les deux fichiers. L'application lui montre ce qu'elle a compris <b>avant</b> d'enregistrer quoi que ce soit. Il confirme ou il annule.</p>
+<figure class="shot">
+<div class="screen-scroll"><div class="app">
+  <div class="side">
+    <svg class="lg" role="img" aria-label="Kaïna"><use href="#kaina"/></svg>
+    <a>Tableau de bord</a><a>Véhicules</a><a>Conducteurs</a><a>Alertes <span class="bd">13</span></a><a class="on">Import / export</a>
+    <div class="who"><b>Driss Amghar</b><br>Chef de parc · 6 agences</div><div class="stamp">Données du 16/11/2026, 8 h</div>
+  </div>
+  <div class="main">
+    <div class="bar"><h4>Import du lundi 16/11/2026 · vérification avant enregistrement</h4><div><span class="btn ghost">Annuler</span> <span class="btn pri">Confirmer l'import</span></div></div>
+    <div class="cols2">
+      <div class="card">
+        <div class="grp" style="margin-top:0">Fichiers lus</div>
+        <table class="mt">
+          <tr><td>M5_Parc_Vehicules_Kaina.csv</td><td>32 lignes · 12 colonnes reconnues</td></tr>
+          <tr><td>M5_Conducteurs_Kaina.csv</td><td>32 lignes · 9 colonnes reconnues</td></tr>
+        </table>
+        <div class="grp">Résultat</div>
+        <table class="mt">
+          <tr><td>Véhicules</td><td><b>31</b> (1 doublon fusionné)</td></tr>
+          <tr><td>Conducteurs</td><td><b>32</b></td></tr>
+          <tr><td>Alertes nouvelles</td><td><b>13</b> : 5 P1 · 4 P2 · 4 P3</td></tr>
+        </table>
+      </div>
+      <div class="card">
+        <div class="grp" style="margin-top:0">Ce que l'outil a corrigé ou signalé</div>
+        <table class="mt">
+          <tr><td>V17 · 54962-A-40</td><td>Deux lignes identiques : fusionnées, traitées une fois</td></tr>
+          <tr><td>V08 · site Mohammedia</td><td>Rattaché à l'agence Casablanca</td></tr>
+          <tr><td>V09 · 41375-A-6</td><td>Compteur plus bas que la dernière vidange : à vérifier</td></tr>
+          <tr><td>V15 · 20340-D-1</td><td>Aucun conducteur : non affecté</td></tr>
+        </table>
+        <div class="grp">Export</div>
+        <span class="btn">Véhicules (.xlsx)</span> <span class="btn">Conducteurs (.xlsx)</span> <span class="btn">Alertes (.xlsx)</span>
+      </div>
+    </div>
+  </div>
+</div></div>
+<figcaption>Rien n'est enregistré avant « Confirmer l'import ». Une colonne inconnue ou manquante bloque l'import avec un message clair.</figcaption>
+</figure>
+<div class="def"><b>CSV.</b> Un fichier tableau très simple, où les colonnes sont séparées par un point-virgule ; Excel sait l'ouvrir. <b>Importer</b> veut dire faire entrer ce fichier dans l'application, <b>exporter</b> veut dire en sortir un fichier Excel.</div>
+
+<!-- ============ 4 ============ -->
+<h2 id="s4"><span class="n">4</span>Les données</h2>
+<div class="prose"><p>Une « table », c'est une liste de fiches du même genre, comme un onglet Excel bien rangé. Un « champ », c'est une colonne de cette liste. Chaque exemple vient des fichiers du 16/11/2026.</p></div>
+
+<h3>Vérification : chaque colonne des fichiers a sa place</h3>
+<div class="tbl"><table>
+<thead><tr><th>Fichier</th><th>Colonne</th><th>Champ dans l'application</th><th>Où on la voit</th><th>Dans le brouillon ?</th></tr></thead>
+<tbody>
+<tr><td rowspan="12">Parc</td><td><code>id</code></td><td>Véhicules · N° véhicule</td><td>Liste, fiche, alertes</td><td><span class="tag add">Ajouté</span></td></tr>
+<tr><td><code>immatriculation</code></td><td>Véhicules · Immatriculation</td><td>Partout</td><td>Oui</td></tr>
+<tr><td><code>type</code></td><td>Véhicules · Type</td><td>Liste, fiche, filtres</td><td>Oui</td></tr>
+<tr><td><code>agence</code></td><td>Véhicules · Site d'origine + Agence</td><td>Liste, filtres, droits</td><td>Oui</td></tr>
+<tr><td><code>conducteur</code></td><td>Véhicules · Conducteur affecté</td><td>Liste, fiche, contrôle avec le fichier des conducteurs</td><td>Oui</td></tr>
+<tr><td><code>km_compteur</code></td><td>Véhicules · Compteur</td><td>Liste, fiche, calcul de vidange</td><td>Oui</td></tr>
+<tr><td><code>km_derniere_vidange</code></td><td>Véhicules · Km dernière vidange</td><td>Fiche, calcul de vidange</td><td>Oui</td></tr>
+<tr><td><code>fin_visite_technique</code></td><td>Véhicules · Fin visite technique</td><td>Liste, fiche, alertes</td><td>Oui</td></tr>
+<tr><td><code>fin_assurance</code></td><td>Véhicules · Fin assurance</td><td>Liste, fiche, alertes</td><td>Oui</td></tr>
+<tr><td><code>km_octobre</code></td><td>Relevés mensuels · Km du mois</td><td>Fiche, calcul de consommation</td><td>Oui</td></tr>
+<tr><td><code>carburant_octobre_L</code></td><td>Relevés mensuels · Litres du mois</td><td>Fiche, tableau de bord, consommation</td><td>Oui</td></tr>
+<tr><td><code>statut</code></td><td>Véhicules · Statut</td><td>Liste, filtres, alertes</td><td>Oui</td></tr>
+<tr><td rowspan="9">Conducteurs</td><td><code>id_conducteur</code></td><td>Conducteurs · N° conducteur</td><td>Liste, fiche, alertes</td><td><span class="tag add">Ajouté</span></td></tr>
+<tr><td><code>nom</code></td><td>Conducteurs · Nom</td><td>Partout (sauf alertes de surconsommation hors flotte)</td><td>Oui</td></tr>
+<tr><td><code>telephone</code></td><td>Conducteurs · Téléphone</td><td>Fiche, selon les droits</td><td>Oui</td></tr>
+<tr><td><code>agence</code></td><td>Conducteurs · Agence</td><td>Liste, filtres, droits</td><td>Oui</td></tr>
+<tr><td><code>categorie_permis</code></td><td>Conducteurs · Catégorie de permis</td><td>Fiche, contrôle permis/véhicule</td><td>Oui</td></tr>
+<tr><td><code>fin_validite_permis</code></td><td>Conducteurs · Fin de validité du permis</td><td>Fiche, alertes</td><td>Oui</td></tr>
+<tr><td><code>date_embauche</code></td><td>Conducteurs · Date d'embauche</td><td>Fiche (ancienneté)</td><td><span class="tag add">Ajouté</span></td></tr>
+<tr><td><code>vehicule_affecte</code></td><td>Conducteurs · Véhicule affecté</td><td>Fiche, lien vers le véhicule</td><td>Oui</td></tr>
+<tr><td><code>statut</code></td><td>Conducteurs · Statut</td><td>Liste, filtres, alertes</td><td>Oui</td></tr>
+</tbody></table></div>
+<p class="prose small muted">Résultat : 21 colonnes sur 21 ont leur place. Trois n'étaient pas dans le brouillon et sont ajoutées. Les noms <code>km_octobre</code> et <code>carburant_octobre_L</code> changent chaque mois : l'application les range par mois dans une table à part, pour garder l'historique.</p>
+
+<h3>4.1 Table Véhicules</h3>
+<div class="tbl"><table>
+<thead><tr><th>Champ</th><th>Description</th><th>Exemple</th></tr></thead>
+<tbody>
+<tr><td>N° véhicule</td><td>Code unique du véhicule, repris du fichier.</td><td class="num">V22</td></tr>
+<tr><td>Immatriculation</td><td>Plaque du véhicule. Sert à repérer les doublons et à relier un conducteur.</td><td class="num">62679-B-13</td></tr>
+<tr><td>Type</td><td>Un de quatre choix : VP pré-vendeur, VP direction, VUL 3,5 t, Camion 7,5 t. Il fixe l'intervalle de vidange, la référence de consommation et le permis requis.</td><td>VUL 3,5 t</td></tr>
+<tr><td>Site d'origine</td><td>La valeur « agence » telle qu'elle arrive dans le fichier.</td><td>Mohammedia (V08)</td></tr>
+<tr><td>Agence</td><td>Agence de rattachement, calculée avec la table des sites (4.6). Décide qui voit le véhicule.</td><td>Casablanca</td></tr>
+<tr><td>Conducteur affecté</td><td>Lien vers la fiche conducteur. Vide = véhicule non affecté.</td><td>Ilyas Akdim</td></tr>
+<tr><td>Compteur (km)</td><td>Kilométrage au compteur le jour de l'export.</td><td class="num">148 900</td></tr>
+<tr><td>Km dernière vidange</td><td>Kilométrage lors de la dernière vidange.</td><td class="num">136 500</td></tr>
+<tr><td>Fin visite technique</td><td>Date jusqu'à laquelle la visite technique est valable.</td><td class="num">13/12/2027</td></tr>
+<tr><td>Fin assurance</td><td>Date jusqu'à laquelle l'assurance est valable.</td><td class="num">18/05/2027</td></tr>
+<tr><td>Statut</td><td>En service ou Immobilisé. Seul le chef de parc passe un véhicule en « Immobilisé ».</td><td>En service</td></tr>
+<tr><td>Archivé</td><td>Oui ou non, avec la date et la personne. Un véhicule archivé disparaît des listes mais garde son historique.</td><td>Non</td></tr>
+<tr><td colspan="3" style="background:var(--soft)"><b>Champs calculés</b> (l'application les calcule, personne ne les saisit)</td></tr>
+<tr><td>Intervalle de vidange</td><td>15 000 km pour un VP, 10 000 km pour un VUL ou un camion.</td><td class="num">10 000 km</td></tr>
+<tr><td>Vidange dans</td><td>Km dernière vidange + intervalle − compteur. Négatif = vidange dépassée. Non calculé si le compteur est plus bas que la dernière vidange.</td><td class="num">−2 400 km</td></tr>
+<tr><td>Données à vérifier</td><td>Oui si une incohérence est trouvée (voir 5.4).</td><td>Non</td></tr>
+</tbody></table></div>
+
+<h3>4.2 Table Relevés mensuels</h3>
+<div class="tbl"><table>
+<thead><tr><th>Champ</th><th>Description</th><th>Exemple</th></tr></thead>
+<tbody>
+<tr><td>Véhicule</td><td>Lien vers le véhicule.</td><td>V05 · 62962-A-6</td></tr>
+<tr><td>Mois</td><td>Mois du relevé, déduit du nom de la colonne.</td><td>Octobre 2026</td></tr>
+<tr><td>Km du mois</td><td>Kilomètres parcourus dans le mois (<code>km_octobre</code>).</td><td class="num">2 410</td></tr>
+<tr><td>Litres du mois</td><td>Gasoil consommé dans le mois (<code>carburant_octobre_L</code>).</td><td class="num">465</td></tr>
+<tr><td>Consommation (calculée)</td><td>Litres ÷ km × 100, en litres aux 100 km. Non calculée si 0 km.</td><td class="num">19,3 L/100</td></tr>
+<tr><td>Écart à la référence (calculé)</td><td>Consommation comparée à la référence du type (4.6).</td><td class="num">+75 %</td></tr>
+<tr><td>Coût (calculé)</td><td>Litres × prix du gasoil retenu.</td><td class="num">6 278 MAD</td></tr>
+</tbody></table></div>
+
+<h3>4.3 Table Conducteurs</h3>
+<div class="tbl"><table>
+<thead><tr><th>Champ</th><th>Description</th><th>Exemple</th></tr></thead>
+<tbody>
+<tr><td>N° conducteur</td><td>Code unique du conducteur.</td><td class="num">C11</td></tr>
+<tr><td>Nom</td><td>Prénom et nom.</td><td>Mohamed Ait Lahcen</td></tr>
+<tr><td>Téléphone</td><td>Donnée personnelle : visible du chef de parc et du chef de l'agence seulement, jamais dans un export de la direction.</td><td class="num">06 00 97 64 76</td></tr>
+<tr><td>Agence</td><td>Agence du conducteur.</td><td>Rabat-Salé</td></tr>
+<tr><td>Catégorie de permis</td><td>B ou C. Permis C obligatoire pour un camion 7,5 t ; permis B pour un VP ou un VUL 3,5 t.</td><td>B</td></tr>
+<tr><td>Fin de validité du permis</td><td>Date jusqu'à laquelle le permis est valable.</td><td class="num">03/12/2026</td></tr>
+<tr><td>Date d'embauche</td><td>Sert à afficher l'ancienneté sur la fiche. Ne déclenche aucune alerte.</td><td class="num">11/07/2019</td></tr>
+<tr><td>Véhicule affecté</td><td>Immatriculation du véhicule confié. Vide = sans véhicule.</td><td class="num">34787-D-1</td></tr>
+<tr><td>Statut</td><td>Actif, Congé ou Remplaçant.</td><td>Actif</td></tr>
+<tr><td>Archivé</td><td>Oui ou non, avec la date et la personne.</td><td>Non</td></tr>
+</tbody></table></div>
+
+<h3>4.4 Table Alertes</h3>
+<div class="tbl"><table>
+<thead><tr><th>Champ</th><th>Description</th><th>Exemple</th></tr></thead>
+<tbody>
+<tr><td>N° alerte</td><td>Numéro unique, donné par l'application.</td><td class="num">A-2026-0003</td></tr>
+<tr><td>Règle</td><td>La règle qui a déclenché l'alerte (section 5).</td><td>Assurance expirée</td></tr>
+<tr><td>Priorité</td><td>P1, P2 ou P3.</td><td><span class="p p1">P1</span></td></tr>
+<tr><td>Véhicule / conducteur</td><td>Ce que l'alerte concerne.</td><td>V12 · 36742-H-1</td></tr>
+<tr><td>Agence</td><td>Décide qui voit l'alerte.</td><td>Rabat-Salé</td></tr>
+<tr><td>Constat</td><td>La phrase qui explique l'alerte avec les chiffres.</td><td>Assurance expirée le 31/10/2026</td></tr>
+<tr><td>Créée le</td><td>Date de l'import qui l'a fait apparaître.</td><td class="num">16/11/2026</td></tr>
+<tr><td>À traiter avant</td><td>Créée le + délai de la priorité (jour même, 7 jours, 15 jours).</td><td class="num">16/11/2026</td></tr>
+<tr><td>Statut</td><td>Ouverte, Reportée, Escaladée, Traitée, Disparue (la condition n'est plus vraie au prochain import, à confirmer par Driss).</td><td>Ouverte</td></tr>
+</tbody></table></div>
+
+<h3>4.5 Table Journal des décisions</h3>
+<p class="prose">Le « journal », c'est le registre qui garde chaque décision. On ne peut ni le modifier ni l'effacer.</p>
+<div class="tbl"><table>
+<thead><tr><th>Champ</th><th>Description</th><th>Exemple</th></tr></thead>
+<tbody>
+<tr><td>Date et heure</td><td>Moment exact de la décision.</td><td class="num">16/11/2026 9 h 05 <span class="muted">(exemple)</span></td></tr>
+<tr><td>Qui</td><td>La personne connectée et son profil.</td><td>Driss Amghar, chef de parc</td></tr>
+<tr><td>Sur quoi</td><td>Alerte, véhicule ou conducteur concerné.</td><td>A-2026-0003 · 36742-H-1</td></tr>
+<tr><td>Décision</td><td>Validée, Reportée, Escaladée, Immobilisation, Réaffectation, Modification, Archivage, Import, Message validé.</td><td>Immobilisation</td></tr>
+<tr><td>Motif</td><td>Texte libre, obligatoire pour un report, une escalade ou une immobilisation.</td><td>Assurance en cours de renouvellement</td></tr>
+<tr><td>Nouvelle date</td><td>Pour un report seulement.</td><td class="num">—</td></tr>
+<tr><td>Avant / après</td><td>Pour une modification : l'ancienne et la nouvelle valeur.</td><td>Statut : En service → Immobilisé</td></tr>
+</tbody></table></div>
+
+<h3>4.6 Tables de règles (paramètres)</h3>
+<p class="prose">Les chiffres des règles ne sont pas écrits « en dur » dans l'application : Driss peut les changer, et chaque changement va au journal.</p>
+<div class="grid2">
+<div class="tbl" style="margin:0"><table>
+<thead><tr><th>Type</th><th>Réf. L/100</th><th>Vidange</th><th>Permis</th></tr></thead>
+<tbody>
+<tr><td>VP pré-vendeur</td><td class="num">7</td><td class="num">15 000 km</td><td>B</td></tr>
+<tr><td>VP direction</td><td class="num">8</td><td class="num">15 000 km</td><td>B</td></tr>
+<tr><td>VUL 3,5 t</td><td class="num">11</td><td class="num">10 000 km</td><td>B</td></tr>
+<tr><td>Camion 7,5 t</td><td class="num">18</td><td class="num">10 000 km</td><td>C</td></tr>
+</tbody></table></div>
+<div class="tbl" style="margin:0"><table>
+<thead><tr><th>Site dans le fichier</th><th>Agence</th></tr></thead>
+<tbody>
+<tr><td>Casablanca, Mohammedia</td><td>Casablanca</td></tr>
+<tr><td>Rabat, Salé, Témara</td><td>Rabat-Salé</td></tr>
+<tr><td>Tanger · Fès · Marrakech · Agadir</td><td>Même nom</td></tr>
+</tbody></table></div>
+<div class="tbl" style="margin:0"><table>
+<thead><tr><th>Seuil</th><th>Valeur</th></tr></thead>
+<tbody>
+<tr><td>Échéance proche</td><td class="num">30 jours</td></tr>
+<tr><td>Vidange proche</td><td class="num">1 000 km</td></tr>
+<tr><td>Surconsommation</td><td class="num">+25 %</td></tr>
+<tr><td>Prix du gasoil retenu</td><td class="num">13,50 MAD/L</td></tr>
+</tbody></table></div>
+</div>
+
+<h3>4.7 Autres tables</h3>
+<div class="tbl"><table>
+<thead><tr><th>Table</th><th>Champs</th><th>Exemple</th></tr></thead>
+<tbody>
+<tr><td>Utilisateurs</td><td>Nom, profil, agence, identifiant, actif oui/non.</td><td>Driss Amghar · Chef de parc · toutes agences</td></tr>
+<tr><td>Imports</td><td>Date, personne, fichiers, lignes lues, doublons fusionnés, lignes à vérifier, alertes créées.</td><td>16/11/2026 · Driss Amghar · 32 + 32 lignes · 1 doublon · 13 alertes</td></tr>
+<tr><td>Brouillons de messages</td><td>Conducteur, texte, préparé le, statut (brouillon, validé par Driss), validé par, validé le.</td><td>C11 · rappel de renouvellement du permis · brouillon</td></tr>
+</tbody></table></div>
+
+<!-- ============ 5 ============ -->
+<h2 id="s5"><span class="n">5</span>Les alertes</h2>
+<div class="prose"><p>L'application recalcule les alertes à chaque import et chaque fois qu'une fiche est modifiée. Une même situation ne crée qu'une alerte : si elle est toujours vraie le lundi suivant, l'alerte existante reste ouverte, elle n'est pas recréée. Les dates sont comparées à la date du jour ; « dans moins de 30 jours » veut dire de 0 à 29 jours.</p></div>
+
+<h3>5.1 Véhicules</h3>
+<div class="tbl"><table>
+<thead><tr><th>Condition</th><th>Priorité</th><th>Délai</th><th>Action proposée</th><th>Au 16/11/2026</th></tr></thead>
+<tbody>
+<tr><td>Visite technique expirée sur un véhicule en service</td><td><span class="p p1">P1</span></td><td>Le jour même</td><td>Proposer l'immobilisation au chef de parc, prendre rendez-vous</td><td>V03 · 83413-D-6 (02/11/2026)</td></tr>
+<tr><td>Assurance expirée sur un véhicule en service</td><td><span class="p p1">P1</span></td><td>Le jour même</td><td>Proposer l'immobilisation au chef de parc</td><td>V12 · 36742-H-1 (31/10/2026)</td></tr>
+<tr><td>Carburant consommé par un véhicule immobilisé</td><td><span class="p p1">P1</span></td><td>Le jour même</td><td>Vérifier la carte carburant et l'usage du véhicule</td><td>V29 · 55022-A-37 (120 L)</td></tr>
+<tr><td>Visite technique ou assurance qui expire dans moins de 30 jours</td><td><span class="p p2">P2</span></td><td>Sous 7 jours</td><td>Prendre rendez-vous ou renouveler</td><td>V18 · 94825-B-40 (VT le 28/11/2026)</td></tr>
+<tr><td>Vidange dépassée</td><td><span class="p p2">P2</span></td><td>Sous 7 jours</td><td>Planifier la vidange</td><td>V22 · 62679-B-13 (−2 400 km)</td></tr>
+<tr><td>Consommation du mois supérieure de plus de 25 % à la référence</td><td><span class="p p2">P2</span></td><td>Sous 7 jours</td><td>Vérifier : fuite, carte carburant, itinéraire. Jamais de sanction automatique ; conducteur non nommé hors service flotte</td><td>V05 · 62962-A-6 (+75 %)</td></tr>
+<tr><td>Vidange à faire dans moins de 1 000 km</td><td><span class="p p3">P3</span></td><td>Sous 15 jours</td><td>Planifier la vidange</td><td>V26 · 56626-B-33 (600 km)</td></tr>
+<tr><td>Véhicule sans conducteur</td><td><span class="p p3">P3</span></td><td>Sous 15 jours</td><td>Signaler au chef d'agence, proposer un conducteur libre de l'agence</td><td>V15 · 20340-D-1</td></tr>
+</tbody></table></div>
+
+<h3>5.2 Conducteurs</h3>
+<div class="tbl"><table>
+<thead><tr><th>Condition</th><th>Priorité</th><th>Délai</th><th>Action proposée</th><th>Au 16/11/2026</th></tr></thead>
+<tbody>
+<tr><td>Permis expiré, conducteur affecté à un véhicule en service</td><td><span class="p p1">P1</span></td><td>Le jour même</td><td>Le conducteur ne prend pas le volant tant que le chef de parc n'a pas réglé la situation</td><td>C07 · Yassine Boukhari (04/11/2026)</td></tr>
+<tr><td>Catégorie de permis non adaptée au véhicule (camion : C ; VP et VUL : B)</td><td><span class="p p1">P1</span></td><td>Le jour même</td><td>Retirer le véhicule, proposer un conducteur avec le bon permis</td><td>C13 · Jamal Bouhmadi (B sur camion)</td></tr>
+<tr><td>Permis qui expire dans moins de 30 jours</td><td><span class="p p2">P2</span></td><td>Sous 7 jours</td><td>Préparer un brouillon de rappel, à valider par Driss</td><td>C11 · Mohamed Ait Lahcen (03/12/2026)</td></tr>
+<tr><td>Conducteur en congé avec un véhicule affecté</td><td><span class="p p3">P3</span></td><td>Sous 15 jours</td><td>Réaffectation à proposer au chef d'agence</td><td>C24 · Zakaria Lamrini (V24)</td></tr>
+</tbody></table></div>
+
+<h3>5.3 Données à vérifier</h3>
+<div class="tbl"><table>
+<thead><tr><th>Condition</th><th>Priorité</th><th>Ce que fait l'outil</th><th>Au 16/11/2026</th></tr></thead>
+<tbody>
+<tr><td>Compteur plus bas que le km de la dernière vidange</td><td><span class="p p3">P3</span></td><td>Marque « à vérifier », ne calcule aucune alerte de vidange</td><td>V09 · 41375-A-6 (84 200 &lt; 91 500)</td></tr>
+<tr><td>Le véhicule et le conducteur ne se désignent pas l'un l'autre <span class="tag val">À valider</span></td><td><span class="p p3">P3</span></td><td>Marque « à vérifier » sur les deux fiches</td><td>Aucun cas</td></tr>
+<tr><td>Véhicule en service avec des litres mais 0 km <span class="tag val">À valider</span></td><td><span class="p p3">P3</span></td><td>Marque « à vérifier », pas de calcul de consommation</td><td>Aucun cas</td></tr>
+</tbody></table></div>
+
+<h3>5.4 Cas traités à l'import, sans alerte</h3>
+<ul class="clean prose">
+  <li><b>Même immatriculation sur deux lignes</b> : fusionnée, traitée une fois, signalée dans le compte rendu d'import (V17 · 54962-A-40).</li>
+  <li><b>Site rattaché à une agence</b> : Mohammedia devient Casablanca (V08), le site d'origine reste visible.</li>
+  <li><b>Véhicule immobilisé</b> : aucune consommation attendue, pas d'alerte de surconsommation (V29 n'a que l'alerte P1 de carburant).</li>
+</ul>
+
+<h3>5.5 Vie d'une alerte</h3>
+<div class="tbl"><table>
+<thead><tr><th>Bouton</th><th>Ce qui se passe</th><th>Obligatoire</th></tr></thead>
+<tbody>
+<tr><td><b>Valider</b></td><td>L'action est faite. L'alerte passe en « Traitée ». Si la condition est toujours vraie au prochain import, l'alerte se rouvre.</td><td>Un commentaire court</td></tr>
+<tr><td><b>Reporter</b></td><td>L'alerte disparaît de la liste jusqu'à la nouvelle date, puis revient. Une P1 ne peut être reportée que par Driss. <span class="tag val">À valider</span></td><td>Nouvelle date et motif</td></tr>
+<tr><td><b>Escalader</b></td><td>L'alerte est envoyée dans la liste de la direction régionale, qui peut la commenter. Elle reste ouverte.</td><td>Motif</td></tr>
+</tbody></table></div>
+<p class="prose small muted">Une alerte dont le délai est dépassé reste à sa priorité et s'affiche « en retard » sur le tableau de bord. Rien ne se déclenche seul.</p>
+
+<!-- ============ 6 ============ -->
+<h2 id="s6"><span class="n">6</span>Là où l'humain décide</h2>
+<div class="prose"><p class="lead">Ces règles ne sont pas négociables. L'application calcule et propose ; elle n'agit jamais seule sur un véhicule, un conducteur ou un message.</p></div>
+<div class="tbl"><table>
+<thead><tr><th>Situation</th><th>L'outil fait</th><th>L'humain décide</th><th>Trace gardée</th></tr></thead>
+<tbody>
+<tr><td>Visite technique ou assurance expirée</td><td>Crée une alerte P1 et propose l'immobilisation</td><td>Driss immobilise ou non. Jamais automatiquement.</td><td>Qui, quand, motif</td></tr>
+<tr><td>Surconsommation</td><td>Crée une alerte P2 de vérification, sans nommer le conducteur hors service flotte</td><td>Driss mène la vérification. Aucune sanction automatique.</td><td>Qui, quand, conclusion</td></tr>
+<tr><td>Permis expiré ou non adapté</td><td>Crée une alerte P1 et propose des conducteurs possibles</td><td>Driss interdit la conduite, choisit le remplaçant et autorise la reprise.</td><td>Qui, quand, motif</td></tr>
+<tr><td>Message à un conducteur</td><td>Prépare un brouillon</td><td>Driss le relit, le corrige et le valide. Il l'envoie lui-même par son canal habituel.</td><td>Texte validé, qui, quand</td></tr>
+<tr><td>Véhicule sans conducteur, conducteur en congé</td><td>Propose une réaffectation</td><td>Le chef d'agence propose, Driss valide la réaffectation.</td><td>Qui, quand</td></tr>
+<tr><td>Import du lundi</td><td>Montre ce qui change avant d'enregistrer</td><td>Driss confirme ou annule.</td><td>Compte rendu d'import</td></tr>
+<tr><td>Archivage</td><td>Retire la fiche des listes, garde l'historique</td><td>Driss seul archive.</td><td>Qui, quand, motif</td></tr>
+<tr><td>Données personnelles</td><td>Masque les téléphones selon le profil</td><td>Driss gère les droits des utilisateurs.</td><td>Changements de droits</td></tr>
+</tbody></table></div>
+
+<!-- ============ 7 ============ -->
+<h2 id="s7"><span class="n">7</span>Hors périmètre</h2>
+<div class="prose">
+<p>Ce que cette première version ne fera pas. Chaque point pourra faire l'objet d'une version suivante.</p>
+<ul class="clean">
+  <li>Géolocalisation des véhicules en temps réel.</li>
+  <li>Paie et primes des conducteurs.</li>
+  <li>Carte carburant connectée.</li>
+  <li><span class="tag add">Ajouté</span> Branchement automatique au logiciel de gestion actuel : l'import reste manuel (réponse 4).</li>
+  <li><span class="tag add">Ajouté</span> Envoi de SMS, WhatsApp ou e-mails par l'application.</li>
+  <li><span class="tag add">Ajouté</span> Application à installer sur téléphone (réponse 5).</li>
+  <li><span class="tag add">Ajouté</span> Suppression définitive de données (réponse 3).</li>
+  <li><span class="tag add">Ajouté</span> Suivi des réparations, des pannes et des factures d'entretien. <span class="tag val">À valider</span></li>
+  <li><span class="tag add">Ajouté</span> Version en arabe des écrans. <span class="tag val">À valider</span></li>
+</ul>
+</div>
+
+<!-- ============ 8 ============ -->
+<h2 id="s8"><span class="n">8</span>Critères de réception</h2>
+<div class="prose"><p>L'application est acceptée quand tous ces tests réussissent, devant Driss, avec les fichiers du 16/11/2026. La date du jour de l'application est réglée sur le lundi 16/11/2026 pour les tests.</p></div>
+<div class="tbl check"><table>
+<thead><tr><th>N°</th><th>Test</th><th>Résultat attendu</th></tr></thead>
+<tbody>
+<tr><td colspan="3" style="background:var(--soft)"><b>Import</b></td></tr>
+<tr><td>R1</td><td>Importer les deux fichiers du 16/11/2026.</td><td>Aperçu avant enregistrement : 31 véhicules, 32 conducteurs, 13 alertes. Rien n'est enregistré sans « Confirmer ».</td></tr>
+<tr><td>R2</td><td>Vérifier V17.</td><td>Une seule fiche 54962-A-40, doublon signalé dans le compte rendu.</td></tr>
+<tr><td>R3</td><td>Vérifier V08.</td><td>Agence Casablanca, site d'origine Mohammedia.</td></tr>
+<tr><td>R4</td><td>Importer un fichier auquel il manque la colonne <code>fin_assurance</code>.</td><td>Import refusé, message qui nomme la colonne manquante.</td></tr>
+<tr><td>R5</td><td>Réimporter les mêmes fichiers.</td><td>Aucune alerte en double : toujours 13 alertes ouvertes.</td></tr>
+<tr><td colspan="3" style="background:var(--soft)"><b>Alertes</b></td></tr>
+<tr><td>R6</td><td>Ouvrir l'écran Alertes.</td><td>Exactement les 13 alertes de la maquette 3.5 : 5 P1, 4 P2, 4 P3.</td></tr>
+<tr><td>R7</td><td>Ouvrir la fiche V09.</td><td>« À vérifier », aucune alerte de vidange.</td></tr>
+<tr><td>R8</td><td>Ouvrir la fiche V29 (immobilisé, 120 L).</td><td>Une alerte P1 carburant, pas d'alerte de surconsommation.</td></tr>
+<tr><td>R9</td><td>Changer la fin d'assurance de V12 au 31/12/2027.</td><td>L'alerte P1 disparaît (statut « Disparue », à confirmer par Driss), la modification est au journal.</td></tr>
+<tr><td>R10</td><td>Driss passe le seuil de surconsommation de 25 % à 5 %.</td><td>De nouvelles alertes P2 apparaissent (par exemple V02 à 11,9 pour 11). Le changement est au journal.</td></tr>
+<tr><td>R11</td><td>Reporter une alerte P2 sans motif.</td><td>Refusé : motif et date obligatoires.</td></tr>
+<tr><td colspan="3" style="background:var(--soft)"><b>Décisions humaines</b></td></tr>
+<tr><td>R12</td><td>Après l'import, regarder le statut de V03 et V12.</td><td>Toujours « En service » : aucune immobilisation automatique.</td></tr>
+<tr><td>R13</td><td>Driss immobilise V03 avec un motif.</td><td>Statut « Immobilisé », ligne au journal avec nom, date, heure et motif.</td></tr>
+<tr><td>R14</td><td>Préparer un brouillon pour C11.</td><td>Brouillon créé, aucun message envoyé. Seul Driss peut le valider.</td></tr>
+<tr><td>R15</td><td>Essayer de modifier ou effacer une ligne du journal.</td><td>Impossible, pour tous les profils.</td></tr>
+<tr><td colspan="3" style="background:var(--soft)"><b>Droits</b></td></tr>
+<tr><td>R16</td><td>Se connecter comme chef d'agence de Fès.</td><td>Seulement 4 véhicules, les conducteurs de Fès et 2 alertes (V22, C24).</td></tr>
+<tr><td>R17</td><td>Se connecter comme chef d'agence de Casablanca et ouvrir l'alerte V05.</td><td>Le véhicule est affiché, le nom du conducteur ne l'est pas.</td></tr>
+<tr><td>R18</td><td>Se connecter comme direction régionale.</td><td>Toutes les agences visibles, aucun numéro de téléphone, ni à l'écran ni dans l'export Excel.</td></tr>
+<tr><td>R19</td><td>Un chef d'agence essaie d'immobiliser un véhicule ou d'archiver une fiche.</td><td>Boutons absents ou inactifs.</td></tr>
+<tr><td colspan="3" style="background:var(--soft)"><b>Archivage, export, appareils</b></td></tr>
+<tr><td>R20</td><td>Driss archive C32.</td><td>C32 disparaît de la liste, reste visible avec le filtre « Archivés », historique intact.</td></tr>
+<tr><td>R21</td><td>Exporter les véhicules en Excel.</td><td>Fichier .xlsx ouvert sans erreur dans Excel, mêmes lignes et filtres qu'à l'écran.</td></tr>
+<tr><td>R22</td><td>Ouvrir l'application sur un téléphone, comme chef d'agence de Rabat-Salé.</td><td>Tableau de bord et 4 alertes lisibles sans zoom ; une réaffectation peut être proposée.</td></tr>
+<tr><td>R23</td><td>Ouvrir l'application dans Chrome et Edge sur ordinateur.</td><td>Tous les écrans s'affichent, sans rien installer.</td></tr>
+</tbody></table></div>
+
+<!-- ============ Lexique ============ -->
+<h2 id="lexique"><span class="n">·</span>Lexique</h2>
+<div class="tbl"><table>
+<thead><tr><th>Mot</th><th>En une phrase</th></tr></thead>
+<tbody>
+<tr><td>Navigateur web</td><td>Le programme qui ouvre les sites internet : Chrome, Edge, Safari.</td></tr>
+<tr><td>Front-end</td><td>La partie visible de l'application : les écrans et les boutons.</td></tr>
+<tr><td>Back-end</td><td>La partie invisible qui range les données et calcule les alertes.</td></tr>
+<tr><td>CSV</td><td>Un fichier tableau simple, colonnes séparées par des points-virgules, que l'on ouvre avec Excel.</td></tr>
+<tr><td>Table, champ</td><td>Une table est une liste de fiches du même genre ; un champ est une de ses colonnes.</td></tr>
+<tr><td>Champ calculé</td><td>Une valeur que l'application calcule elle-même à partir d'autres champs.</td></tr>
+<tr><td>Droits</td><td>Ce qu'une personne a le droit de voir et de faire, selon son profil.</td></tr>
+<tr><td>Archiver</td><td>Retirer une fiche des listes sans l'effacer, pour garder son historique.</td></tr>
+<tr><td>Journal</td><td>Le registre qui garde chaque décision et chaque modification, sans possibilité de l'effacer.</td></tr>
+<tr><td>VP, VUL</td><td>Véhicule particulier (voiture) ; véhicule utilitaire léger (fourgon jusqu'à 3,5 t).</td></tr>
+</tbody></table></div>
+
+<footer>
+  <p>Kaïna Distribution · Direction régionale Centre · Cahier des charges Kaïna Flotte, version 1 du 21/11/2026. Sources : brouillon de Yassine, « Règles de gestion de la flotte automobile » v2, exports M5_Parc_Vehicules_Kaina.csv et M5_Conducteurs_Kaina.csv du 16/11/2026. Document fictif créé pour l'atelier Challenge IA.</p>
+  <p>Projet — identité en cours de validation.</p>
+</footer>
+</div>
