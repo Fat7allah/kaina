@@ -1,0 +1,81 @@
+<!doctype html><html lang="fr"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Pitch jury audio</title>
+<style>
+:root{--cedre:#0F5C4A;--safran:#F2A900;--terre:#C4532D;--sable:#F6EFE3;--noir:#111}
+*{box-sizing:border-box;margin:0}body{font-family:Inter,Arial,sans-serif;background:var(--sable);color:var(--noir);padding:24px 16px 60px}
+.wrap{max-width:820px;margin:0 auto}header{display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap}
+header svg{height:44px;width:auto}h1{font-size:24px;color:var(--cedre)}
+.bar{position:sticky;top:0;background:var(--sable);padding:14px 0;margin-top:14px;z-index:2;border-bottom:2px solid #e5dccb}
+.ctl{display:flex;gap:10px;flex-wrap:wrap;align-items:center}
+button,select{font:inherit;font-size:16px;border-radius:12px;padding:12px 18px;border:0;cursor:pointer}
+.go{background:var(--cedre);color:#fff;font-weight:700}.stop{background:#fff;color:var(--cedre);border:2px solid var(--cedre)}
+select{background:#fff;border:2px solid #cfc6b6;padding:10px}
+.clock{font-size:34px;font-weight:800;color:var(--cedre);font-variant-numeric:tabular-nums;margin-left:auto}
+.track{height:10px;background:#e5dccb;border-radius:5px;margin-top:12px;position:relative;overflow:hidden}.fill{height:100%;width:0;background:var(--safran)}
+.sec{background:#fff;border-radius:16px;padding:18px 18px;margin-top:16px;border-left:8px solid #e5dccb}
+.sec.on{border-left-color:var(--safran)}.sec h2{font-size:17px;color:var(--terre);display:flex;justify-content:space-between;gap:10px}
+.sec h2 small{color:#555;font-weight:600}.sec p{font-size:19px;line-height:1.45;margin-top:8px;color:#444;transition:color .2s}
+.sec p.cur{color:var(--noir);font-weight:700;background:#fdf3d6;border-radius:6px;padding:2px 6px;margin-left:-6px}
+.sec .one{background:none;color:var(--cedre);padding:4px 0;font-size:14px;font-weight:700;text-decoration:underline}
+.note{font-size:13px;color:#555;margin-top:10px;line-height:1.5}
+.video{background:#fff;border-radius:16px;padding:14px;margin-top:16px}.video h2{font-size:17px;color:var(--terre);margin-bottom:10px;display:flex;justify-content:space-between;align-items:center;gap:10px}.video .frm{position:relative;width:100%;aspect-ratio:16/9;border-radius:10px;overflow:hidden;background:var(--cedre)}.video iframe{position:absolute;inset:0;width:100%;height:100%;border:0}.video a{font-size:14px;color:var(--cedre);font-weight:700}
+</style></head><body><div class="wrap">
+<header><svg viewBox="0 0 541 218" role="img" aria-label="Kaïna"><path d="M51.20,40.00 L51.20,171.20 M105.60,100.80 L57.60,142.40 M72.00,131.20 L108.80,171.20 M224.00,136.00 A35.20,35.20 0 1 1 153.60,136.00 A35.20,35.20 0 1 1 224.00,136.00 M224.00,100.80 L224.00,171.20 M265.60,100.80 L265.60,171.20 M307.20,171.20 L307.20,136.00 A35.20,35.20 0 0 1 377.60,136.00 L377.60,171.20 M489.60,136.00 A35.20,35.20 0 1 1 419.20,136.00 A35.20,35.20 0 1 1 489.60,136.00 M489.60,100.80 L489.60,171.20" fill="none" stroke="#0F5C4A" stroke-width="22.40" stroke-linecap="round" stroke-linejoin="round"/><circle cx="248.00" cy="62.40" r="13.12" fill="#F2A900"/><circle cx="283.20" cy="62.40" r="13.12" fill="#F2A900"/></svg><h1>Pitch jury · 3 minutes</h1></header>
+<div class="bar"><div class="ctl">
+<button class="go" id="play">▶ Écouter tout le pitch</button><button class="stop" id="stop">■ Arrêter</button>
+<select id="voice"></select><span class="clock" id="clock">0:00 / 3:00</span></div>
+<div class="track"><div class="fill" id="fill"></div></div>
+<p class="note" id="msg">La voix est celle de votre ordinateur (voix choisie : Eddy, français de France). Chaque partie démarre à son minutage prévu.</p></div>
+<div class="video" id="video"><h2><span>Vidéo du stand · 45 s en boucle</span><a href="Kaina_Video_Stand_45s.html" target="_blank">Ouvrir en plein écran (avec son)</a></h2><div class="frm"><iframe src="Kaina_Video_Stand_45s.html?son=0" title="Vidéo du stand Kaïna" loading="lazy"></iframe></div><p class="note">Muette ici pour ne pas couvrir la voix. Elle s'affiche pendant « Six et sept » du pitch.</p></div>
+<div id="secs"></div></div>
+<script>
+const SECS = [{"debut": "0:00", "fin": "0:20", "titre": "Le problème", "duree": 20, "phrases": ["Kaïna, c'est 14 000 points de vente.", "Mais notre marge opérationnelle, c'est 3,9 %.", "3,9 %. Ça veut dire une chose : on n'a pas droit à l'erreur.", "Pas d'erreur de chiffre. Pas d'erreur de livraison.", "Et pendant ce temps, nos épiciers testent des applications concurrentes."]}, {"debut": "0:20", "fin": "1:00", "titre": "L'erreur de l'IA que j'ai corrigée", "duree": 40, "phrases": ["On m'a remis une synthèse financière écrite par une IA. Jamais relue.", "Elle disait : Fès fait 11,97 milliards de dirhams.", "Le groupe entier fait 1,1 milliard.", "Une agence ne peut pas peser dix fois le groupe.", "J'ai cherché. Une erreur d'unité : des dirhams saisis à la place de milliers de dirhams.", "Même synthèse : « Agadir, l'agence la plus rentable, le modèle à suivre. »", "En vrai, Agadir a un EBITDA négatif six mois de suite.", "L'IA recommandait de copier notre agence en difficulté.", "J'ai fait contrôler le fichier ligne par ligne. Trois erreurs trouvées, trois corrigées.", "Ma règle depuis : l'IA propose, je vérifie la source."]}, {"debut": "1:00", "fin": "2:00", "titre": "Ce que j'ai livré", "duree": 60, "phrases": ["En une journée, sept livrables.", "Un. Une nouvelle marque. Le logo « Deux points ». Un brand book.", "Et un skill qui relit chaque message avant envoi : pas de chiffre inventé, pas de promesse.", "Deux. Une présentation au comité sur la commande en ligne.", "Ma reco : tester les pré-vendeurs avec WhatsApp avant de payer une application.", "Trois. Le reporting financier, contrôlé et corrigé, avec un tableau de bord.", "Marge brute réelle : 14,2 %. Pas 16,4 % comme disait l'IA.", "Quatre. Un agent qui prépare le flash COMEX et l'envoie par e-mail.", "Cinq. Une application de flotte, en ligne, pour Driss.", "Six et sept. La landing page du salon, sur téléphone, avec un seul bouton : être rappelé. Et la vidéo du stand.", "Et là aussi, j'ai retiré cinq affirmations non vérifiées. Dont « n°1 au Maroc »."]}, {"debut": "2:00", "fin": "2:40", "titre": "La démo", "duree": 40, "phrases": ["Voici Kaïna Flotte. 31 véhicules, 6 agences.", "Driss importe ses deux fichiers le lundi. Rien d'autre à faire.", "L'application calcule les alertes toute seule. Ici, 13 alertes.", "En rouge, les urgentes. Un permis expiré. Une assurance à régulariser.", "Ce bandeau : 5 véhicules ne doivent pas rouler aujourd'hui.", "Je clique sur une alerte. Je décide : valider, reporter ou escalader.", "Et on garde qui a décidé, et quand.", "Moins de camions en panne, plus de livraisons à l'heure."]}, {"debut": "2:40", "fin": "3:00", "titre": "Ma première action lundi", "duree": 20, "phrases": ["Lundi, 9 h, je suis avec Driss.", "Il importe ses fichiers. On traite ensemble les 5 alertes urgentes.", "Avant midi, chaque véhicule bloqué a un responsable et une date.", "Merci."]}];
+const SAY = t => t.replace(/EBITDA/g,'ébitda').replace(/n°1/g,'numéro un').replace(/9 h/g,'9 heures').replace(/« | »/g,'').replace(/ : /g,', ');
+const toS = m => { const [a,b] = m.split(':'); return +a*60 + +b; };
+const fmt = s => Math.floor(s/60)+':'+String(Math.floor(s%60)).padStart(2,'0');
+const box = document.getElementById('secs');
+SECS.forEach((s,i) => {
+  const d = document.createElement('div'); d.className='sec'; d.id='sec'+i;
+  d.innerHTML = `<h2><span>${s.debut} – ${s.fin} · ${s.titre}</span><small>${s.duree} s</small></h2>` +
+    s.phrases.map((p,j)=>`<p id="p${i}_${j}">${p}</p>`).join('') + `<button class="one" data-i="${i}">▶ Écouter cette partie seule</button>`;
+  box.appendChild(d);
+});
+const synth = window.speechSynthesis, sel = document.getElementById('voice');
+let voices = [];
+function loadVoices(){
+  voices = synth.getVoices().filter(v => v.lang && v.lang.toLowerCase().startsWith('fr'));
+  const pref = ['Eddy','Thomas','Amélie','Audrey','Aurélie','Google français','Denise','Henri'];
+  const score = v => { const i = pref.findIndex(p=>v.name.includes(p)); return (i<0?99:i)*2 + (v.lang.replace('_','-').toLowerCase()==='fr-fr'?0:1); };
+  voices.sort((a,b)=>score(a)-score(b));
+  sel.innerHTML = voices.map((v,i)=>`<option value="${i}">${v.name}</option>`).join('') || '<option>Voix par défaut</option>';
+  if(!voices.length) document.getElementById('msg').textContent = "Aucune voix française trouvée : installez-en une (Réglages Système › Accessibilité › Contenu énoncé), ou utilisez Chrome.";
+}
+loadVoices(); synth.onvoiceschanged = loadVoices;
+let run = 0, t0 = 0, timer = null, base = 0, total = 180;
+function speak(text, myRun){ return new Promise(res => {
+  if (myRun !== run) return res();
+  const u = new SpeechSynthesisUtterance(SAY(text)); u.lang='fr-FR'; u.rate = 0.98;
+  if (voices[sel.value]) u.voice = voices[sel.value];
+  u.onend = u.onerror = () => res(); synth.speak(u);
+});}
+const wait = ms => new Promise(r => setTimeout(r, ms));
+function mark(i,j){ document.querySelectorAll('.sec').forEach(e=>e.classList.toggle('on', e.id==='sec'+i)); document.querySelectorAll('.sec p').forEach(e=>e.classList.remove('cur'));
+  const p = document.getElementById(`p${i}_${j}`); if(p){p.classList.add('cur'); (p.textContent.startsWith('Six et sept') ? document.getElementById('video') : p).scrollIntoView({block:'center',behavior:'smooth'});} }
+function tickClock(){ const e = base + (performance.now()-t0)/1000; document.getElementById('clock').textContent = fmt(e)+' / '+fmt(total);
+  document.getElementById('fill').style.width = Math.min(100, e/total*100)+'%'; document.getElementById('clock').style.color = e > total ? 'var(--terre)' : 'var(--cedre)'; }
+async function play(from, to){
+  stop(); const myRun = ++run; base = toS(SECS[from].debut); total = to===SECS.length-1 ? 180 : toS(SECS[to].fin);
+  t0 = performance.now(); timer = setInterval(tickClock, 200);
+  for (let i = from; i <= to; i++) {
+    const startAt = (toS(SECS[i].debut) - base) * 1000;
+    const late = performance.now() - t0; if (late < startAt) await wait(startAt - late);
+    for (let j = 0; j < SECS[i].phrases.length; j++) { if (myRun !== run) return; mark(i,j); await speak(SECS[i].phrases[j], myRun); await wait(320); }
+  }
+  if (myRun === run) { tickClock(); clearInterval(timer); mark(-1,-1);
+    const e = (performance.now()-t0)/1000; document.getElementById('msg').textContent = `Terminé en ${fmt(e)} pour ${fmt(total-base)} prévues.`; }
+}
+function stop(){ run++; synth.cancel(); clearInterval(timer); }
+document.getElementById('play').onclick = () => play(0, SECS.length-1);
+document.getElementById('stop').onclick = () => { stop(); mark(-1,-1); };
+box.addEventListener('click', e => { const b = e.target.closest('.one'); if (b) play(+b.dataset.i, +b.dataset.i); });
+</script></body></html>

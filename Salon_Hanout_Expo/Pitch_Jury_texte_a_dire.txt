@@ -1,0 +1,47 @@
+[0:00 – 0:20] Le problème
+Kaïna, c'est 14 000 points de vente.
+Mais notre marge opérationnelle, c'est 3,9 %.
+3,9 %. Ça veut dire une chose : on n'a pas droit à l'erreur.
+Pas d'erreur de chiffre. Pas d'erreur de livraison.
+Et pendant ce temps, nos épiciers testent des applications concurrentes.
+
+[0:20 – 1:00] L'erreur de l'IA que j'ai corrigée
+On m'a remis une synthèse financière écrite par une IA. Jamais relue.
+Elle disait : Fès fait 11,97 milliards de dirhams.
+Le groupe entier fait 1,1 milliard.
+Une agence ne peut pas peser dix fois le groupe.
+J'ai cherché. Une erreur d'unité : des dirhams saisis à la place de milliers de dirhams.
+Même synthèse : « Agadir, l'agence la plus rentable, le modèle à suivre. »
+En vrai, Agadir a un EBITDA négatif six mois de suite.
+L'IA recommandait de copier notre agence en difficulté.
+J'ai fait contrôler le fichier ligne par ligne. Trois erreurs trouvées, trois corrigées.
+Ma règle depuis : l'IA propose, je vérifie la source.
+
+[1:00 – 2:00] Ce que j'ai livré
+En une journée, sept livrables.
+Un. Une nouvelle marque. Le logo « Deux points ». Un brand book.
+Et un skill qui relit chaque message avant envoi : pas de chiffre inventé, pas de promesse.
+Deux. Une présentation au comité sur la commande en ligne.
+Ma reco : tester les pré-vendeurs avec WhatsApp avant de payer une application.
+Trois. Le reporting financier, contrôlé et corrigé, avec un tableau de bord.
+Marge brute réelle : 14,2 %. Pas 16,4 % comme disait l'IA.
+Quatre. Un agent qui prépare le flash COMEX et l'envoie par e-mail.
+Cinq. Une application de flotte, en ligne, pour Driss.
+Six et sept. La landing page du salon, sur téléphone, avec un seul bouton : être rappelé. Et la vidéo du stand.
+Et là aussi, j'ai retiré cinq affirmations non vérifiées. Dont « n°1 au Maroc ».
+
+[2:00 – 2:40] La démo
+Voici Kaïna Flotte. 31 véhicules, 6 agences.
+Driss importe ses deux fichiers le lundi. Rien d'autre à faire.
+L'application calcule les alertes toute seule. Ici, 13 alertes.
+En rouge, les urgentes. Un permis expiré. Une assurance à régulariser.
+Ce bandeau : 5 véhicules ne doivent pas rouler aujourd'hui.
+Je clique sur une alerte. Je décide : valider, reporter ou escalader.
+Et on garde qui a décidé, et quand.
+Moins de camions en panne, plus de livraisons à l'heure.
+
+[2:40 – 3:00] Ma première action lundi
+Lundi, 9 h, je suis avec Driss.
+Il importe ses fichiers. On traite ensemble les 5 alertes urgentes.
+Avant midi, chaque véhicule bloqué a un responsable et une date.
+Merci.
