@@ -6,353 +6,350 @@
 <title>Kaïna Distribution · Hanout Expo</title>
 <meta name="description" content="Commandez à votre pré-vendeur Kaïna sur WhatsApp, 7 jours sur 7. Stand B12, Hanout Expo.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Inter:ital,wght@0,400;0,500;0,600;0,700;0,800;1,800&display=swap" rel="stylesheet">
 <style>
-:root{--cedre:#0F5C4A;--cedre-f:#0A4537;--safran:#F2A900;--terre:#C4532D;--sable:#F6EFE3;--sable-f:#EFE4D2;--noir:#111111;--blanc:#FFFFFF;--gris:#5A5A5A;--ligne:#E6DCCB}
+:root{--cedre:#0F5C4A;--cedre-f:#0A4537;--safran:#F2A900;--terre:#C4532D;--sable:#F6EFE3;--noir:#111111;--blanc:#FFFFFF;--gris:#5C5C5C;--ligne:#E8DFD0;--fond:#FAF7F2}
 *{box-sizing:border-box;margin:0;padding:0}
 html{scroll-behavior:smooth;background:var(--blanc)}
 body{font-family:Inter,Arial,sans-serif;color:var(--noir);background:var(--blanc);-webkit-font-smoothing:antialiased;overflow-x:hidden}
 a{color:inherit;text-decoration:none}
+img{display:block;max-width:100%}
 .wrap{max-width:1200px;margin:0 auto;padding:0 20px}
-.display{font-weight:900;text-transform:uppercase;letter-spacing:-.035em;line-height:.95}
-.display em{font-style:normal;color:var(--terre)}
-.logo{display:block;height:34px;width:auto}
+.eyebrow{display:inline-flex;align-items:center;gap:12px;font-size:12px;font-weight:700;letter-spacing:.18em;text-transform:uppercase;color:var(--noir)}
+.eyebrow:after,.center .eyebrow:before{content:"";width:34px;height:2px;background:var(--terre)}
+h2{font-size:clamp(30px,6vw,46px);font-weight:800;letter-spacing:-.03em;line-height:1.1;margin-top:12px}
+h2 em{font-style:italic;color:var(--cedre)}
+.center{text-align:center}
+.btn{display:inline-flex;align-items:center;gap:12px;border-radius:40px;padding:8px 8px 8px 22px;font-weight:700;font-size:14px;text-transform:uppercase;letter-spacing:.03em;border:2px solid var(--terre);background:var(--terre);color:var(--blanc);cursor:pointer;font-family:inherit;white-space:nowrap}
+.btn i{width:32px;height:32px;border-radius:50%;background:var(--blanc);color:var(--terre);display:grid;place-items:center;font-style:normal}
+.btn i svg{width:13px;height:13px}
+.btn.ghost{background:transparent;color:var(--noir)}.btn.ghost i{background:var(--noir);color:var(--blanc)}
+.btn.sm{padding:9px 18px;font-size:12.5px}
 
-/* Barre de navigation */
-.nav{position:sticky;top:0;z-index:20;background:rgba(255,255,255,.92);backdrop-filter:blur(10px);border-bottom:1px solid var(--ligne)}
-.nav .wrap{display:flex;align-items:center;justify-content:space-between;height:68px}
-.nav ul{display:none;list-style:none;gap:30px;font-size:14px;font-weight:600}
-.nav ul a:hover,.nav ul a.on{color:var(--terre)}
-.pill{display:inline-flex;align-items:center;gap:10px;background:var(--terre);color:var(--blanc);font-weight:700;font-size:14px;border-radius:40px;padding:10px 10px 10px 20px;border:0;cursor:pointer;font-family:inherit;white-space:nowrap}
-.pill i{display:grid;place-items:center;width:30px;height:30px;border-radius:50%;background:var(--blanc);color:var(--terre);font-style:normal}
-.pill i svg{width:14px;height:14px}
-.pill.sm{font-size:13px;padding:8px 18px}
+/* Navigation */
+.nav{position:sticky;top:0;z-index:30;background:rgba(255,255,255,.94);backdrop-filter:blur(10px);box-shadow:0 1px 0 var(--ligne)}
+.nav .wrap{display:flex;align-items:center;justify-content:space-between;height:70px;gap:20px}
+.nav .logo{width:92px;color:var(--cedre)}
+.nav ul{display:none;list-style:none;gap:28px;font-size:14px;font-weight:600}
+.nav ul a:hover{color:var(--terre)}
+.nav .act{display:flex;gap:10px;align-items:center}
+.nav .stand{display:none;font-size:13px;font-weight:700;color:var(--cedre)}
 
 /* Héros */
-.hero{background:radial-gradient(120% 90% at 0% 0%,#FBF6EE 0%,var(--sable) 45%,var(--sable-f) 100%);border-radius:0 0 36px 36px;position:relative;overflow:hidden}
-.hero .wrap{display:grid;gap:36px;padding-top:36px;padding-bottom:40px}
-.chip{display:inline-flex;align-items:center;gap:8px;background:var(--blanc);border-radius:30px;padding:7px 14px;font-size:11.5px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--cedre);box-shadow:0 1px 0 var(--ligne)}
-.chip b{width:8px;height:8px;border-radius:50%;background:var(--safran)}
-.hero h1{font-size:clamp(40px,10vw,76px);margin:22px 0 20px;color:var(--noir)}
-.hero p.lead{font-size:17px;line-height:1.55;max-width:470px;color:#2b2b2b}
-.hero .cta{display:flex;flex-wrap:wrap;align-items:center;gap:18px;margin-top:28px}
-.hero .cta small{font-size:13px;color:var(--gris)}
-.rail{display:none}
+.hero{position:relative;background:linear-gradient(180deg,#FBF8F3 0%,var(--sable) 100%);overflow:hidden;padding-bottom:70px}
 
-/* Mosaïque */
-.mosaic{display:grid;grid-template-columns:repeat(3,1fr);grid-auto-rows:96px;gap:10px}
-.tile{border-radius:16px;overflow:hidden;position:relative;display:flex;flex-direction:column;justify-content:flex-end;padding:12px;color:var(--blanc)}
-.tile .n{font-weight:900;font-size:26px;white-space:nowrap;letter-spacing:-.03em;line-height:1}
-.tile .l{font-size:11px;font-weight:600;margin-top:4px;opacity:.9;line-height:1.25}
-.tile svg.ico{position:absolute;top:12px;left:12px;width:30px;height:30px}
-.t-cedre{background:var(--cedre)}.t-terre{background:var(--terre)}.t-safran{background:var(--safran);color:var(--noir)}.t-wide{grid-column:span 2}
-.t-blanc{background:var(--blanc);color:var(--noir);box-shadow:inset 0 0 0 1px var(--ligne)}.t-noir{background:var(--noir)}
-.t-big{grid-column:2/4;grid-row:1/3;background:var(--cedre);padding:14px;justify-content:center;align-items:center}
-.chat{width:100%;max-width:260px;background:var(--sable);border-radius:18px;padding:10px;color:var(--noir)}
-.chat .top{display:flex;align-items:center;gap:8px;font-size:12px;font-weight:700;padding:2px 4px 8px;border-bottom:1px solid var(--ligne);margin-bottom:6px}
-.chat .top span{width:22px;height:22px;border-radius:50%;background:var(--cedre);display:grid;place-items:center}
-.chat .top span i{width:4px;height:4px;border-radius:50%;background:var(--safran);margin:0 1px;display:inline-block}
-.bub{font-size:11.5px;line-height:1.35;padding:7px 10px;border-radius:12px;margin:5px 0;max-width:88%}
-.bub.me{background:#D7EADF;margin-left:auto;border-bottom-right-radius:4px}
-.bub.kn{background:var(--blanc);border-bottom-left-radius:4px}
-.dots{display:flex;gap:5px;position:absolute;top:12px;right:12px}.dots i{width:9px;height:9px;border-radius:50%;background:var(--safran)}
+.hero .wrap{position:relative;display:grid;gap:26px;padding-top:40px}
+.hero h1{font-size:clamp(38px,8vw,60px);font-weight:800;letter-spacing:-.035em;line-height:1.02}
+.band{display:inline-flex;align-items:center;gap:14px;margin-top:10px}
+.speed{display:grid;gap:6px}.speed i{display:block;height:6px;border-radius:4px;background:var(--safran)}
+.speed i:nth-child(1){width:30px}.speed i:nth-child(2){width:46px}.speed i:nth-child(3){width:22px}
+.band b{white-space:nowrap;font-size:.8em;background:var(--cedre);color:var(--blanc);font-style:italic;font-weight:800;text-transform:uppercase;letter-spacing:-.02em;padding:.08em .5em .12em;border-radius:.35em;transform:skewX(-6deg);display:inline-block;box-shadow:0 10px 24px rgba(15,92,74,.25)}
+.hero p.lead{font-size:17px;line-height:1.6;max-width:460px;margin-top:22px;color:#2c2c2c}
+.hero .ctas{display:flex;flex-wrap:wrap;gap:12px;margin-top:26px}
+.hero .pilot{font-size:13px;color:var(--gris);margin-top:16px}
+.hero .img{position:relative}
+.hero .img img{width:100%;filter:drop-shadow(0 24px 30px rgba(17,17,17,.12))}
+.swoosh{position:absolute;left:0;right:0;bottom:0;height:110px;pointer-events:none}
 
-/* Bandeau confiance */
-.trust{padding:30px 0 8px}
-.trust .t{display:flex;align-items:center;gap:14px;font-size:11.5px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--gris);text-align:center}
-.trust .t:before,.trust .t:after{content:"";flex:1;height:1px;background:var(--ligne)}
-.cities{display:flex;flex-wrap:wrap;justify-content:center;gap:10px 26px;margin-top:18px}
-.cities span{font-weight:800;font-size:17px;letter-spacing:-.02em;color:#9C9C9C}
+/* Atouts */
+.atouts{background:var(--fond)}
+.atouts .wrap{display:grid;grid-template-columns:1fr 1fr;gap:26px 18px;padding-top:34px;padding-bottom:40px}
+.atout{display:grid;gap:10px;align-content:start}
+.atout .ic{width:54px;height:54px;border-radius:50%;background:#E5EFEB;display:grid;place-items:center}
+.atout .ic svg{width:26px;height:26px}
+.atout h3{font-size:16px;font-weight:700}
+.atout p{font-size:13px;line-height:1.5;color:var(--gris)}
 
-/* Sections */
-section{padding:56px 0}
-.head{display:grid;gap:14px;margin-bottom:28px}
-.head h2{font-size:clamp(32px,7vw,52px)}
-.head p{font-size:15.5px;line-height:1.6;color:#3a3a3a;max-width:440px}
-.center{text-align:center}.center .head{justify-items:center}
+section{padding:64px 0}
+.lead2{font-size:15px;color:var(--gris);margin-top:12px;line-height:1.6}
 
-.cards{display:grid;gap:14px}
-.card{border-radius:22px;padding:24px;min-height:250px;position:relative;overflow:hidden;display:flex;flex-direction:column}
-.card h3{padding-right:44px;font-size:21px;font-weight:800;letter-spacing:-.02em}
-.card p{font-size:14px;line-height:1.5;margin-top:8px;max-width:290px}
-.card .go{position:absolute;top:20px;right:20px;width:34px;height:34px;border-radius:50%;display:grid;place-items:center;background:var(--terre);color:var(--blanc)}
-.card .go svg{width:14px;height:14px}
-.card .art{margin-top:auto;padding-top:20px;display:flex;justify-content:center}
-.c-gris{background:#F3F1EC}.c-cedre{background:var(--cedre);color:var(--blanc)}.c-sable{background:var(--sable)}
-.c-cedre p{opacity:.9}
+/* Étapes */
+.steps{display:grid;gap:22px;margin-top:40px;position:relative}
+.step{background:var(--blanc);border-radius:120px 120px 30px 30px;padding:30px 24px 30px;text-align:center;box-shadow:0 16px 40px rgba(17,17,17,.07);border-bottom:4px solid var(--terre);position:relative}
+.step .num{position:absolute;top:-34px;left:50%;transform:translateX(-50%);font-size:64px;font-weight:800;color:#F0E9DD;z-index:-1;letter-spacing:-.04em}
+.step .ic{width:78px;height:78px;border-radius:50%;background:var(--cedre);display:grid;place-items:center;margin:0 auto 18px;box-shadow:0 0 0 10px #E5EFEB}
+.step .ic svg{width:34px;height:34px}
+.step h3{font-size:18px;font-weight:800}
+.step p{font-size:13.5px;line-height:1.55;color:var(--gris);margin-top:8px}
 
-/* Panneau segments */
-.panel{background:var(--sable);border-radius:36px;padding:56px 0}
-.seg{background:var(--blanc);border-radius:22px;padding:28px 22px 24px;text-align:center;display:flex;flex-direction:column;align-items:center}
-.seg h3{font-size:22px;font-weight:800;letter-spacing:-.02em}
-.seg p{font-size:14px;color:var(--gris);margin-top:6px}
-.seg .tag{margin-top:16px;display:inline-flex;align-items:center;gap:8px;border:1.5px solid var(--terre);color:var(--terre);border-radius:30px;padding:6px 8px 6px 16px;font-size:11.5px;font-weight:800;letter-spacing:.05em;text-transform:uppercase}
-.seg .tag i{width:22px;height:22px;border-radius:50%;background:var(--terre);color:var(--blanc);display:grid;place-items:center}
-.seg .tag i svg{width:10px;height:10px}
-.seg.hl{box-shadow:0 18px 40px rgba(15,92,74,.14);transform:translateY(-8px)}
-.seg.hl .tag{background:var(--terre);color:var(--blanc)}.seg.hl .tag i{background:var(--blanc);color:var(--terre)}
-.seg svg.big{width:150px;height:150px;margin-top:22px}
+/* Clients (cartes images) */
+.clients{background:var(--fond)}
+.clients .top{display:grid;gap:14px}
+.grid4{display:grid;gap:16px;margin-top:34px}
+.cc{background:var(--blanc);border-radius:18px;overflow:hidden;box-shadow:0 10px 30px rgba(17,17,17,.06);display:flex;flex-direction:column;position:relative}
+.cc img{aspect-ratio:4/3;object-fit:cover;width:100%}
+.cc .flag{position:absolute;top:12px;left:12px;background:var(--terre);color:var(--blanc);font-size:11px;font-weight:700;padding:5px 10px;border-radius:6px}
+.cc .body{padding:30px 20px 18px;position:relative;flex:1;display:flex;flex-direction:column}
+.cc .badge{position:absolute;top:-24px;right:18px;width:48px;height:48px;border-radius:50%;background:var(--cedre);display:grid;place-items:center;box-shadow:0 0 0 5px var(--blanc)}
+.cc .badge svg{width:22px;height:22px}
+.cc h3{font-size:17px;font-weight:800}
+.cc p{font-size:13px;line-height:1.5;color:var(--gris);margin-top:6px;flex:1}
+.cc .more{display:flex;align-items:center;justify-content:space-between;margin-top:16px;padding-top:14px;border-top:1px solid var(--ligne);font-size:12px;font-weight:800;letter-spacing:.06em;text-transform:uppercase;color:var(--terre)}
+.cc .more i{width:28px;height:28px;border-radius:50%;border:1.5px solid var(--terre);display:grid;place-items:center}
+.cc .more i svg{width:11px;height:11px}
+.cc.hl .more i{background:var(--terre);color:var(--blanc)}
 
-/* Offre + formulaire */
-.duo{display:grid;gap:16px}
-.offre{background:var(--terre);color:var(--blanc);border-radius:26px;padding:34px 28px;position:relative;overflow:hidden;display:flex;flex-direction:column;justify-content:flex-end;min-height:340px}
-.offre:before{content:"";position:absolute;right:-60px;top:-60px;width:260px;height:260px;border-radius:50%;background:rgba(255,255,255,.08)}
-.offre .k{font-size:12px;font-weight:800;letter-spacing:.1em;text-transform:uppercase;opacity:.9}
-.offre .big{font-weight:900;font-size:clamp(84px,20vw,150px);letter-spacing:-.05em;line-height:.9;margin:10px 0 8px}
-.offre p{font-size:17px;line-height:1.45;max-width:380px}
-.offre small{display:block;font-size:12.5px;opacity:.85;margin-top:12px}
-.form{background:var(--blanc);border-radius:26px;padding:30px 24px;box-shadow:0 0 0 1px var(--ligne),0 20px 50px rgba(17,17,17,.06)}
-.form h3{font-size:26px;font-weight:900;letter-spacing:-.03em;text-transform:uppercase;line-height:1}
-.form h3 em{font-style:normal;color:var(--terre)}
-.form .sub{font-size:14px;color:var(--gris);margin-top:8px}
+/* Bandeau ville */
+.ville{position:relative;height:clamp(220px,38vw,520px);background:url(visuels/kaina-ville.svg) center/cover no-repeat}
+.ville:before,.ville:after{content:"";position:absolute;left:0;right:0;height:60px}
+.ville:before{top:-1px;background:linear-gradient(to bottom right,var(--fond) 50%,transparent 50.5%)}
+.ville:after{bottom:-1px;background:linear-gradient(to top left,var(--blanc) 50%,transparent 50.5%)}
+
+/* Agences */
+.agences .box{margin-top:34px;border-radius:24px;background:linear-gradient(135deg,#F3EEE5,#FBF8F3);padding:18px;display:grid;gap:18px;position:relative;overflow:hidden}
+.list{background:var(--blanc);border-radius:16px;padding:10px;box-shadow:0 10px 30px rgba(17,17,17,.06);display:grid;gap:4px;align-content:start}
+.list button{all:unset;cursor:pointer;display:flex;align-items:center;gap:10px;padding:11px 12px;border-radius:10px;font-size:13px;font-weight:700;text-transform:uppercase;letter-spacing:.04em}
+.list button svg{width:14px;height:16px;flex:none}
+.list button:nth-child(even){background:#F7F4EF}
+.list button.on{background:#FCE9E1;color:var(--terre)}
+.map{position:relative;min-height:380px}
+.map svg.pays{position:absolute;inset:0;width:100%;height:100%}
+.pin{cursor:pointer}
+.pin circle.halo{fill:var(--safran);opacity:.25}
+.pin.on circle.halo{fill:var(--terre);opacity:.3}
+.pin.on path{fill:var(--terre)}
+.info{position:absolute;right:12px;top:12px;background:var(--blanc);border-radius:14px;padding:14px 16px;box-shadow:0 14px 34px rgba(17,17,17,.12);width:210px}
+.info b{display:block;font-size:17px;font-weight:800}
+.info span{display:flex;gap:8px;font-size:12.5px;color:var(--gris);margin-top:8px;line-height:1.4}
+.info span:before{content:"";flex:none;width:8px;height:8px;border-radius:50%;background:var(--terre);margin-top:4px}
+
+/* Appel à l'action */
+.cta{position:relative;margin-top:10px}
+.cta .card{position:relative;border-radius:26px;overflow:hidden;background:linear-gradient(120deg,#E8F1ED 0%,#F6EFE3 60%,#F9E6DC 100%);padding:34px 24px 0;display:grid;gap:10px}
+
+.cta .txt{position:relative}
+.cta h2{font-size:clamp(34px,7vw,56px)}
+.cta .off{display:flex;align-items:baseline;gap:12px;margin-top:14px;flex-wrap:wrap}
+.cta .off b{font-size:clamp(56px,13vw,92px);font-weight:800;letter-spacing:-.05em;color:var(--terre);line-height:.9}
+.cta .off span{font-size:16px;font-weight:600;max-width:240px;line-height:1.35}
+.cta small{display:block;font-size:12.5px;color:var(--gris);margin:10px 0 20px}
+.cta .van{position:relative;align-self:end;margin:0 -10px -6px}
+
+/* Formulaire */
+.rappel .wrap{display:grid;gap:18px}
+.form{background:var(--blanc);border-radius:22px;padding:28px 22px;box-shadow:0 0 0 1px var(--ligne),0 20px 50px rgba(17,17,17,.06)}
+.form h3{font-size:24px;font-weight:800;letter-spacing:-.02em}
+.form h3 em{font-style:italic;color:var(--cedre)}
+.form .sub{font-size:14px;color:var(--gris);margin-top:6px}
 .fields{display:grid;gap:12px;margin-top:20px}
 label{display:block;font-size:12.5px;font-weight:700;margin-bottom:6px}
 input{width:100%;padding:13px 14px;border:1.5px solid var(--ligne);border-radius:12px;font:inherit;font-size:15px;background:#FBF8F3;color:var(--noir)}
 input:focus{outline:none;border-color:var(--cedre);background:var(--blanc)}
-.form .pill{width:100%;justify-content:space-between;margin-top:18px;font-size:15px;padding:12px 12px 12px 22px}
-.form .pill i{width:34px;height:34px}
+.form .btn{width:100%;justify-content:space-between;margin-top:18px}
 .note{font-size:11.5px;color:var(--gris);margin-top:12px;line-height:1.45}
-
-/* Chiffres */
-.stats{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}
-.stat{border-radius:20px;padding:22px 12px;text-align:center;background:#F3F1EC}
-.stat b{display:block;font-weight:900;font-size:clamp(28px,6vw,52px);letter-spacing:-.04em;color:var(--cedre);line-height:1}
-.stat span{display:block;font-size:12.5px;font-weight:600;margin-top:8px;color:#3a3a3a;line-height:1.3}
+.qr{background:var(--cedre);color:var(--blanc);border-radius:22px;padding:26px 22px;display:grid;gap:16px;align-content:start;justify-items:start}
+.qr img{width:170px;border-radius:14px;background:#fff;padding:6px}
+.qr h3{font-size:20px;font-weight:800}
+.qr p{font-size:14px;opacity:.9;line-height:1.5}
+.qr ul{list-style:none;display:grid;gap:8px;font-size:14px}
+.qr li{display:flex;gap:10px}.qr li:before{content:"";width:8px;height:8px;border-radius:50%;background:var(--safran);margin-top:6px;flex:none}
 
 /* Pied de page */
-footer{background:var(--noir);color:#D9D9D9;border-radius:36px 36px 0 0;margin-top:20px;position:relative;overflow:hidden}
-footer .wrap{display:grid;gap:34px;padding-top:48px;padding-bottom:26px;position:relative}
-footer h4{color:var(--blanc);font-size:16px;font-weight:700;margin-bottom:14px}
-footer h4:after{content:"";display:block;width:28px;height:2px;background:var(--terre);margin-top:8px}
+footer{position:relative;background:var(--noir);color:#CFCFCF;margin-top:40px}
+footer .sw{position:absolute;left:0;right:0;top:-60px;height:62px}
+footer .wrap{display:grid;gap:30px;padding-top:50px;padding-bottom:24px}
+footer .about p{font-size:13.5px;line-height:1.6;margin-top:14px;max-width:280px}
+footer .logo{width:110px;color:var(--sable)}
+footer h4{color:var(--blanc);font-size:16px;font-weight:700}
+footer h4:after{content:"";display:block;width:30px;height:2px;background:var(--terre);margin:10px 0 14px}
 footer ul{list-style:none;display:grid;gap:9px;font-size:13.5px}
-footer .mid{text-align:center;display:flex;flex-direction:column;align-items:center;gap:14px}
-footer .mid .logo{height:52px}
-footer .mid p{font-size:14px;color:var(--blanc);font-weight:600}
-footer .bottom{grid-column:1/-1;border-top:1px solid #2a2a2a;padding-top:18px;display:flex;flex-wrap:wrap;justify-content:space-between;gap:8px;font-size:12px;color:#9a9a9a}
-.wm{position:absolute;left:50%;bottom:-120px;transform:translateX(-50%);width:520px;opacity:.06;pointer-events:none}
+footer .bottom{border-top:1px solid #2b2b2b;padding-top:18px;display:flex;flex-wrap:wrap;justify-content:space-between;gap:8px;font-size:12px;color:#8d8d8d}
+.cols{display:grid;grid-template-columns:1fr 1fr;gap:26px}
 
 @media (min-width:760px){
-  .cards{grid-template-columns:repeat(3,1fr)}
-  .segs{grid-template-columns:repeat(3,1fr)}
-  .duo{grid-template-columns:1fr 1fr}
-  footer .wrap{grid-template-columns:1fr 1.2fr 1fr}
-  footer .mid{border-left:1px solid #2a2a2a;border-right:1px solid #2a2a2a}
+  .atouts .wrap{grid-template-columns:repeat(4,1fr)}
+  .atout{border-left:1px solid var(--ligne);padding-left:20px}
+  .steps{grid-template-columns:repeat(3,1fr);gap:40px}
+  .steps:before{content:"";position:absolute;left:16%;right:16%;top:-8px;border-top:2px dashed #D8CCB8}
+  .grid4{grid-template-columns:repeat(2,1fr)}
+  .agences .box{grid-template-columns:240px 1fr;padding:26px}
+  .map{min-height:440px}
+  .rappel .wrap{grid-template-columns:1.5fr 1fr}
+  .fields{grid-template-columns:1fr 1fr}
+  .cols{grid-template-columns:repeat(3,1fr)}
 }
 @media (min-width:1000px){
   .wrap{padding:0 40px}
-  .nav ul{display:flex}
-  .hero .wrap{grid-template-columns:1fr 1.08fr;align-items:center;padding-top:56px;padding-bottom:64px;padding-left:96px}
-  .rail{display:flex;position:absolute;left:34px;top:60px;bottom:60px;flex-direction:column;align-items:center;gap:14px;color:var(--gris)}
-  .rail .v{writing-mode:vertical-rl;font-size:11px;font-weight:700;letter-spacing:.2em;text-transform:uppercase;margin-top:auto}
-  .rail .bar{width:1.5px;height:60px;background:var(--terre)}
-  .rail .d{width:8px;height:8px;border-radius:50%;background:var(--safran)}
-  .mosaic{grid-auto-rows:118px;gap:12px}
-  .tile .n{font-size:30px}.tile .l{font-size:12px}
-  .head{grid-template-columns:1.1fr 1fr;align-items:end;gap:40px}
-  .center .head{grid-template-columns:1fr}
-  section{padding:84px 0}
-  .panel{padding:76px 0}
-  .card{min-height:320px;padding:28px}
-  .offre{padding:44px}
-  .form{padding:40px 38px}
-  .fields{grid-template-columns:1fr 1fr}
-  .stat{padding:34px 16px}
+  .nav ul{display:flex}.nav .stand{display:inline}
+  .hero .wrap{grid-template-columns:.95fr 1.05fr;align-items:center;padding-top:60px}
+  .hero{padding-bottom:110px}
+  .grid4{grid-template-columns:repeat(4,1fr)}
+  .clients .top{grid-template-columns:1fr 1fr;align-items:end}
+  section{padding:90px 0}
+  .cta .card{grid-template-columns:1fr 1.1fr;padding:56px 0 0 56px;align-items:center}
+  .cta .van{margin:0 -30px -8px 0}
+  .form{padding:38px 36px}
+  footer .wrap{grid-template-columns:1.2fr 2fr;padding-top:70px}
+  footer .bottom{grid-column:1/-1}
 }
 </style>
 </head>
 <body>
 
 <svg width="0" height="0" style="position:absolute" aria-hidden="true">
-  <symbol id="logo" viewBox="0 0 541 218"><path d="M51.20,40.00 L51.20,171.20 M105.60,100.80 L57.60,142.40 M72.00,131.20 L108.80,171.20 M224.00,136.00 A35.20,35.20 0 1 1 153.60,136.00 A35.20,35.20 0 1 1 224.00,136.00 M224.00,100.80 L224.00,171.20 M265.60,100.80 L265.60,171.20 M307.20,171.20 L307.20,136.00 A35.20,35.20 0 0 1 377.60,136.00 L377.60,171.20 M489.60,136.00 A35.20,35.20 0 1 1 419.20,136.00 A35.20,35.20 0 1 1 489.60,136.00 M489.60,100.80 L489.60,171.20" fill="none" stroke="currentColor" stroke-width="22.40" stroke-linecap="round" stroke-linejoin="round"/><circle cx="248.00" cy="62.40" r="13.12" fill="#F2A900"/><circle cx="283.20" cy="62.40" r="13.12" fill="#F2A900"/></symbol>
-  <symbol id="fleche" viewBox="0 0 16 16"><path d="M4 12 12 4M5.5 4H12v6.5" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+  <symbol id="logo" viewBox="40 40 461 143"><path d="M51.20,40.00 L51.20,171.20 M105.60,100.80 L57.60,142.40 M72.00,131.20 L108.80,171.20 M224.00,136.00 A35.20,35.20 0 1 1 153.60,136.00 A35.20,35.20 0 1 1 224.00,136.00 M224.00,100.80 L224.00,171.20 M265.60,100.80 L265.60,171.20 M307.20,171.20 L307.20,136.00 A35.20,35.20 0 0 1 377.60,136.00 L377.60,171.20 M489.60,136.00 A35.20,35.20 0 1 1 419.20,136.00 A35.20,35.20 0 1 1 489.60,136.00 M489.60,100.80 L489.60,171.20" fill="none" stroke="currentColor" stroke-width="22.40" stroke-linecap="round" stroke-linejoin="round"/><circle cx="248.00" cy="62.40" r="13.12" fill="#F2A900"/><circle cx="283.20" cy="62.40" r="13.12" fill="#F2A900"/></symbol>
+  <symbol id="fl" viewBox="0 0 16 16"><path d="M4 12 12 4M5.5 4H12v6.5" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+  <symbol id="pin" viewBox="0 0 14 16"><path d="M7 15s5-4.6 5-8.5A5 5 0 0 0 2 6.5C2 10.4 7 15 7 15z" fill="currentColor"/><circle cx="7" cy="6.5" r="1.8" fill="#fff"/></symbol>
 </svg>
 
 <header class="nav">
   <div class="wrap">
-    <a href="#" aria-label="Kaïna Distribution"><svg class="logo" style="color:var(--cedre);width:84px" viewBox="0 0 541 218"><use href="#logo"/></svg></a>
+    <a href="#" aria-label="Kaïna Distribution"><svg class="logo" viewBox="0 0 461 143"><use href="#logo"/></svg></a>
     <ul>
-      <li><a class="on" href="#">Accueil</a></li>
       <li><a href="#service">Le service</a></li>
+      <li><a href="#etapes">Comment ça marche</a></li>
       <li><a href="#clients">Nos clients</a></li>
-      <li><a href="#offre">L'offre salon</a></li>
+      <li><a href="#agences">Nos agences</a></li>
     </ul>
-    <a class="pill sm" href="#rappel">Être rappelé</a>
+    <div class="act"><span class="stand">Stand B12</span><a class="btn sm" href="#rappel">Être rappelé</a></div>
   </div>
 </header>
 
 <div class="hero">
-  <div class="rail" aria-hidden="true"><span class="d"></span><span class="bar"></span><span class="v">Défiler</span></div>
   <div class="wrap">
     <div>
-      <span class="chip"><b></b>Stand B12 · Hanout Expo</span>
-      <h1 class="display">Commandez à votre pré‑vendeur <em>sur WhatsApp</em></h1>
-      <p class="lead">Un message suffit, 7 jours sur 7. Votre pré-vendeur Kaïna prépare votre commande.</p>
-      <div class="cta">
-        <a class="pill" href="#rappel">Être rappelé par un pré-vendeur <i><svg><use href="#fleche"/></svg></i></a>
-        <small>Pilote en cours à Casablanca et Rabat-Salé.</small>
+      <h1>Commandez à votre pré&#8209;vendeur<br><span class="band"><span class="speed" aria-hidden="true"><i></i><i></i><i></i></span><b>sur WhatsApp</b></span></h1>
+      <p class="lead">Un message suffit, 7 jours sur 7. Votre pré-vendeur Kaïna prépare votre commande, et votre agence vous livre comme d'habitude.</p>
+      <div class="ctas">
+        <a class="btn" href="#rappel">Être rappelé <i><svg><use href="#fl"/></svg></i></a>
+        <a class="btn ghost" href="#offre">L'offre du salon <i><svg><use href="#fl"/></svg></i></a>
       </div>
+      <p class="pilot">Pilote en cours à Casablanca et Rabat-Salé · Stand B12, Hanout Expo</p>
     </div>
+    <div class="img"><img src="visuels/kaina-hero-livraison.svg" alt="Livreur Kaïna devant un fourgon Kaïna, un carton Kaïna à la main" width="760" height="520"></div>
+  </div>
+  <svg class="swoosh" viewBox="0 0 1440 110" preserveAspectRatio="none" aria-hidden="true"><path d="M0 40 Q720 120 1440 20 V110 H0Z" fill="#FAF7F2"/><path d="M0 40 Q720 120 1440 20" stroke="#C4532D" stroke-width="10" fill="none"/><path d="M0 56 Q720 136 1440 36" stroke="#F2A900" stroke-width="4" fill="none"/></svg>
+</div>
 
-    <div class="mosaic" aria-label="Kaïna en bref">
-      <div class="tile t-terre">
-        <svg class="ico" viewBox="0 0 32 32" fill="none" stroke="#fff" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 13h24M6 13v14h20V13M4 13l3-7h18l3 7"/><path d="M13 27v-7h6v7"/></svg>
-        <span class="l">Épiceries de quartier</span>
-      </div>
-      <div class="tile t-big">
-        <span class="dots"><i></i><i></i></span>
-        <div class="chat">
-          <div class="top"><span><i></i><i></i></span>Votre pré-vendeur Kaïna</div>
-          <div class="bub me">Bonjour, 2 cartons d'huile et 1 pack d'eau svp</div>
-          <div class="bub kn">Bien reçu, c'est noté pour votre commerce.</div>
-        </div>
-      </div>
-      <div class="tile t-safran"><span class="n">7j/7</span><span class="l">sur WhatsApp</span></div>
-      <div class="tile t-blanc"><span class="n" style="color:var(--cedre)">14 000</span><span class="l">points de vente</span></div>
-      <div class="tile t-cedre">
-        <svg class="ico" viewBox="0 0 32 32" fill="none" stroke="#F6EFE3" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 13h15v6a6 6 0 0 1-6 6h-3a6 6 0 0 1-6-6z"/><path d="M22 15h2a3 3 0 0 1 0 6h-2M12 9c0-2 2-2 2-4M16 9c0-2 2-2 2-4"/></svg>
-        <span class="l">Cafés-hôtels-restaurants</span>
-      </div>
-      <div class="tile t-noir"><span class="n" style="color:var(--safran)">6</span><span class="l">agences au Maroc</span></div>
-      <div class="tile t-terre"><span class="n">2004</span><span class="l">fondée à Casablanca</span></div>
-      <div class="tile t-blanc t-wide">
-        <svg class="ico" viewBox="0 0 32 32" fill="none" stroke="#C4532D" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 6h4l3 14h15l3-10H9"/><circle cx="12" cy="25" r="2"/><circle cx="23" cy="25" r="2"/></svg>
-        <span class="l">Moyennes et grandes surfaces</span>
-      </div>
-    </div>
+<div class="atouts" id="service">
+  <div class="wrap">
+    <div class="atout"><span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="#0F5C4A" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12a8 8 0 0 1-11.6 7.1L4 20l1-4.9A8 8 0 1 1 21 12z"/><path d="M9 10h6M9 14h4"/></svg></span><h3>Un message suffit</h3><p>Commandez sur WhatsApp, 7 jours sur 7.</p></div>
+    <div class="atout"><span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="#0F5C4A" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="4"/><path d="M4 21a8 8 0 0 1 16 0"/></svg></span><h3>Votre pré-vendeur</h3><p>Il connaît votre commerce et prépare votre commande.</p></div>
+    <div class="atout"><span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="#0F5C4A" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 21s7-6 7-11a7 7 0 0 0-14 0c0 5 7 11 7 11z"/><circle cx="12" cy="10" r="2.5"/></svg></span><h3>6 agences</h3><p>Casablanca, Rabat-Salé, Tanger, Fès, Marrakech, Agadir.</p></div>
+    <div class="atout"><span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="#0F5C4A" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 10h18M5 10v10h14V10M3 10l2-5h14l2 5"/><path d="M10 20v-5h4v5"/></svg></span><h3>14 000 points de vente</h3><p>Servis par Kaïna Distribution depuis 2004.</p></div>
   </div>
 </div>
 
-<div class="trust">
-  <div class="wrap">
-    <p class="t">Nos 6 agences au Maroc</p>
-    <div class="cities"><span>Casablanca</span><span>Rabat-Salé</span><span>Tanger</span><span>Fès</span><span>Marrakech</span><span>Agadir</span></div>
-  </div>
-</div>
-
-<section id="service">
-  <div class="wrap">
-    <div class="head">
-      <h2 class="display">Votre commande. <em>Un seul message.</em></h2>
-      <p>Plus besoin d'attendre le passage en magasin pour passer commande : écrivez à votre pré-vendeur quand vous en avez besoin, il s'occupe du reste.</p>
-    </div>
-    <div class="cards">
-      <article class="card c-gris">
-        <span class="go"><svg><use href="#fleche"/></svg></span>
-        <h3>1. Vous écrivez</h3>
-        <p>Un message WhatsApp à votre pré-vendeur, 7 jours sur 7.</p>
-        <div class="art">
-          <svg width="150" height="120" viewBox="0 0 150 120" fill="none"><rect x="40" y="6" width="70" height="112" rx="14" fill="#111"/><rect x="45" y="16" width="60" height="92" rx="8" fill="#F6EFE3"/><rect x="58" y="30" width="40" height="14" rx="7" fill="#D7EADF"/><rect x="52" y="52" width="34" height="14" rx="7" fill="#fff"/><rect x="64" y="74" width="34" height="14" rx="7" fill="#D7EADF"/><circle cx="66" cy="11" r="1.5" fill="#444"/></svg>
-        </div>
-      </article>
-      <article class="card c-cedre">
-        <span class="go"><svg><use href="#fleche"/></svg></span>
-        <h3>2. Votre pré-vendeur prépare</h3>
-        <p>Il connaît votre commerce et prépare votre commande.</p>
-        <div class="art">
-          <svg width="170" height="120" viewBox="0 0 170 120" fill="none"><rect x="20" y="40" width="58" height="70" rx="6" fill="#C4532D"/><rect x="20" y="40" width="58" height="12" fill="#A84626"/><rect x="88" y="58" width="62" height="52" rx="6" fill="#F2A900"/><rect x="88" y="58" width="62" height="10" fill="#D99700"/><rect x="50" y="10" width="54" height="34" rx="6" fill="#F6EFE3"/><path d="M60 27l7 7 14-14" stroke="#0F5C4A" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/></svg>
-        </div>
-      </article>
-      <article class="card c-sable">
-        <span class="go"><svg><use href="#fleche"/></svg></span>
-        <h3>3. Votre agence vous sert</h3>
-        <p>La commande part de votre agence Kaïna, comme d'habitude.</p>
-        <div class="art">
-          <svg width="190" height="110" viewBox="0 0 190 110" fill="none"><rect x="10" y="24" width="110" height="60" rx="8" fill="#0F5C4A"/><path d="M120 44h34l22 22v18h-56z" fill="#0A4537"/><path d="M130 50h20l14 14h-34z" fill="#F6EFE3" opacity=".9"/><circle cx="44" cy="88" r="12" fill="#111"/><circle cx="44" cy="88" r="5" fill="#F6EFE3"/><circle cx="150" cy="88" r="12" fill="#111"/><circle cx="150" cy="88" r="5" fill="#F6EFE3"/><g transform="translate(34 38) scale(.12)"><use href="#logo" style="color:#F6EFE3"/></g></svg>
-        </div>
-      </article>
+<section id="etapes">
+  <div class="wrap center">
+    <span class="eyebrow">Comment ça marche</span>
+    <h2>Un message. Une commande. <em>Votre agence.</em></h2>
+    <p class="lead2">Trois étapes, sans changer vos habitudes.</p>
+    <div class="steps">
+      <div class="step"><span class="num">01</span><span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="#F6EFE3" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="6" y="2" width="12" height="20" rx="3"/><path d="M10 6h4M9 11h6M9 15h4"/></svg></span><h3>Vous écrivez</h3><p>Un message WhatsApp à votre pré-vendeur, quand vous en avez besoin.</p></div>
+      <div class="step"><span class="num">02</span><span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="#F6EFE3" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 7l9-4 9 4-9 4-9-4z"/><path d="M3 7v10l9 4 9-4V7M12 11v10"/></svg></span><h3>Il prépare</h3><p>Votre pré-vendeur confirme et prépare votre commande.</p></div>
+      <div class="step"><span class="num">03</span><span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="#F6EFE3" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M1 6h13v10H1zM14 10h5l3 3v3h-8z"/><circle cx="6" cy="18" r="2"/><circle cx="18" cy="18" r="2"/></svg></span><h3>Votre agence livre</h3><p>La commande part de votre agence Kaïna, comme d'habitude.</p></div>
     </div>
   </div>
 </section>
 
-<div class="wrap" id="clients">
-  <div class="panel">
-    <div class="wrap center">
-      <div class="head">
-        <h2 class="display">Votre commerce, <em>bien servi.</em></h2>
-        <p>Épicerie, hygiène, boissons : depuis 2004, Kaïna Distribution sert tous les formats de commerce.</p>
-      </div>
-      <div class="cards segs">
-        <article class="seg">
-          <h3>Épiceries de quartier</h3>
-          <p>Le cœur de notre métier.</p>
-          <a class="tag" href="#rappel">Être rappelé <i><svg><use href="#fleche"/></svg></i></a>
-          <svg class="big" viewBox="0 0 150 150" fill="none"><rect x="20" y="52" width="110" height="88" rx="4" fill="#F6EFE3" stroke="#0F5C4A" stroke-width="4"/><rect x="14" y="36" width="122" height="18" rx="3" fill="#0F5C4A"/><path d="M20 54h22v14a11 11 0 0 1-22 0zM42 54h22v14a11 11 0 0 1-22 0zM64 54h22v14a11 11 0 0 1-22 0zM86 54h22v14a11 11 0 0 1-22 0zM108 54h22v14a11 11 0 0 1-22 0z" fill="#C4532D"/><path d="M42 54h22v14a11 11 0 0 1-22 0zM86 54h22v14a11 11 0 0 1-22 0z" fill="#fff"/><rect x="34" y="92" width="44" height="48" fill="#fff" stroke="#0F5C4A" stroke-width="4"/><rect x="90" y="88" width="28" height="22" rx="3" fill="#F2A900"/><circle cx="72" cy="117" r="2.5" fill="#0F5C4A"/></svg>
-        </article>
-        <article class="seg hl">
-          <h3>Cafés-hôtels-restaurants</h3>
-          <p>Le réassort au rythme du service.</p>
-          <a class="tag" href="#rappel">Être rappelé <i><svg><use href="#fleche"/></svg></i></a>
-          <svg class="big" viewBox="0 0 150 150" fill="none"><path d="M30 62h76v34a28 28 0 0 1-28 28H58a28 28 0 0 1-28-28z" fill="#0F5C4A"/><path d="M106 70h8a14 14 0 0 1 0 28h-8" stroke="#0F5C4A" stroke-width="8"/><rect x="18" y="126" width="104" height="8" rx="4" fill="#C4532D"/><path d="M54 48c0-8 8-8 8-16M74 48c0-8 8-8 8-16" stroke="#F2A900" stroke-width="5" stroke-linecap="round"/></svg>
-        </article>
-        <article class="seg">
-          <h3>Moyennes et grandes surfaces</h3>
-          <p>Des volumes suivis par votre agence.</p>
-          <a class="tag" href="#rappel">Être rappelé <i><svg><use href="#fleche"/></svg></i></a>
-          <svg class="big" viewBox="0 0 150 150" fill="none"><path d="M10 34h20l14 64h74l14-46H38" stroke="#0F5C4A" stroke-width="7" stroke-linecap="round" stroke-linejoin="round"/><rect x="52" y="60" width="22" height="30" rx="3" fill="#C4532D"/><rect x="78" y="48" width="18" height="42" rx="3" fill="#F2A900"/><rect x="100" y="66" width="16" height="24" rx="3" fill="#0F5C4A"/><circle cx="56" cy="118" r="9" fill="#111"/><circle cx="106" cy="118" r="9" fill="#111"/></svg>
-        </article>
+<section class="clients" id="clients">
+  <div class="wrap">
+    <div class="top">
+      <div><span class="eyebrow">Nos clients</span><h2>Un seul distributeur <em>pour chaque commerce</em></h2></div>
+      <p class="lead2">Épicerie, hygiène, boissons : Kaïna Distribution sert les épiceries de quartier, les cafés-hôtels-restaurants, les moyennes et grandes surfaces.</p>
+    </div>
+    <div class="grid4">
+      <article class="cc hl"><span class="flag">Nouveau</span><img src="visuels/kaina-whatsapp.svg" alt="Commande WhatsApp à un pré-vendeur Kaïna" loading="lazy"><div class="body"><span class="badge"><svg viewBox="0 0 24 24" fill="none" stroke="#F6EFE3" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12a8 8 0 0 1-11.6 7.1L4 20l1-4.9A8 8 0 1 1 21 12z"/></svg></span><h3>Commande WhatsApp</h3><p>Pilote en cours à Casablanca et Rabat-Salé.</p><a class="more" href="#rappel">Être rappelé <i><svg><use href="#fl"/></svg></i></a></div></article>
+      <article class="cc"><img src="visuels/kaina-epicerie.svg" alt="Épicerie de quartier livrée en cartons Kaïna" loading="lazy"><div class="body"><span class="badge"><svg viewBox="0 0 24 24" fill="none" stroke="#F6EFE3" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 10h18M5 10v10h14V10M3 10l2-5h14l2 5"/></svg></span><h3>Épiceries de quartier</h3><p>Le cœur de notre métier, visitées par nos pré-vendeurs.</p><a class="more" href="#rappel">Être rappelé <i><svg><use href="#fl"/></svg></i></a></div></article>
+      <article class="cc"><img src="visuels/kaina-cafe.svg" alt="Café livré en cartons Kaïna" loading="lazy"><div class="body"><span class="badge"><svg viewBox="0 0 24 24" fill="none" stroke="#F6EFE3" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 9h13v5a5 5 0 0 1-5 5H9a5 5 0 0 1-5-5z"/><path d="M17 11h1.5a2.5 2.5 0 0 1 0 5H17"/></svg></span><h3>Cafés-hôtels-restaurants</h3><p>Le réassort au rythme de votre service.</p><a class="more" href="#rappel">Être rappelé <i><svg><use href="#fl"/></svg></i></a></div></article>
+      <article class="cc"><img src="visuels/kaina-grande-surface.svg" alt="Grande surface approvisionnée en cartons Kaïna" loading="lazy"><div class="body"><span class="badge"><svg viewBox="0 0 24 24" fill="none" stroke="#F6EFE3" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 4h3l3 12h10l2-8H7"/><circle cx="10" cy="20" r="1.5"/><circle cx="18" cy="20" r="1.5"/></svg></span><h3>Moyennes et grandes surfaces</h3><p>Des volumes suivis par votre agence.</p><a class="more" href="#rappel">Être rappelé <i><svg><use href="#fl"/></svg></i></a></div></article>
+    </div>
+  </div>
+</section>
+
+<div class="ville" role="img" aria-label="Fourgon Kaïna en ville"></div>
+
+<section class="agences" id="agences">
+  <div class="wrap center">
+    <span class="eyebrow">Nos agences</span>
+    <h2>Six agences, <em>près de chez vous</em></h2>
+    <p class="lead2">Votre pré-vendeur dépend de l'agence la plus proche de votre commerce.</p>
+  </div>
+  <div class="wrap">
+    <div class="box">
+      <div class="list" id="liste"></div>
+      <div class="map">
+        <svg class="pays" viewBox="0 0 800 880" preserveAspectRatio="xMidYMid meet" aria-label="Carte des agences Kaïna au Maroc">
+          <path d="M561.6 24.2 L567.5 24.2 L579.8 20.8 L588.1 18.0 L591.0 29.2 L593.0 35.9 L601.8 44.9 L622.9 56.6 L641.0 60.0 L659.1 54.4 L675.3 57.2 L694.9 55.0 L707.2 44.3 L708.6 58.9 L724.3 62.8 L743.9 63.4 L763.5 71.2 L766.0 102.0 L769.4 135.6 L768.4 169.2 L783.1 197.2 L792.9 230.8 L743.9 236.4 L707.2 247.6 L670.4 258.8 L672.9 298.0 L616.5 320.4 L577.3 359.6 L533.2 373.6 L479.3 383.1 L426.9 421.2 L426.9 499.6 L426.9 572.4 L263.7 572.4 L263.7 715.2 L209.8 751.6 L214.7 833.9 L21.2 833.9 L16.2 860.8 L18.7 835.6 L31.0 782.4 L50.5 746.0 L67.7 704.0 L82.4 684.4 L111.8 650.8 L124.1 617.2 L141.2 565.1 L170.6 533.2 L204.9 508.0 L219.6 463.2 L268.6 446.4 L307.8 432.4 L332.3 410.0 L352.9 383.1 L371.5 351.2 L380.3 326.0 L367.6 313.1 L370.5 286.8 L373.0 264.4 L398.5 219.6 L397.5 206.2 L409.2 195.5 L435.2 166.4 L478.3 146.8 L490.1 140.6 L516.5 122.7 L528.3 109.3 L538.1 79.6 L550.4 57.2 L556.2 42.1 L561.6 24.2 Z" fill="#FFFFFF" stroke="#0F5C4A" stroke-width="6" stroke-linejoin="round" stroke-linecap="round"/>
+          <g id="pins"></g>
+        </svg>
+        <div class="info" id="info"><b>Casablanca</b><span>Siège : Aïn Sebaâ</span><span>Pilote WhatsApp en cours</span></div>
       </div>
     </div>
   </div>
-</div>
+</section>
 
-<section id="offre">
+<div class="cta" id="offre">
   <div class="wrap">
-    <div class="head">
-      <h2 class="display">Passez au stand, <em>on vous rappelle.</em></h2>
-      <p>Laissez vos coordonnées pendant le salon : un pré-vendeur de votre agence vous rappelle pour vous présenter la commande sur WhatsApp.</p>
-    </div>
-    <div class="duo">
-      <div class="offre">
-        <span class="k">Offre Hanout Expo</span>
-        <div class="big">−5 %</div>
-        <p><b>sur votre première commande</b>, après une demande de rappel faite pendant le salon.</p>
+    <div class="card">
+      <div class="txt">
+        <span class="eyebrow">Offre Hanout Expo</span>
+        <h2>Passez au <em>stand B12</em></h2>
+        <div class="off"><b>−5 %</b><span>sur votre première commande, après une demande de rappel faite pendant le salon.</span></div>
         <small>Valable jusqu'au 31 décembre 2026.</small>
+        <a class="btn" href="#rappel">Être rappelé <i><svg><use href="#fl"/></svg></i></a>
       </div>
-      <form class="form" id="rappel" onsubmit="return false">
-        <h3>Un pré-vendeur <em>vous rappelle</em></h3>
-        <p class="sub">Quatre informations, et c'est parti.</p>
-        <div class="fields">
-          <div><label for="nom">Nom</label><input id="nom" placeholder="Votre nom" autocomplete="name"></div>
-          <div><label for="commerce">Nom du commerce</label><input id="commerce" placeholder="Ex. : Épicerie Al Amal"></div>
-          <div><label for="ville">Ville</label><input id="ville" placeholder="Ex. : Casablanca"></div>
-          <div><label for="tel">Téléphone</label><input id="tel" type="tel" placeholder="06 00 00 00 00" autocomplete="tel"></div>
-        </div>
-        <button class="pill" type="submit">Être rappelé par un pré-vendeur <i><svg><use href="#fleche"/></svg></i></button>
-        <p class="note">Vos coordonnées servent uniquement à vous rappeler. Elles sont traitées par l'administration des ventes de Kaïna.</p>
-      </form>
+      <img class="van" src="visuels/kaina-fourgon.svg" alt="Fourgon de livraison Kaïna" loading="lazy" width="640" height="350">
     </div>
   </div>
-</section>
+</div>
 
-<section style="padding-top:0">
+<section class="rappel">
   <div class="wrap">
-    <div class="stats">
-      <div class="stat"><b>2004</b><span>fondée à Casablanca</span></div>
-      <div class="stat"><b>14 000</b><span>points de vente livrés</span></div>
-      <div class="stat"><b>6</b><span>agences au Maroc</span></div>
-    </div>
+    <form class="form" id="rappel" onsubmit="return false">
+      <span class="eyebrow">Être rappelé</span>
+      <h3 style="margin-top:12px">Un pré-vendeur <em>vous rappelle</em></h3>
+      <p class="sub">Quatre informations, et c'est parti.</p>
+      <div class="fields">
+        <div><label for="nom">Nom</label><input id="nom" placeholder="Votre nom" autocomplete="name"></div>
+        <div><label for="commerce">Nom du commerce</label><input id="commerce" placeholder="Ex. : Épicerie Al Amal"></div>
+        <div><label for="ville">Ville</label><input id="ville" placeholder="Ex. : Casablanca"></div>
+        <div><label for="tel">Téléphone</label><input id="tel" type="tel" placeholder="06 00 00 00 00" autocomplete="tel"></div>
+      </div>
+      <button class="btn" type="submit">Être rappelé par un pré-vendeur <i><svg><use href="#fl"/></svg></i></button>
+      <p class="note">Vos coordonnées servent uniquement à vous rappeler. Elles sont traitées par l'administration des ventes de Kaïna.</p>
+    </form>
+    <aside class="qr">
+      <img src="QR_Landing_Page_Kaina.png" alt="QR code vers cette page" width="170" height="170" loading="lazy">
+      <h3>Partagez cette page</h3>
+      <p>Scannez le QR code pour la retrouver sur votre téléphone.</p>
+      <ul><li>Stand B12 · Hanout Expo</li><li>Siège : Aïn Sebaâ, Casablanca</li></ul>
+    </aside>
   </div>
 </section>
 
 <footer>
-  <svg class="wm" viewBox="0 0 541 218" style="color:#fff" aria-hidden="true"><use href="#logo"/></svg>
+  <svg class="sw" viewBox="0 0 1440 62" preserveAspectRatio="none" aria-hidden="true"><path d="M0 62 L0 30 Q720 -10 1440 40 V62 Z" fill="#111111"/><path d="M0 30 Q720 -10 1440 40" stroke="#C4532D" stroke-width="8" fill="none"/></svg>
   <div class="wrap">
-    <div>
-      <h4>Le service</h4>
-      <ul><li>Commande sur WhatsApp, 7 jours sur 7</li><li>Pré-vendeur dédié</li><li>Pilote Casablanca et Rabat-Salé</li><li>Épicerie, hygiène, boissons</li></ul>
+    <div class="about">
+      <svg class="logo" viewBox="0 0 461 143"><use href="#logo"/></svg>
+      <p>Distributeur de produits de grande consommation, Kaïna Distribution sert 14 000 points de vente depuis 2004. Votre commerce, bien servi.</p>
     </div>
-    <div class="mid">
-      <svg class="logo" viewBox="0 0 541 218" style="color:#F6EFE3;width:130px"><use href="#logo"/></svg>
-      <p>Votre commerce, bien servi.</p>
-      <a class="pill sm" href="#rappel">Être rappelé</a>
-    </div>
-    <div>
-      <h4>Nous trouver</h4>
-      <ul><li>Stand B12 · Hanout Expo</li><li>Siège : Aïn Sebaâ, Casablanca</li><li>Agences : Casablanca, Rabat-Salé, Tanger, Fès, Marrakech, Agadir</li></ul>
+    <div class="cols">
+      <div><h4>Le service</h4><ul><li><a href="#service">Commande WhatsApp</a></li><li><a href="#etapes">Comment ça marche</a></li><li><a href="#offre">Offre du salon</a></li></ul></div>
+      <div><h4>Nos clients</h4><ul><li>Épiceries de quartier</li><li>Cafés-hôtels-restaurants</li><li>Moyennes et grandes surfaces</li></ul></div>
+      <div><h4>Nos agences</h4><ul><li>Casablanca · Rabat-Salé</li><li>Tanger · Fès</li><li>Marrakech · Agadir</li></ul></div>
     </div>
     <div class="bottom"><span>© 2026 Kaïna Distribution</span><span>Document fictif (atelier Challenge IA)</span></div>
   </div>
 </footer>
 
+<script>
+const AG=[["Tanger",567,26,"Agence de Tanger"],["Rabat-Salé",517,123,"Pilote WhatsApp en cours"],["Casablanca",480,149,"Siège : Aïn Sebaâ"],["Fès",607,123,"Agence de Fès"],["Marrakech",460,257,"Agence de Marrakech"],["Agadir",386,325,"Agence d'Agadir"]];
+const liste=document.getElementById('liste'),pins=document.getElementById('pins'),info=document.getElementById('info'),NS='http://www.w3.org/2000/svg';
+function choisir(i){
+  [...liste.children].forEach((b,j)=>b.classList.toggle('on',i===j));
+  [...pins.children].forEach((p,j)=>p.classList.toggle('on',i===j));
+  const a=AG[i];info.innerHTML='<b>'+a[0]+'</b><span>'+a[3]+'</span>'+(a[0]==='Casablanca'?'<span>Pilote WhatsApp en cours</span>':'');
+}
+AG.forEach((a,i)=>{
+  const b=document.createElement('button');b.type='button';b.innerHTML='<svg style="color:#C4532D"><use href="#pin"/></svg>'+a[0];b.onclick=()=>choisir(i);liste.appendChild(b);
+  const g=document.createElementNS(NS,'g');g.setAttribute('class','pin');g.setAttribute('transform','translate('+a[1]+' '+a[2]+') scale(1.7)');
+  g.innerHTML='<circle class="halo" r="26"/><path d="M0 4s-14-13-14-24a14 14 0 0 1 28 0C14-9 0 4 0 4z" fill="#0F5C4A" transform="translate(0 -6)"/><circle cy="-26" r="5" fill="#fff"/>';
+  g.addEventListener('click',()=>choisir(i));pins.appendChild(g);
+});
+choisir(2);
+</script>
 </body>
 </html>
