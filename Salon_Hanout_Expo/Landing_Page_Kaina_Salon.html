@@ -1,65 +1,358 @@
-<!doctype html><html lang="fr"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
 <title>Kaïna Distribution · Hanout Expo</title>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap" rel="stylesheet">
+<meta name="description" content="Commandez à votre pré-vendeur Kaïna sur WhatsApp, 7 jours sur 7. Stand B12, Hanout Expo.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
 <style>
-:root{--cedre:#0F5C4A;--safran:#F2A900;--terre:#C4532D;--sable:#F6EFE3;--noir:#111;}
-*{box-sizing:border-box;margin:0}body{font-family:Inter,Arial,sans-serif;background:var(--sable);color:var(--noir);max-width:520px;margin:0 auto}html{background:var(--sable)}
-header{display:flex;justify-content:space-between;align-items:center;padding:14px 16px}
-header img{height:34px}.badge{font-size:11px;font-weight:600;color:var(--cedre);border:1.5px solid var(--cedre);border-radius:20px;padding:4px 10px}
-.hero{background:var(--cedre);color:var(--sable);padding:32px 20px 36px;border-radius:0 0 28px 28px}
-.tag{display:inline-block;background:var(--safran);color:var(--noir);font-weight:700;font-size:12px;padding:5px 10px;border-radius:6px;margin-bottom:16px}
-h1{font-size:28px;line-height:1.12;font-weight:800;margin-bottom:14px}h1 span{color:var(--safran)}
-.hero p{font-size:16px;line-height:1.45;opacity:.95}.small{font-size:12px!important;opacity:.8!important;margin-top:10px}
-.phone{margin:22px auto 0;width:220px;background:var(--sable);border-radius:22px;padding:14px;color:var(--noir)}
-.b1,.b2{font-size:13px;padding:9px 12px;border-radius:14px;margin:6px 0;max-width:82%}
-.b1{background:#fff}.b2{background:#d7eadf;margin-left:auto;text-align:right}
-section{padding:28px 20px}h2{font-size:22px;color:var(--terre);font-weight:800;margin-bottom:14px}
-.stats{display:grid;grid-template-columns:1fr 1fr 1fr;gap:10px}.stat{background:#fff;border-radius:14px;padding:14px 8px;text-align:center}
-.stat b{display:block;font-size:22px;color:var(--cedre);font-weight:800}.stat small{font-size:11.5px;line-height:1.3;display:block;margin-top:4px}
-.clients{margin-top:14px;font-size:14.5px;line-height:1.5}
-.offre{background:var(--terre);color:#fff;border-radius:20px;padding:24px 20px;margin:0 20px}
-.offre .big{font-size:56px;font-weight:800;line-height:1}.offre p{font-size:16px;line-height:1.4;margin-top:8px}.offre .small{color:#fff}
-form{background:#fff;border-radius:20px;padding:22px 18px;margin:24px 20px 0}
-form h2{color:var(--cedre);font-size:20px}label{display:block;font-size:13px;font-weight:600;margin:12px 0 5px}
-input{width:100%;padding:12px;border:1.5px solid #cfc6b6;border-radius:10px;font:inherit;font-size:15px;background:var(--sable)}
-button{width:100%;margin-top:18px;background:var(--cedre);color:#fff;border:0;border-radius:12px;padding:16px;font:inherit;font-size:16px;font-weight:700}
-.note{font-size:11.5px;color:#555;margin-top:10px;line-height:1.4}
-footer{padding:26px 20px 30px;text-align:center;font-size:11.5px;color:#555;line-height:1.6}footer img{height:26px;margin-bottom:8px}
-@media (min-width:900px){
-body{max-width:1160px;display:grid;grid-template-columns:1fr 1fr;column-gap:32px;padding:0 40px}
-header,.hero,section,footer{grid-column:1/-1}
-header{padding:24px 0}header img{height:44px}.badge{font-size:13px;padding:6px 14px}
-.hero{border-radius:32px;padding:64px 64px;display:grid;grid-template-columns:1.25fr 1fr;column-gap:56px;align-items:center}
-.hero>*{grid-column:1}.tag{justify-self:start}
-h1{font-size:50px}.hero p{font-size:19px}
-.phone{grid-column:2;grid-row:1/span 4;width:320px;margin:0 auto;padding:20px;border-radius:28px}
-.b1,.b2{font-size:15px}
-section{padding:56px 0 40px}h2{font-size:30px}
-.stats{gap:20px}.stat{padding:28px 12px}.stat b{font-size:38px}.stat small{font-size:14px}
-.clients{font-size:17px;margin-top:20px}
-.offre,form{margin:0;align-self:stretch}
-.offre{padding:40px;display:flex;flex-direction:column;justify-content:center}
-.offre .big{font-size:96px}.offre p{font-size:19px}
-form{padding:32px}form h2{font-size:24px}
-footer{padding:48px 0 40px}
+:root{--cedre:#0F5C4A;--cedre-f:#0A4537;--safran:#F2A900;--terre:#C4532D;--sable:#F6EFE3;--sable-f:#EFE4D2;--noir:#111111;--blanc:#FFFFFF;--gris:#5A5A5A;--ligne:#E6DCCB}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth;background:var(--blanc)}
+body{font-family:Inter,Arial,sans-serif;color:var(--noir);background:var(--blanc);-webkit-font-smoothing:antialiased;overflow-x:hidden}
+a{color:inherit;text-decoration:none}
+.wrap{max-width:1200px;margin:0 auto;padding:0 20px}
+.display{font-weight:900;text-transform:uppercase;letter-spacing:-.035em;line-height:.95}
+.display em{font-style:normal;color:var(--terre)}
+.logo{display:block;height:34px;width:auto}
+
+/* Barre de navigation */
+.nav{position:sticky;top:0;z-index:20;background:rgba(255,255,255,.92);backdrop-filter:blur(10px);border-bottom:1px solid var(--ligne)}
+.nav .wrap{display:flex;align-items:center;justify-content:space-between;height:68px}
+.nav ul{display:none;list-style:none;gap:30px;font-size:14px;font-weight:600}
+.nav ul a:hover,.nav ul a.on{color:var(--terre)}
+.pill{display:inline-flex;align-items:center;gap:10px;background:var(--terre);color:var(--blanc);font-weight:700;font-size:14px;border-radius:40px;padding:10px 10px 10px 20px;border:0;cursor:pointer;font-family:inherit;white-space:nowrap}
+.pill i{display:grid;place-items:center;width:30px;height:30px;border-radius:50%;background:var(--blanc);color:var(--terre);font-style:normal}
+.pill i svg{width:14px;height:14px}
+.pill.sm{font-size:13px;padding:8px 18px}
+
+/* Héros */
+.hero{background:radial-gradient(120% 90% at 0% 0%,#FBF6EE 0%,var(--sable) 45%,var(--sable-f) 100%);border-radius:0 0 36px 36px;position:relative;overflow:hidden}
+.hero .wrap{display:grid;gap:36px;padding-top:36px;padding-bottom:40px}
+.chip{display:inline-flex;align-items:center;gap:8px;background:var(--blanc);border-radius:30px;padding:7px 14px;font-size:11.5px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--cedre);box-shadow:0 1px 0 var(--ligne)}
+.chip b{width:8px;height:8px;border-radius:50%;background:var(--safran)}
+.hero h1{font-size:clamp(40px,10vw,76px);margin:22px 0 20px;color:var(--noir)}
+.hero p.lead{font-size:17px;line-height:1.55;max-width:470px;color:#2b2b2b}
+.hero .cta{display:flex;flex-wrap:wrap;align-items:center;gap:18px;margin-top:28px}
+.hero .cta small{font-size:13px;color:var(--gris)}
+.rail{display:none}
+
+/* Mosaïque */
+.mosaic{display:grid;grid-template-columns:repeat(3,1fr);grid-auto-rows:96px;gap:10px}
+.tile{border-radius:16px;overflow:hidden;position:relative;display:flex;flex-direction:column;justify-content:flex-end;padding:12px;color:var(--blanc)}
+.tile .n{font-weight:900;font-size:26px;white-space:nowrap;letter-spacing:-.03em;line-height:1}
+.tile .l{font-size:11px;font-weight:600;margin-top:4px;opacity:.9;line-height:1.25}
+.tile svg.ico{position:absolute;top:12px;left:12px;width:30px;height:30px}
+.t-cedre{background:var(--cedre)}.t-terre{background:var(--terre)}.t-safran{background:var(--safran);color:var(--noir)}.t-wide{grid-column:span 2}
+.t-blanc{background:var(--blanc);color:var(--noir);box-shadow:inset 0 0 0 1px var(--ligne)}.t-noir{background:var(--noir)}
+.t-big{grid-column:2/4;grid-row:1/3;background:var(--cedre);padding:14px;justify-content:center;align-items:center}
+.chat{width:100%;max-width:260px;background:var(--sable);border-radius:18px;padding:10px;color:var(--noir)}
+.chat .top{display:flex;align-items:center;gap:8px;font-size:12px;font-weight:700;padding:2px 4px 8px;border-bottom:1px solid var(--ligne);margin-bottom:6px}
+.chat .top span{width:22px;height:22px;border-radius:50%;background:var(--cedre);display:grid;place-items:center}
+.chat .top span i{width:4px;height:4px;border-radius:50%;background:var(--safran);margin:0 1px;display:inline-block}
+.bub{font-size:11.5px;line-height:1.35;padding:7px 10px;border-radius:12px;margin:5px 0;max-width:88%}
+.bub.me{background:#D7EADF;margin-left:auto;border-bottom-right-radius:4px}
+.bub.kn{background:var(--blanc);border-bottom-left-radius:4px}
+.dots{display:flex;gap:5px;position:absolute;top:12px;right:12px}.dots i{width:9px;height:9px;border-radius:50%;background:var(--safran)}
+
+/* Bandeau confiance */
+.trust{padding:30px 0 8px}
+.trust .t{display:flex;align-items:center;gap:14px;font-size:11.5px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--gris);text-align:center}
+.trust .t:before,.trust .t:after{content:"";flex:1;height:1px;background:var(--ligne)}
+.cities{display:flex;flex-wrap:wrap;justify-content:center;gap:10px 26px;margin-top:18px}
+.cities span{font-weight:800;font-size:17px;letter-spacing:-.02em;color:#9C9C9C}
+
+/* Sections */
+section{padding:56px 0}
+.head{display:grid;gap:14px;margin-bottom:28px}
+.head h2{font-size:clamp(32px,7vw,52px)}
+.head p{font-size:15.5px;line-height:1.6;color:#3a3a3a;max-width:440px}
+.center{text-align:center}.center .head{justify-items:center}
+
+.cards{display:grid;gap:14px}
+.card{border-radius:22px;padding:24px;min-height:250px;position:relative;overflow:hidden;display:flex;flex-direction:column}
+.card h3{padding-right:44px;font-size:21px;font-weight:800;letter-spacing:-.02em}
+.card p{font-size:14px;line-height:1.5;margin-top:8px;max-width:290px}
+.card .go{position:absolute;top:20px;right:20px;width:34px;height:34px;border-radius:50%;display:grid;place-items:center;background:var(--terre);color:var(--blanc)}
+.card .go svg{width:14px;height:14px}
+.card .art{margin-top:auto;padding-top:20px;display:flex;justify-content:center}
+.c-gris{background:#F3F1EC}.c-cedre{background:var(--cedre);color:var(--blanc)}.c-sable{background:var(--sable)}
+.c-cedre p{opacity:.9}
+
+/* Panneau segments */
+.panel{background:var(--sable);border-radius:36px;padding:56px 0}
+.seg{background:var(--blanc);border-radius:22px;padding:28px 22px 24px;text-align:center;display:flex;flex-direction:column;align-items:center}
+.seg h3{font-size:22px;font-weight:800;letter-spacing:-.02em}
+.seg p{font-size:14px;color:var(--gris);margin-top:6px}
+.seg .tag{margin-top:16px;display:inline-flex;align-items:center;gap:8px;border:1.5px solid var(--terre);color:var(--terre);border-radius:30px;padding:6px 8px 6px 16px;font-size:11.5px;font-weight:800;letter-spacing:.05em;text-transform:uppercase}
+.seg .tag i{width:22px;height:22px;border-radius:50%;background:var(--terre);color:var(--blanc);display:grid;place-items:center}
+.seg .tag i svg{width:10px;height:10px}
+.seg.hl{box-shadow:0 18px 40px rgba(15,92,74,.14);transform:translateY(-8px)}
+.seg.hl .tag{background:var(--terre);color:var(--blanc)}.seg.hl .tag i{background:var(--blanc);color:var(--terre)}
+.seg svg.big{width:150px;height:150px;margin-top:22px}
+
+/* Offre + formulaire */
+.duo{display:grid;gap:16px}
+.offre{background:var(--terre);color:var(--blanc);border-radius:26px;padding:34px 28px;position:relative;overflow:hidden;display:flex;flex-direction:column;justify-content:flex-end;min-height:340px}
+.offre:before{content:"";position:absolute;right:-60px;top:-60px;width:260px;height:260px;border-radius:50%;background:rgba(255,255,255,.08)}
+.offre .k{font-size:12px;font-weight:800;letter-spacing:.1em;text-transform:uppercase;opacity:.9}
+.offre .big{font-weight:900;font-size:clamp(84px,20vw,150px);letter-spacing:-.05em;line-height:.9;margin:10px 0 8px}
+.offre p{font-size:17px;line-height:1.45;max-width:380px}
+.offre small{display:block;font-size:12.5px;opacity:.85;margin-top:12px}
+.form{background:var(--blanc);border-radius:26px;padding:30px 24px;box-shadow:0 0 0 1px var(--ligne),0 20px 50px rgba(17,17,17,.06)}
+.form h3{font-size:26px;font-weight:900;letter-spacing:-.03em;text-transform:uppercase;line-height:1}
+.form h3 em{font-style:normal;color:var(--terre)}
+.form .sub{font-size:14px;color:var(--gris);margin-top:8px}
+.fields{display:grid;gap:12px;margin-top:20px}
+label{display:block;font-size:12.5px;font-weight:700;margin-bottom:6px}
+input{width:100%;padding:13px 14px;border:1.5px solid var(--ligne);border-radius:12px;font:inherit;font-size:15px;background:#FBF8F3;color:var(--noir)}
+input:focus{outline:none;border-color:var(--cedre);background:var(--blanc)}
+.form .pill{width:100%;justify-content:space-between;margin-top:18px;font-size:15px;padding:12px 12px 12px 22px}
+.form .pill i{width:34px;height:34px}
+.note{font-size:11.5px;color:var(--gris);margin-top:12px;line-height:1.45}
+
+/* Chiffres */
+.stats{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}
+.stat{border-radius:20px;padding:22px 12px;text-align:center;background:#F3F1EC}
+.stat b{display:block;font-weight:900;font-size:clamp(28px,6vw,52px);letter-spacing:-.04em;color:var(--cedre);line-height:1}
+.stat span{display:block;font-size:12.5px;font-weight:600;margin-top:8px;color:#3a3a3a;line-height:1.3}
+
+/* Pied de page */
+footer{background:var(--noir);color:#D9D9D9;border-radius:36px 36px 0 0;margin-top:20px;position:relative;overflow:hidden}
+footer .wrap{display:grid;gap:34px;padding-top:48px;padding-bottom:26px;position:relative}
+footer h4{color:var(--blanc);font-size:16px;font-weight:700;margin-bottom:14px}
+footer h4:after{content:"";display:block;width:28px;height:2px;background:var(--terre);margin-top:8px}
+footer ul{list-style:none;display:grid;gap:9px;font-size:13.5px}
+footer .mid{text-align:center;display:flex;flex-direction:column;align-items:center;gap:14px}
+footer .mid .logo{height:52px}
+footer .mid p{font-size:14px;color:var(--blanc);font-weight:600}
+footer .bottom{grid-column:1/-1;border-top:1px solid #2a2a2a;padding-top:18px;display:flex;flex-wrap:wrap;justify-content:space-between;gap:8px;font-size:12px;color:#9a9a9a}
+.wm{position:absolute;left:50%;bottom:-120px;transform:translateX(-50%);width:520px;opacity:.06;pointer-events:none}
+
+@media (min-width:760px){
+  .cards{grid-template-columns:repeat(3,1fr)}
+  .segs{grid-template-columns:repeat(3,1fr)}
+  .duo{grid-template-columns:1fr 1fr}
+  footer .wrap{grid-template-columns:1fr 1.2fr 1fr}
+  footer .mid{border-left:1px solid #2a2a2a;border-right:1px solid #2a2a2a}
 }
-</style></head><body>
-<header><img src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCA1NDEgMjE4IiB3aWR0aD0iNTQxIiBoZWlnaHQ9IjIxOCIgcm9sZT0iaW1nIiBhcmlhLWxhYmVsPSJLYcOvbmEgRGlzdHJpYnV0aW9uIOKAlCBjb25jZXB0IDMgRGV1eCBwb2ludHMiIHhtbG5zOmMycGE9Imh0dHA6Ly9jMnBhLm9yZy9tYW5pZmVzdCI+Cjx0aXRsZT5LYcOvbmEgRGlzdHJpYnV0aW9uIOKAlCBjb25jZXB0IDMgRGV1eCBwb2ludHM8L3RpdGxlPgo8cGF0aCBkPSJNNTEuMjAsNDAuMDAgTDUxLjIwLDE3MS4yMCBNMTA1LjYwLDEwMC44MCBMNTcuNjAsMTQyLjQwIE03Mi4wMCwxMzEuMjAgTDEwOC44MCwxNzEuMjAgTTIyNC4wMCwxMzYuMDAgQTM1LjIwLDM1LjIwIDAgMSAxIDE1My42MCwxMzYuMDAgQTM1LjIwLDM1LjIwIDAgMSAxIDIyNC4wMCwxMzYuMDAgTTIyNC4wMCwxMDAuODAgTDIyNC4wMCwxNzEuMjAgTTI2NS42MCwxMDAuODAgTDI2NS42MCwxNzEuMjAgTTMwNy4yMCwxNzEuMjAgTDMwNy4yMCwxMzYuMDAgQTM1LjIwLDM1LjIwIDAgMCAxIDM3Ny42MCwxMzYuMDAgTDM3Ny42MCwxNzEuMjAgTTQ4OS42MCwxMzYuMDAgQTM1LjIwLDM1LjIwIDAgMSAxIDQxOS4yMCwxMzYuMDAgQTM1LjIwLDM1LjIwIDAgMSAxIDQ4OS42MCwxMzYuMDAgTTQ4OS42MCwxMDAuODAgTDQ4OS42MCwxNzEuMjAiIGZpbGw9Im5vbmUiIHN0cm9rZT0iIzBGNUM0QSIgc3Ryb2tlLXdpZHRoPSIyMi40MCIgc3Ryb2tlLWxpbmVjYXA9InJvdW5kIiBzdHJva2UtbGluZWpvaW49InJvdW5kIi8+PGNpcmNsZSBjeD0iMjQ4LjAwIiBjeT0iNjIuNDAiIHI9IjEzLjEyIiBmaWxsPSIjRjJBOTAwIi8+PGNpcmNsZSBjeD0iMjgzLjIwIiBjeT0iNjIuNDAiIHI9IjEzLjEyIiBmaWxsPSIjRjJBOTAwIi8+CjxtZXRhZGF0YT48YzJwYTptYW5pZmVzdD5BQUFXZ21wMWJXSUFBQUFlYW5WdFpHTXljR0VBRVFBUWdBQUFxZ0E0bTNFRFl6SndZUUFBQUJaY2FuVnRZZ0FBQUVkcWRXMWtZekp0WVFBUkFCQ0FBQUNxQURpYmNRTjFjbTQ2WXpKd1lUb3dPRGswTVdGa055MWhZMlptTFRRd01HTXRZVFkxWmkxa09EQTJNR0V4T0RNeVl6TUFBQUFEbDJwMWJXSUFBQUFwYW5WdFpHTXlZWE1BRVFBUWdBQUFxZ0E0bTNFRFl6SndZUzVoYzNObGNuUnBiMjV6QUFBQUFMeHFkVzFpQUFBQVJHcDFiV1JqWW05eUFCRUFFSUFBQUtvQU9KdHhFMk15Y0dFdWFXNW5jbVZrYVdWdWRDNTJNd0FBQUFBWVl6SnphQ0xZR29WYWw1ZENWMUJDSDdMbU9NMEFBQUJ3WTJKdmNxTnBaR002Wm05eWJXRjBiV2x0WVdkbEwzTjJaeXQ0Yld4cWFXNXpkR0Z1WTJWSlJIZ3NlRzF3T21scFpEcGxaRGhoWW1FMU55MW1OMlprTFRSbE1HRXRZV1EyTkMweE9XSmxZVGcyT0RFME5URnNjbVZzWVhScGIyNXphR2x3YUhCaGNtVnVkRTltQUFBQjRtcDFiV0lBQUFCQmFuVnRaR05pYjNJQUVRQVFnQUFBcWdBNG0zRVRZekp3WVM1aFkzUnBiMjV6TG5ZeUFBQUFBQmhqTW5Ob1BiY2hrZ2NCUXdiNnpOblRCTk9rVVFBQUFabGpZbTl5b21kaFkzUnBiMjV6Z3FKbVlXTjBhVzl1YTJNeWNHRXViM0JsYm1Wa2FuQmhjbUZ0WlhSbGNuT2hhMmx1WjNKbFpHbGxiblJ6Z2FKamRYSnNlQzF6Wld4bUkycDFiV0ptUFdNeWNHRXVZWE56WlhKMGFXOXVjeTlqTW5CaExtbHVaM0psWkdsbGJuUXVkak5rYUdGemFGZ2dvSGZKbE5ZTjBFUnhUMXEzZjFtZXdiN0ZJcktER29xaFY5MDhESmNzOGRXa1ptRmpkR2x2Ym5nZFkyOXRMbUZ1ZEdoeWIzQnBZeTVqYkdGMVpHVXVjSEp2ZG1sa1pXUnFjR0Z5WVcxbGRHVnljNkY0SDJOdmJTNWhiblJvY205d2FXTXViM0pwWjJsdUxXTnZibVpwWkdWdVkyVm5kVzVyYm05M2JtdGtaWE5qY21sd2RHbHZibmhtUTJ4aGRXUmxJSEJ5YjNacFpHVmtJSFJvYVhNZ1ptbHNaU0JoZENCMGFHVWdjbVZ4ZFdWemRDQnZaaUJoSUhWelpYSWdZVzVrSUcxaGVTQm9ZWFpsSUdOeVpXRjBaV1FnYjNJZ2JXOWthV1pwWldRZ2RHaGxJR1pwYkdVZ1kyOXVkR1Z1ZEhNdWJYTnZablIzWVhKbFFXZGxiblNoWkc1aGJXVm1RMnhoZFdSbGNtRnNiRUZqZEdsdmJuTkpibU5zZFdSbFpQVUFBQURJYW5WdFlnQUFBRUJxZFcxa1kySnZjZ0FSQUJDQUFBQ3FBRGliY1JOak1uQmhMbWhoYzJndVpHRjBZUUFBQUFBWVl6SnphSnBJOHFGRkd0U1k0YjI4VjlaRGVlSUFBQUNBWTJKdmNxVmpZV3huWm5Ob1lUSTFObU53WVdSTUFBQUFBQUFBQUFBQUFBQUFaR2hoYzJoWUlJbHcwVS9aVWZWaTVNeVNBWlh1ZWVXSWpYeGFEUEhPOVhKb0V1dG1TaytZWkc1aGJXVnVhblZ0WW1ZZ2JXRnVhV1psYzNScVpYaGpiSFZ6YVc5dWM0R2laWE4wWVhKMEdRT1labXhsYm1kMGFCa2VCQUFBQWo1cWRXMWlBQUFBSjJwMWJXUmpNbU5zQUJFQUVJQUFBS29BT0p0eEEyTXljR0V1WTJ4aGFXMHVkaklBQUFBQ0QyTmliM0tsWTJGc1oyWnphR0V5TlRacGMybG5ibUYwZFhKbGVFMXpaV3htSTJwMWJXSm1QUzlqTW5CaEwzVnlianBqTW5CaE9qQTRPVFF4WVdRM0xXRmpabVl0TkRBd1l5MWhOalZtTFdRNE1EWXdZVEU0TXpKak15OWpNbkJoTG5OcFoyNWhkSFZ5WldwcGJuTjBZVzVqWlVsRWVDeDRiWEE2YVdsa09tRTJPVEZtTWpCbExUVTJaREV0TkdWa1ppMDROekJoTFRWbFpqVTNNVFU1TURobFpISmpjbVZoZEdWa1gyRnpjMlZ5ZEdsdmJuT0RvbU4xY214NExYTmxiR1lqYW5WdFltWTlZekp3WVM1aGMzTmxjblJwYjI1ekwyTXljR0V1YVc1bmNtVmthV1Z1ZEM1Mk0yUm9ZWE5vV0NDZ2Q4bVUxZzNRUkhGUFdyZC9XWjdCdnNVaXNvTWFpcUZYM1R3TWx5engxYUpqZFhKc2VDcHpaV3htSTJwMWJXSm1QV015Y0dFdVlYTnpaWEowYVc5dWN5OWpNbkJoTG1GamRHbHZibk11ZGpKa2FHRnphRmdnSWNwOVBRZHBmVkxtRWgvemh3UFNGZERLQW4reGl6Sm9wZFV1T2xtYmlCNmlZM1Z5YkhncGMyVnNaaU5xZFcxaVpqMWpNbkJoTG1GemMyVnlkR2x2Ym5Ndll6SndZUzVvWVhOb0xtUmhkR0ZrYUdGemFGZ2dLTEdwN3ZsSEhheGY1TjBtS3NzeDh6bWR0S0pRNXM4UzA2eVV4K0FXRWF0MFkyeGhhVzFmWjJWdVpYSmhkRzl5WDJsdVptK2paRzVoYldWdlFXNTBhSEp2Y0dsaklFWnBiR1Z6WjNabGNuTnBiMjVsTVM0d0xqQnJjM0JsWTFabGNuTnBiMjVsTWk0MExqQUFBQkE0YW5WdFlnQUFBQ2hxZFcxa1l6Smpjd0FSQUJDQUFBQ3FBRGliY1FOak1uQmhMbk5wWjI1aGRIVnlaUUFBQUJBSVkySnZjdEtFV1FJU29nRW1HQ0ZaQWdvd2dnSUdNSUlCamFBREFnRUNBaFJBNWFBSzdzSTUwTDY0Zy9vR1FnVTlaMVVUQURBS0JnZ3Foa2pPUFFRREF6QkpNUmN3RlFZRFZRUUtFdzVCYm5Sb2NtOXdhV01zSUZCQ1F6RXVNQ3dHQTFVRUF4TWxRVzUwYUhKdmNHbGpJRU52Ym5SbGJuUWdRM0psWkdWdWRHbGhiSE1nVW05dmRDQkRRVEFlRncweU5qQTRNRGN4T0RRek5UWmFGdzB5T0RBNE1EWXhPVFF6TlRaYU1FUXhGekFWQmdOVkJBb1REa0Z1ZEdoeWIzQnBZeXdnVUVKRE1Ta3dKd1lEVlFRREV5QkJiblJvY205d2FXTWdRMnhoZFdSbElFTnZiblJsYm5RZ1UybG5ibWx1WnpCWk1CTUdCeXFHU000OUFnRUdDQ3FHU000OUF3RUhBMElBQkpoNkNtdkxVQmdGRk5VMHZVS2xPVnRFNmRqZDE3TDVTdXdYMExlbUZpc0JNM2RrZC8zY3lqeEZBM1FvNVM0NmZYMC9paFkwVlo3bWZiOUtGNzAzdDVPaldEQldNQTRHQTFVZER3RUIvd1FFQXdJSGdEQVZCZ05WSFNVRURqQU1CZ29yQmdFRUFZUG9YZ0lCTUF3R0ExVWRFd0VCL3dRQ01BQXdId1lEVlIwakJCZ3dGb0FVemxIaUJJRk9aRnNqK09QRXo1bytuTUhYWE1Jd0NnWUlLb1pJemowRUF3TURad0F3WkFJd01YTWRGSjRCZXRMTFZZN09SdUU5bm9xYmJBWk9abi9hQXJYeVR3RkFaZktyUHp4RjJ2UG9KTmYxK1VDZGcxWEdBakJ3WDF6ZDlXR3FZa3FtTDVTRnF3MVF5U2pyMXpKZnBKTTkrMXJkRHdTUExNT1BPakt1aVhqb1UvcFVVZUc5UndtaFkzQmhaRmtObmdBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFQWllRQ3RyYUJuSGhpd3lJMW5QSTViT1dWU2x0QUtOeFhaMlEyZFZTTlVPYnprcUR0Q091c0JtZGZ5Nm1WdXFHNWxzdG02Y3lrd0phMEtvRlhGb3NCdXk0dFU9PC9jMnBhOm1hbmlmZXN0PjwvbWV0YWRhdGE+PC9zdmc+Cg==" alt="Kaïna"><span class="badge">Stand B12 · Hanout Expo</span></header>
+@media (min-width:1000px){
+  .wrap{padding:0 40px}
+  .nav ul{display:flex}
+  .hero .wrap{grid-template-columns:1fr 1.08fr;align-items:center;padding-top:56px;padding-bottom:64px;padding-left:96px}
+  .rail{display:flex;position:absolute;left:34px;top:60px;bottom:60px;flex-direction:column;align-items:center;gap:14px;color:var(--gris)}
+  .rail .v{writing-mode:vertical-rl;font-size:11px;font-weight:700;letter-spacing:.2em;text-transform:uppercase;margin-top:auto}
+  .rail .bar{width:1.5px;height:60px;background:var(--terre)}
+  .rail .d{width:8px;height:8px;border-radius:50%;background:var(--safran)}
+  .mosaic{grid-auto-rows:118px;gap:12px}
+  .tile .n{font-size:30px}.tile .l{font-size:12px}
+  .head{grid-template-columns:1.1fr 1fr;align-items:end;gap:40px}
+  .center .head{grid-template-columns:1fr}
+  section{padding:84px 0}
+  .panel{padding:76px 0}
+  .card{min-height:320px;padding:28px}
+  .offre{padding:44px}
+  .form{padding:40px 38px}
+  .fields{grid-template-columns:1fr 1fr}
+  .stat{padding:34px 16px}
+}
+</style>
+</head>
+<body>
+
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <symbol id="logo" viewBox="0 0 541 218"><path d="M51.20,40.00 L51.20,171.20 M105.60,100.80 L57.60,142.40 M72.00,131.20 L108.80,171.20 M224.00,136.00 A35.20,35.20 0 1 1 153.60,136.00 A35.20,35.20 0 1 1 224.00,136.00 M224.00,100.80 L224.00,171.20 M265.60,100.80 L265.60,171.20 M307.20,171.20 L307.20,136.00 A35.20,35.20 0 0 1 377.60,136.00 L377.60,171.20 M489.60,136.00 A35.20,35.20 0 1 1 419.20,136.00 A35.20,35.20 0 1 1 489.60,136.00 M489.60,100.80 L489.60,171.20" fill="none" stroke="currentColor" stroke-width="22.40" stroke-linecap="round" stroke-linejoin="round"/><circle cx="248.00" cy="62.40" r="13.12" fill="#F2A900"/><circle cx="283.20" cy="62.40" r="13.12" fill="#F2A900"/></symbol>
+  <symbol id="fleche" viewBox="0 0 16 16"><path d="M4 12 12 4M5.5 4H12v6.5" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+</svg>
+
+<header class="nav">
+  <div class="wrap">
+    <a href="#" aria-label="Kaïna Distribution"><svg class="logo" style="color:var(--cedre);width:84px" viewBox="0 0 541 218"><use href="#logo"/></svg></a>
+    <ul>
+      <li><a class="on" href="#">Accueil</a></li>
+      <li><a href="#service">Le service</a></li>
+      <li><a href="#clients">Nos clients</a></li>
+      <li><a href="#offre">L'offre salon</a></li>
+    </ul>
+    <a class="pill sm" href="#rappel">Être rappelé</a>
+  </div>
+</header>
+
 <div class="hero">
-<span class="tag">Nouveau</span>
-<h1>Commandez à votre pré-vendeur <span>sur WhatsApp</span>, 7 jours sur 7.</h1>
-<p>Un message suffit. Votre pré-vendeur Kaïna prépare votre commande.</p>
-<p class="small">Pilote en cours à Casablanca et Rabat-Salé.</p>
-<div class="phone"><div class="b2">Bonjour, 2 cartons d'huile et 1 pack d'eau svp</div><div class="b1">Bien reçu, c'est noté pour votre commerce.</div></div>
+  <div class="rail" aria-hidden="true"><span class="d"></span><span class="bar"></span><span class="v">Défiler</span></div>
+  <div class="wrap">
+    <div>
+      <span class="chip"><b></b>Stand B12 · Hanout Expo</span>
+      <h1 class="display">Commandez à votre pré‑vendeur <em>sur WhatsApp</em></h1>
+      <p class="lead">Un message suffit, 7 jours sur 7. Votre pré-vendeur Kaïna prépare votre commande.</p>
+      <div class="cta">
+        <a class="pill" href="#rappel">Être rappelé par un pré-vendeur <i><svg><use href="#fleche"/></svg></i></a>
+        <small>Pilote en cours à Casablanca et Rabat-Salé.</small>
+      </div>
+    </div>
+
+    <div class="mosaic" aria-label="Kaïna en bref">
+      <div class="tile t-terre">
+        <svg class="ico" viewBox="0 0 32 32" fill="none" stroke="#fff" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 13h24M6 13v14h20V13M4 13l3-7h18l3 7"/><path d="M13 27v-7h6v7"/></svg>
+        <span class="l">Épiceries de quartier</span>
+      </div>
+      <div class="tile t-big">
+        <span class="dots"><i></i><i></i></span>
+        <div class="chat">
+          <div class="top"><span><i></i><i></i></span>Votre pré-vendeur Kaïna</div>
+          <div class="bub me">Bonjour, 2 cartons d'huile et 1 pack d'eau svp</div>
+          <div class="bub kn">Bien reçu, c'est noté pour votre commerce.</div>
+        </div>
+      </div>
+      <div class="tile t-safran"><span class="n">7j/7</span><span class="l">sur WhatsApp</span></div>
+      <div class="tile t-blanc"><span class="n" style="color:var(--cedre)">14 000</span><span class="l">points de vente</span></div>
+      <div class="tile t-cedre">
+        <svg class="ico" viewBox="0 0 32 32" fill="none" stroke="#F6EFE3" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 13h15v6a6 6 0 0 1-6 6h-3a6 6 0 0 1-6-6z"/><path d="M22 15h2a3 3 0 0 1 0 6h-2M12 9c0-2 2-2 2-4M16 9c0-2 2-2 2-4"/></svg>
+        <span class="l">Cafés-hôtels-restaurants</span>
+      </div>
+      <div class="tile t-noir"><span class="n" style="color:var(--safran)">6</span><span class="l">agences au Maroc</span></div>
+      <div class="tile t-terre"><span class="n">2004</span><span class="l">fondée à Casablanca</span></div>
+      <div class="tile t-blanc t-wide">
+        <svg class="ico" viewBox="0 0 32 32" fill="none" stroke="#C4532D" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 6h4l3 14h15l3-10H9"/><circle cx="12" cy="25" r="2"/><circle cx="23" cy="25" r="2"/></svg>
+        <span class="l">Moyennes et grandes surfaces</span>
+      </div>
+    </div>
+  </div>
 </div>
-<section><h2>Kaïna Distribution, à vos côtés depuis 2004</h2>
-<div class="stats"><div class="stat"><b>14 000</b><small>points de vente livrés</small></div><div class="stat"><b>6</b><small>agences au Maroc</small></div><div class="stat"><b>2004</b><small>fondée à Casablanca</small></div></div>
-<p class="clients">Épicerie, hygiène, boissons : nous servons les épiceries de quartier, les cafés-hôtels-restaurants, les moyennes et grandes surfaces.</p></section>
-<div class="offre"><div class="big">−5 %</div><p><b>sur votre première commande</b>, après une demande de rappel faite pendant le salon.</p><p class="small">Valable jusqu'au 31 décembre 2026.</p></div>
-<form onsubmit="return false"><h2>Un pré-vendeur vous rappelle</h2>
-<label>Nom</label><input placeholder="Votre nom"><label>Nom du commerce</label><input placeholder="Ex. : Épicerie Al Amal">
-<label>Ville</label><input placeholder="Ex. : Casablanca"><label>Téléphone</label><input placeholder="06 00 00 00 00" type="tel">
-<button>Être rappelé par un pré-vendeur</button>
-<p class="note">Vos coordonnées servent uniquement à vous rappeler. Elles sont traitées par l'administration des ventes de Kaïna.</p></form>
-<footer><img src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCA1NDEgMjE4IiB3aWR0aD0iNTQxIiBoZWlnaHQ9IjIxOCIgcm9sZT0iaW1nIiBhcmlhLWxhYmVsPSJLYcOvbmEgRGlzdHJpYnV0aW9uIOKAlCBjb25jZXB0IDMgRGV1eCBwb2ludHMiIHhtbG5zOmMycGE9Imh0dHA6Ly9jMnBhLm9yZy9tYW5pZmVzdCI+Cjx0aXRsZT5LYcOvbmEgRGlzdHJpYnV0aW9uIOKAlCBjb25jZXB0IDMgRGV1eCBwb2ludHM8L3RpdGxlPgo8cGF0aCBkPSJNNTEuMjAsNDAuMDAgTDUxLjIwLDE3MS4yMCBNMTA1LjYwLDEwMC44MCBMNTcuNjAsMTQyLjQwIE03Mi4wMCwxMzEuMjAgTDEwOC44MCwxNzEuMjAgTTIyNC4wMCwxMzYuMDAgQTM1LjIwLDM1LjIwIDAgMSAxIDE1My42MCwxMzYuMDAgQTM1LjIwLDM1LjIwIDAgMSAxIDIyNC4wMCwxMzYuMDAgTTIyNC4wMCwxMDAuODAgTDIyNC4wMCwxNzEuMjAgTTI2NS42MCwxMDAuODAgTDI2NS42MCwxNzEuMjAgTTMwNy4yMCwxNzEuMjAgTDMwNy4yMCwxMzYuMDAgQTM1LjIwLDM1LjIwIDAgMCAxIDM3Ny42MCwxMzYuMDAgTDM3Ny42MCwxNzEuMjAgTTQ4OS42MCwxMzYuMDAgQTM1LjIwLDM1LjIwIDAgMSAxIDQxOS4yMCwxMzYuMDAgQTM1LjIwLDM1LjIwIDAgMSAxIDQ4OS42MCwxMzYuMDAgTTQ4OS42MCwxMDAuODAgTDQ4OS42MCwxNzEuMjAiIGZpbGw9Im5vbmUiIHN0cm9rZT0iIzBGNUM0QSIgc3Ryb2tlLXdpZHRoPSIyMi40MCIgc3Ryb2tlLWxpbmVjYXA9InJvdW5kIiBzdHJva2UtbGluZWpvaW49InJvdW5kIi8+PGNpcmNsZSBjeD0iMjQ4LjAwIiBjeT0iNjIuNDAiIHI9IjEzLjEyIiBmaWxsPSIjRjJBOTAwIi8+PGNpcmNsZSBjeD0iMjgzLjIwIiBjeT0iNjIuNDAiIHI9IjEzLjEyIiBmaWxsPSIjRjJBOTAwIi8+CjxtZXRhZGF0YT48YzJwYTptYW5pZmVzdD5BQUFXZ21wMWJXSUFBQUFlYW5WdFpHTXljR0VBRVFBUWdBQUFxZ0E0bTNFRFl6SndZUUFBQUJaY2FuVnRZZ0FBQUVkcWRXMWtZekp0WVFBUkFCQ0FBQUNxQURpYmNRTjFjbTQ2WXpKd1lUb3dPRGswTVdGa055MWhZMlptTFRRd01HTXRZVFkxWmkxa09EQTJNR0V4T0RNeVl6TUFBQUFEbDJwMWJXSUFBQUFwYW5WdFpHTXlZWE1BRVFBUWdBQUFxZ0E0bTNFRFl6SndZUzVoYzNObGNuUnBiMjV6QUFBQUFMeHFkVzFpQUFBQVJHcDFiV1JqWW05eUFCRUFFSUFBQUtvQU9KdHhFMk15Y0dFdWFXNW5jbVZrYVdWdWRDNTJNd0FBQUFBWVl6SnphQ0xZR29WYWw1ZENWMUJDSDdMbU9NMEFBQUJ3WTJKdmNxTnBaR002Wm05eWJXRjBiV2x0WVdkbEwzTjJaeXQ0Yld4cWFXNXpkR0Z1WTJWSlJIZ3NlRzF3T21scFpEcGxaRGhoWW1FMU55MW1OMlprTFRSbE1HRXRZV1EyTkMweE9XSmxZVGcyT0RFME5URnNjbVZzWVhScGIyNXphR2x3YUhCaGNtVnVkRTltQUFBQjRtcDFiV0lBQUFCQmFuVnRaR05pYjNJQUVRQVFnQUFBcWdBNG0zRVRZekp3WVM1aFkzUnBiMjV6TG5ZeUFBQUFBQmhqTW5Ob1BiY2hrZ2NCUXdiNnpOblRCTk9rVVFBQUFabGpZbTl5b21kaFkzUnBiMjV6Z3FKbVlXTjBhVzl1YTJNeWNHRXViM0JsYm1Wa2FuQmhjbUZ0WlhSbGNuT2hhMmx1WjNKbFpHbGxiblJ6Z2FKamRYSnNlQzF6Wld4bUkycDFiV0ptUFdNeWNHRXVZWE56WlhKMGFXOXVjeTlqTW5CaExtbHVaM0psWkdsbGJuUXVkak5rYUdGemFGZ2dvSGZKbE5ZTjBFUnhUMXEzZjFtZXdiN0ZJcktER29xaFY5MDhESmNzOGRXa1ptRmpkR2x2Ym5nZFkyOXRMbUZ1ZEdoeWIzQnBZeTVqYkdGMVpHVXVjSEp2ZG1sa1pXUnFjR0Z5WVcxbGRHVnljNkY0SDJOdmJTNWhiblJvY205d2FXTXViM0pwWjJsdUxXTnZibVpwWkdWdVkyVm5kVzVyYm05M2JtdGtaWE5qY21sd2RHbHZibmhtUTJ4aGRXUmxJSEJ5YjNacFpHVmtJSFJvYVhNZ1ptbHNaU0JoZENCMGFHVWdjbVZ4ZFdWemRDQnZaaUJoSUhWelpYSWdZVzVrSUcxaGVTQm9ZWFpsSUdOeVpXRjBaV1FnYjNJZ2JXOWthV1pwWldRZ2RHaGxJR1pwYkdVZ1kyOXVkR1Z1ZEhNdWJYTnZablIzWVhKbFFXZGxiblNoWkc1aGJXVm1RMnhoZFdSbGNtRnNiRUZqZEdsdmJuTkpibU5zZFdSbFpQVUFBQURJYW5WdFlnQUFBRUJxZFcxa1kySnZjZ0FSQUJDQUFBQ3FBRGliY1JOak1uQmhMbWhoYzJndVpHRjBZUUFBQUFBWVl6SnphSnBJOHFGRkd0U1k0YjI4VjlaRGVlSUFBQUNBWTJKdmNxVmpZV3huWm5Ob1lUSTFObU53WVdSTUFBQUFBQUFBQUFBQUFBQUFaR2hoYzJoWUlJbHcwVS9aVWZWaTVNeVNBWlh1ZWVXSWpYeGFEUEhPOVhKb0V1dG1TaytZWkc1aGJXVnVhblZ0WW1ZZ2JXRnVhV1psYzNScVpYaGpiSFZ6YVc5dWM0R2laWE4wWVhKMEdRT1labXhsYm1kMGFCa2VCQUFBQWo1cWRXMWlBQUFBSjJwMWJXUmpNbU5zQUJFQUVJQUFBS29BT0p0eEEyTXljR0V1WTJ4aGFXMHVkaklBQUFBQ0QyTmliM0tsWTJGc1oyWnphR0V5TlRacGMybG5ibUYwZFhKbGVFMXpaV3htSTJwMWJXSm1QUzlqTW5CaEwzVnlianBqTW5CaE9qQTRPVFF4WVdRM0xXRmpabVl0TkRBd1l5MWhOalZtTFdRNE1EWXdZVEU0TXpKak15OWpNbkJoTG5OcFoyNWhkSFZ5WldwcGJuTjBZVzVqWlVsRWVDeDRiWEE2YVdsa09tRTJPVEZtTWpCbExUVTJaREV0TkdWa1ppMDROekJoTFRWbFpqVTNNVFU1TURobFpISmpjbVZoZEdWa1gyRnpjMlZ5ZEdsdmJuT0RvbU4xY214NExYTmxiR1lqYW5WdFltWTlZekp3WVM1aGMzTmxjblJwYjI1ekwyTXljR0V1YVc1bmNtVmthV1Z1ZEM1Mk0yUm9ZWE5vV0NDZ2Q4bVUxZzNRUkhGUFdyZC9XWjdCdnNVaXNvTWFpcUZYM1R3TWx5engxYUpqZFhKc2VDcHpaV3htSTJwMWJXSm1QV015Y0dFdVlYTnpaWEowYVc5dWN5OWpNbkJoTG1GamRHbHZibk11ZGpKa2FHRnphRmdnSWNwOVBRZHBmVkxtRWgvemh3UFNGZERLQW4reGl6Sm9wZFV1T2xtYmlCNmlZM1Z5YkhncGMyVnNaaU5xZFcxaVpqMWpNbkJoTG1GemMyVnlkR2x2Ym5Ndll6SndZUzVvWVhOb0xtUmhkR0ZrYUdGemFGZ2dLTEdwN3ZsSEhheGY1TjBtS3NzeDh6bWR0S0pRNXM4UzA2eVV4K0FXRWF0MFkyeGhhVzFmWjJWdVpYSmhkRzl5WDJsdVptK2paRzVoYldWdlFXNTBhSEp2Y0dsaklFWnBiR1Z6WjNabGNuTnBiMjVsTVM0d0xqQnJjM0JsWTFabGNuTnBiMjVsTWk0MExqQUFBQkE0YW5WdFlnQUFBQ2hxZFcxa1l6Smpjd0FSQUJDQUFBQ3FBRGliY1FOak1uQmhMbk5wWjI1aGRIVnlaUUFBQUJBSVkySnZjdEtFV1FJU29nRW1HQ0ZaQWdvd2dnSUdNSUlCamFBREFnRUNBaFJBNWFBSzdzSTUwTDY0Zy9vR1FnVTlaMVVUQURBS0JnZ3Foa2pPUFFRREF6QkpNUmN3RlFZRFZRUUtFdzVCYm5Sb2NtOXdhV01zSUZCQ1F6RXVNQ3dHQTFVRUF4TWxRVzUwYUhKdmNHbGpJRU52Ym5SbGJuUWdRM0psWkdWdWRHbGhiSE1nVW05dmRDQkRRVEFlRncweU5qQTRNRGN4T0RRek5UWmFGdzB5T0RBNE1EWXhPVFF6TlRaYU1FUXhGekFWQmdOVkJBb1REa0Z1ZEdoeWIzQnBZeXdnVUVKRE1Ta3dKd1lEVlFRREV5QkJiblJvY205d2FXTWdRMnhoZFdSbElFTnZiblJsYm5RZ1UybG5ibWx1WnpCWk1CTUdCeXFHU000OUFnRUdDQ3FHU000OUF3RUhBMElBQkpoNkNtdkxVQmdGRk5VMHZVS2xPVnRFNmRqZDE3TDVTdXdYMExlbUZpc0JNM2RrZC8zY3lqeEZBM1FvNVM0NmZYMC9paFkwVlo3bWZiOUtGNzAzdDVPaldEQldNQTRHQTFVZER3RUIvd1FFQXdJSGdEQVZCZ05WSFNVRURqQU1CZ29yQmdFRUFZUG9YZ0lCTUF3R0ExVWRFd0VCL3dRQ01BQXdId1lEVlIwakJCZ3dGb0FVemxIaUJJRk9aRnNqK09QRXo1bytuTUhYWE1Jd0NnWUlLb1pJemowRUF3TURad0F3WkFJd01YTWRGSjRCZXRMTFZZN09SdUU5bm9xYmJBWk9abi9hQXJYeVR3RkFaZktyUHp4RjJ2UG9KTmYxK1VDZGcxWEdBakJ3WDF6ZDlXR3FZa3FtTDVTRnF3MVF5U2pyMXpKZnBKTTkrMXJkRHdTUExNT1BPakt1aVhqb1UvcFVVZUc5UndtaFkzQmhaRmtObmdBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFQWllRQ3RyYUJuSGhpd3lJMW5QSTViT1dWU2x0QUtOeFhaMlEyZFZTTlVPYnprcUR0Q091c0JtZGZ5Nm1WdXFHNWxzdG02Y3lrd0phMEtvRlhGb3NCdXk0dFU9PC9jMnBhOm1hbmlmZXN0PjwvbWV0YWRhdGE+PC9zdmc+Cg==" alt=""><br>Kaïna Distribution · Siège Aïn Sebaâ, Casablanca<br>Document fictif (atelier Challenge IA)</footer>
-</body></html>
+
+<div class="trust">
+  <div class="wrap">
+    <p class="t">Nos 6 agences au Maroc</p>
+    <div class="cities"><span>Casablanca</span><span>Rabat-Salé</span><span>Tanger</span><span>Fès</span><span>Marrakech</span><span>Agadir</span></div>
+  </div>
+</div>
+
+<section id="service">
+  <div class="wrap">
+    <div class="head">
+      <h2 class="display">Votre commande. <em>Un seul message.</em></h2>
+      <p>Plus besoin d'attendre le passage en magasin pour passer commande : écrivez à votre pré-vendeur quand vous en avez besoin, il s'occupe du reste.</p>
+    </div>
+    <div class="cards">
+      <article class="card c-gris">
+        <span class="go"><svg><use href="#fleche"/></svg></span>
+        <h3>1. Vous écrivez</h3>
+        <p>Un message WhatsApp à votre pré-vendeur, 7 jours sur 7.</p>
+        <div class="art">
+          <svg width="150" height="120" viewBox="0 0 150 120" fill="none"><rect x="40" y="6" width="70" height="112" rx="14" fill="#111"/><rect x="45" y="16" width="60" height="92" rx="8" fill="#F6EFE3"/><rect x="58" y="30" width="40" height="14" rx="7" fill="#D7EADF"/><rect x="52" y="52" width="34" height="14" rx="7" fill="#fff"/><rect x="64" y="74" width="34" height="14" rx="7" fill="#D7EADF"/><circle cx="66" cy="11" r="1.5" fill="#444"/></svg>
+        </div>
+      </article>
+      <article class="card c-cedre">
+        <span class="go"><svg><use href="#fleche"/></svg></span>
+        <h3>2. Votre pré-vendeur prépare</h3>
+        <p>Il connaît votre commerce et prépare votre commande.</p>
+        <div class="art">
+          <svg width="170" height="120" viewBox="0 0 170 120" fill="none"><rect x="20" y="40" width="58" height="70" rx="6" fill="#C4532D"/><rect x="20" y="40" width="58" height="12" fill="#A84626"/><rect x="88" y="58" width="62" height="52" rx="6" fill="#F2A900"/><rect x="88" y="58" width="62" height="10" fill="#D99700"/><rect x="50" y="10" width="54" height="34" rx="6" fill="#F6EFE3"/><path d="M60 27l7 7 14-14" stroke="#0F5C4A" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </div>
+      </article>
+      <article class="card c-sable">
+        <span class="go"><svg><use href="#fleche"/></svg></span>
+        <h3>3. Votre agence vous sert</h3>
+        <p>La commande part de votre agence Kaïna, comme d'habitude.</p>
+        <div class="art">
+          <svg width="190" height="110" viewBox="0 0 190 110" fill="none"><rect x="10" y="24" width="110" height="60" rx="8" fill="#0F5C4A"/><path d="M120 44h34l22 22v18h-56z" fill="#0A4537"/><path d="M130 50h20l14 14h-34z" fill="#F6EFE3" opacity=".9"/><circle cx="44" cy="88" r="12" fill="#111"/><circle cx="44" cy="88" r="5" fill="#F6EFE3"/><circle cx="150" cy="88" r="12" fill="#111"/><circle cx="150" cy="88" r="5" fill="#F6EFE3"/><g transform="translate(34 38) scale(.12)"><use href="#logo" style="color:#F6EFE3"/></g></svg>
+        </div>
+      </article>
+    </div>
+  </div>
+</section>
+
+<div class="wrap" id="clients">
+  <div class="panel">
+    <div class="wrap center">
+      <div class="head">
+        <h2 class="display">Votre commerce, <em>bien servi.</em></h2>
+        <p>Épicerie, hygiène, boissons : depuis 2004, Kaïna Distribution sert tous les formats de commerce.</p>
+      </div>
+      <div class="cards segs">
+        <article class="seg">
+          <h3>Épiceries de quartier</h3>
+          <p>Le cœur de notre métier.</p>
+          <a class="tag" href="#rappel">Être rappelé <i><svg><use href="#fleche"/></svg></i></a>
+          <svg class="big" viewBox="0 0 150 150" fill="none"><rect x="20" y="52" width="110" height="88" rx="4" fill="#F6EFE3" stroke="#0F5C4A" stroke-width="4"/><rect x="14" y="36" width="122" height="18" rx="3" fill="#0F5C4A"/><path d="M20 54h22v14a11 11 0 0 1-22 0zM42 54h22v14a11 11 0 0 1-22 0zM64 54h22v14a11 11 0 0 1-22 0zM86 54h22v14a11 11 0 0 1-22 0zM108 54h22v14a11 11 0 0 1-22 0z" fill="#C4532D"/><path d="M42 54h22v14a11 11 0 0 1-22 0zM86 54h22v14a11 11 0 0 1-22 0z" fill="#fff"/><rect x="34" y="92" width="44" height="48" fill="#fff" stroke="#0F5C4A" stroke-width="4"/><rect x="90" y="88" width="28" height="22" rx="3" fill="#F2A900"/><circle cx="72" cy="117" r="2.5" fill="#0F5C4A"/></svg>
+        </article>
+        <article class="seg hl">
+          <h3>Cafés-hôtels-restaurants</h3>
+          <p>Le réassort au rythme du service.</p>
+          <a class="tag" href="#rappel">Être rappelé <i><svg><use href="#fleche"/></svg></i></a>
+          <svg class="big" viewBox="0 0 150 150" fill="none"><path d="M30 62h76v34a28 28 0 0 1-28 28H58a28 28 0 0 1-28-28z" fill="#0F5C4A"/><path d="M106 70h8a14 14 0 0 1 0 28h-8" stroke="#0F5C4A" stroke-width="8"/><rect x="18" y="126" width="104" height="8" rx="4" fill="#C4532D"/><path d="M54 48c0-8 8-8 8-16M74 48c0-8 8-8 8-16" stroke="#F2A900" stroke-width="5" stroke-linecap="round"/></svg>
+        </article>
+        <article class="seg">
+          <h3>Moyennes et grandes surfaces</h3>
+          <p>Des volumes suivis par votre agence.</p>
+          <a class="tag" href="#rappel">Être rappelé <i><svg><use href="#fleche"/></svg></i></a>
+          <svg class="big" viewBox="0 0 150 150" fill="none"><path d="M10 34h20l14 64h74l14-46H38" stroke="#0F5C4A" stroke-width="7" stroke-linecap="round" stroke-linejoin="round"/><rect x="52" y="60" width="22" height="30" rx="3" fill="#C4532D"/><rect x="78" y="48" width="18" height="42" rx="3" fill="#F2A900"/><rect x="100" y="66" width="16" height="24" rx="3" fill="#0F5C4A"/><circle cx="56" cy="118" r="9" fill="#111"/><circle cx="106" cy="118" r="9" fill="#111"/></svg>
+        </article>
+      </div>
+    </div>
+  </div>
+</div>
+
+<section id="offre">
+  <div class="wrap">
+    <div class="head">
+      <h2 class="display">Passez au stand, <em>on vous rappelle.</em></h2>
+      <p>Laissez vos coordonnées pendant le salon : un pré-vendeur de votre agence vous rappelle pour vous présenter la commande sur WhatsApp.</p>
+    </div>
+    <div class="duo">
+      <div class="offre">
+        <span class="k">Offre Hanout Expo</span>
+        <div class="big">−5 %</div>
+        <p><b>sur votre première commande</b>, après une demande de rappel faite pendant le salon.</p>
+        <small>Valable jusqu'au 31 décembre 2026.</small>
+      </div>
+      <form class="form" id="rappel" onsubmit="return false">
+        <h3>Un pré-vendeur <em>vous rappelle</em></h3>
+        <p class="sub">Quatre informations, et c'est parti.</p>
+        <div class="fields">
+          <div><label for="nom">Nom</label><input id="nom" placeholder="Votre nom" autocomplete="name"></div>
+          <div><label for="commerce">Nom du commerce</label><input id="commerce" placeholder="Ex. : Épicerie Al Amal"></div>
+          <div><label for="ville">Ville</label><input id="ville" placeholder="Ex. : Casablanca"></div>
+          <div><label for="tel">Téléphone</label><input id="tel" type="tel" placeholder="06 00 00 00 00" autocomplete="tel"></div>
+        </div>
+        <button class="pill" type="submit">Être rappelé par un pré-vendeur <i><svg><use href="#fleche"/></svg></i></button>
+        <p class="note">Vos coordonnées servent uniquement à vous rappeler. Elles sont traitées par l'administration des ventes de Kaïna.</p>
+      </form>
+    </div>
+  </div>
+</section>
+
+<section style="padding-top:0">
+  <div class="wrap">
+    <div class="stats">
+      <div class="stat"><b>2004</b><span>fondée à Casablanca</span></div>
+      <div class="stat"><b>14 000</b><span>points de vente livrés</span></div>
+      <div class="stat"><b>6</b><span>agences au Maroc</span></div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <svg class="wm" viewBox="0 0 541 218" style="color:#fff" aria-hidden="true"><use href="#logo"/></svg>
+  <div class="wrap">
+    <div>
+      <h4>Le service</h4>
+      <ul><li>Commande sur WhatsApp, 7 jours sur 7</li><li>Pré-vendeur dédié</li><li>Pilote Casablanca et Rabat-Salé</li><li>Épicerie, hygiène, boissons</li></ul>
+    </div>
+    <div class="mid">
+      <svg class="logo" viewBox="0 0 541 218" style="color:#F6EFE3;width:130px"><use href="#logo"/></svg>
+      <p>Votre commerce, bien servi.</p>
+      <a class="pill sm" href="#rappel">Être rappelé</a>
+    </div>
+    <div>
+      <h4>Nous trouver</h4>
+      <ul><li>Stand B12 · Hanout Expo</li><li>Siège : Aïn Sebaâ, Casablanca</li><li>Agences : Casablanca, Rabat-Salé, Tanger, Fès, Marrakech, Agadir</li></ul>
+    </div>
+    <div class="bottom"><span>© 2026 Kaïna Distribution</span><span>Document fictif (atelier Challenge IA)</span></div>
+  </div>
+</footer>
+
+</body>
+</html>
